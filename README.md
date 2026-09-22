@@ -10,6 +10,8 @@ An Alystria project powered by Convai. Play a position, ask why, and learn from 
 
 <img src="docs/media/chessbuddy-full-demo.webp" width="960" alt="The complete Chessbuddy gameplay demo featuring the AI chess coaches" />
 
+[▶ Watch the full demo with sound](#watch-the-full-demo)
+
 </div>
 
 ## Build with us
@@ -31,6 +33,12 @@ Good first areas: keyboard and mobile usability, chess explanations, puzzle feed
 | Demo capture and editing example | `examples/demo-capture/` |
 
 The app includes four coaches (Sofia, Leila, Magnus, and Arjun), voice and text chat, puzzles, saved games, and post-game analysis. A Convai connection enables coach conversation; the board and other local UI can be developed without putting a permanent API key in the browser.
+
+## Watch the full demo
+
+https://github.com/user-attachments/assets/7005bf2c-22c6-40c0-98f8-052915e4e236
+
+Music: “Meanwhile” by Scott Buckley, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) · [Original track](https://www.scottbuckley.com.au/library/meanwhile/).
 
 ## Run locally
 
