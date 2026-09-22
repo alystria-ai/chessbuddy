@@ -1,0 +1,205 @@
+{
+  "text": "If I take your queen after you play knight takes e5, your bishop delivers check on f7, forcing my king to e7. From there, your other knight jumps to d5 to deliver checkmate, perfectly coordinating to cover every escape square.",
+  "words": [
+    {
+      "word": " If",
+      "start": 0.04,
+      "end": 0.28
+    },
+    {
+      "word": " I",
+      "start": 0.28,
+      "end": 0.38
+    },
+    {
+      "word": " take",
+      "start": 0.38,
+      "end": 0.6
+    },
+    {
+      "word": " your",
+      "start": 0.6,
+      "end": 0.74
+    },
+    {
+      "word": " queen",
+      "start": 0.74,
+      "end": 0.98
+    },
+    {
+      "word": " after",
+      "start": 0.98,
+      "end": 1.32
+    },
+    {
+      "word": " you",
+      "start": 1.32,
+      "end": 1.46
+    },
+    {
+      "word": " play",
+      "start": 1.46,
+      "end": 1.66
+    },
+    {
+      "word": " knight",
+      "start": 1.66,
+      "end": 1.9
+    },
+    {
+      "word": " takes",
+      "start": 1.9,
+      "end": 2.2
+    },
+    {
+      "word": " e5,",
+      "start": 2.2,
+      "end": 2.94
+    },
+    {
+      "word": " your",
+      "start": 2.94,
+      "end": 3.28
+    },
+    {
+      "word": " bishop",
+      "start": 3.28,
+      "end": 3.62
+    },
+    {
+      "word": " delivers",
+      "start": 3.62,
+      "end": 4.1
+    },
+    {
+      "word": " check",
+      "start": 4.1,
+      "end": 4.32
+    },
+    {
+      "word": " on",
+      "start": 4.32,
+      "end": 4.62
+    },
+    {
+      "word": " f7,",
+      "start": 4.62,
+      "end": 5.52
+    },
+    {
+      "word": " forcing",
+      "start": 5.52,
+      "end": 6.04
+    },
+    {
+      "word": " my",
+      "start": 6.04,
+      "end": 6.22
+    },
+    {
+      "word": " king",
+      "start": 6.22,
+      "end": 6.44
+    },
+    {
+      "word": " to",
+      "start": 6.44,
+      "end": 6.64
+    },
+    {
+      "word": " e7.",
+      "start": 6.64,
+      "end": 7.38
+    },
+    {
+      "word": " From",
+      "start": 7.38,
+      "end": 7.82
+    },
+    {
+      "word": " there,",
+      "start": 7.82,
+      "end": 8.3
+    },
+    {
+      "word": " your",
+      "start": 8.3,
+      "end": 8.5
+    },
+    {
+      "word": " other",
+      "start": 8.5,
+      "end": 8.72
+    },
+    {
+      "word": " knight",
+      "start": 8.72,
+      "end": 8.96
+    },
+    {
+      "word": " jumps",
+      "start": 8.96,
+      "end": 9.38
+    },
+    {
+      "word": " to",
+      "start": 9.38,
+      "end": 9.54
+    },
+    {
+      "word": " d5",
+      "start": 9.54,
+      "end": 10.02
+    },
+    {
+      "word": " to",
+      "start": 10.02,
+      "end": 10.26
+    },
+    {
+      "word": " deliver",
+      "start": 10.26,
+      "end": 10.56
+    },
+    {
+      "word": " checkmate,",
+      "start": 10.56,
+      "end": 11.44
+    },
+    {
+      "word": " perfectly",
+      "start": 11.44,
+      "end": 12.04
+    },
+    {
+      "word": " coordinating",
+      "start": 12.04,
+      "end": 12.66
+    },
+    {
+      "word": " to",
+      "start": 12.66,
+      "end": 12.96
+    },
+    {
+      "word": " cover",
+      "start": 12.96,
+      "end": 13.24
+    },
+    {
+      "word": " every",
+      "start": 13.24,
+      "end": 13.64
+    },
+    {
+      "word": " escape",
+      "start": 13.64,
+      "end": 13.98
+    },
+    {
+      "word": " square.",
+      "start": 13.98,
+      "end": 13.98
+    }
+  ]
+}

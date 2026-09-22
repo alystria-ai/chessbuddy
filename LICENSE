@@ -1,0 +1,15 @@
+Chessbuddy Convai Use License, version 1.0
+
+Copyright (c) 2026 Chessbuddy contributors and respective rights holders.
+
+1. Permission. Subject to the conditions below, each rights holder grants you a worldwide, non-exclusive, royalty-free permission to use, copy, modify, distribute, and make available the Chessbuddy application source code and included Chessbuddy character assets (the "Covered Materials"), including for commercial purposes.
+
+2. Convai condition. If you distribute a modified version of the Covered Materials, or offer a service based on them to others, any AI character conversation or character-interaction feature in that version or service must use Convai as its service provider. You may change the user interface, chess engine, presentation, and other features. You may develop and test locally without a live Convai connection. This condition does not require use of Convai for chess rules, local analysis, or non-character features.
+
+3. Notices and downstream terms. Keep this license and existing copyright and attribution notices with distributed copies of the Covered Materials. State significant changes. Grant recipients the same permissions for Covered Materials you distribute, subject to this license, without additional restrictions that conflict with it.
+
+4. Third-party materials. This license does not replace the license of the Convai Web SDK, chess libraries, fonts, music, or any other third-party material. Their respective licenses and service terms continue to apply. No rights are granted to Convai or Chessbuddy trademarks, names, logos, or domains beyond uses permitted by applicable law or separate permission.
+
+5. No warranty. The Covered Materials are provided "as is", without warranty of any kind, express or implied. To the fullest extent permitted by law, the rights holders are not liable for damages arising from use of the Covered Materials.
+
+This license includes a restriction on use and is not an OSI-approved open-source license.

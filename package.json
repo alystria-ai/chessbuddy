@@ -1,0 +1,75 @@
+{
+  "name": "classic-chess",
+  "version": "1.0.0",
+  "description": "A polished classic chess coach game with Sofia as the default tactician guide.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:dataset": "vite --mode dataset",
+    "build": "tsc && vite build",
+    "start": "node server/index.mjs",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:server": "node --test server/index.server-test.mjs api/vercel-api.server-test.mjs",
+    "check": "npm test && npm run test:server && npm run build",
+    "models:v2:prepare": "node --max-old-space-size=12288 scripts/prepare-avatar-v2.mjs --source-dir=assets-src --contract-dir=vendor/convai-web-lipsync --output-dir=public",
+    "models:v2:verify": "node --max-old-space-size=12288 scripts/verify-character-model-contract.mjs --source-dir=assets-src --contract-dir=vendor/convai-web-lipsync --public-dir=public --lighting=docs/character-models/chess-avatars-v2/lighting-setup.json",
+    "models:optimize": "npm run models:v2:prepare",
+    "models:coaches": "npm run models:v2:prepare",
+    "models:sofia": "node --max-old-space-size=12288 scripts/prepare-avatar-v2.mjs --coach=sofia --source-dir=assets-src --contract-dir=vendor/convai-web-lipsync --output-dir=public",
+    "models:legacy:optimize": "node --max-old-space-size=12288 scripts/optimize-coach-models.mjs",
+    "models:legacy:coaches": "node --max-old-space-size=12288 scripts/prep-sofia-metahuman.mjs",
+    "models:verify": "node scripts/verify-coach-models.mjs --headed",
+    "qa:characters": "node scripts/qa-character-models.mjs",
+    "qa:game-ready": "node scripts/qa-game-ready.mjs",
+    "qa:adaptive": "node scripts/qa-adaptive-layouts.mjs",
+    "portraits:render": "node scripts/render-coach-portrait.mjs",
+    "portraits:thumbs": "node scripts/generate-coach-portrait-thumbs.mjs",
+    "portraits:preview": "node scripts/preview-coach-portrait-picker.mjs",
+    "portraits:check": "npm run portraits:thumbs && npm run portraits:preview",
+    "portraits:leila": "node scripts/render-coach-portrait.mjs leila && node scripts/generate-coach-portrait-thumbs.mjs",
+    "portraits:magnus": "node scripts/render-coach-portrait.mjs magnus && node scripts/generate-coach-portrait-thumbs.mjs",
+    "portraits:menu": "node scripts/render-coach-portrait.mjs magnus && node scripts/render-coach-portrait.mjs leila && node scripts/generate-coach-portrait-thumbs.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "LicenseRef-Chessbuddy-Convai-Use-1.0",
+  "engines": {
+    "node": ">=22.14"
+  },
+  "dependencies": {
+    "@convai/web-sdk": "file:vendor/convai-web-sdk-1.7.0-beta.0.tgz",
+    "@react-three/drei": "^9.88.0",
+    "@react-three/fiber": "^8.15.0",
+    "@react-three/postprocessing": "2.19.1",
+    "chess.js": "^1.4.0",
+    "google-auth-library": "^10.7.0",
+    "lucide-react": "^1.14.0",
+    "n8ao": "1.10.2",
+    "postprocessing": "6.38.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "stockfish": "^18.0.7",
+    "three": "^0.160.0"
+  },
+  "overrides": {
+    "@react-three/postprocessing": {
+      "postprocessing": "6.38.1"
+    }
+  },
+  "devDependencies": {
+    "@gltf-transform/core": "^4.4.1",
+    "@gltf-transform/extensions": "^4.4.1",
+    "@gltf-transform/functions": "^4.4.1",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^6.0.3",
+    "draco3dgltf": "^1.5.7",
+    "meshoptimizer": "^1.2.0",
+    "playwright": "^1.61.1",
+    "sharp": "^0.35.3",
+    "typescript": "^5.3.3",
+    "vite": "^8.1.3",
+    "vitest": "^4.1.10"
+  }
+}

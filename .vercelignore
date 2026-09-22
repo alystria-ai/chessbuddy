@@ -1,0 +1,20 @@
+# Raw art and model-preparation inputs are not needed by the Vite build.
+assets-src/
+design/
+
+# Development-only documentation, tooling, and verification output.
+.agents/
+.claude/
+.verify-out/
+scripts/
+server/
+
+# Tests are run before deployment and are not needed in the upload.
+**/*.test.ts
+**/*.test.tsx
+**/*.server-test.mjs
+
+# Local or generated artifacts.
+dist/
+node_modules/
+*.zip

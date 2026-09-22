@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Local environment
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local reference repos (not part of the app)
+misc/
+docs/prompts.txt
+docs/AGENT_HANDOFF.md
+HANDOFF*.md
+docs/convai-demo-tutorial-script.md
+demo/
+# Local dataset captured via `npm run dev:dataset`
+dataset.json
+Logs
+# Model verification renders (scripts/verify-coach-models.mjs)
+.verify-out/
+.claude/
+# Repository-local Codex design skills (downloaded tooling, not app source)
+.agents/skills/
+# Local Vercel project metadata
+.vercel/
+
+# Local demo captures and response material
+examples/demo-capture/capture/
+examples/demo-capture/replay-data/
+examples/demo-capture/audio/*.wav
+examples/demo-capture/audio/*.mp3
+examples/demo-capture/final/
+examples/demo-capture/edit/*.mp4
+examples/demo-capture/edit/*.wav

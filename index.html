@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg?v=2" />
+    <link rel="preload" as="image" href="./coach-portraits/sofia-thumb.png?v=24" fetchpriority="high" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Chessbuddy</title>
+    <script>
+      // ?headless: drive requestAnimationFrame via setTimeout so the 3D scene
+      // keeps running in hidden/headless tabs (automated browser testing).
+      // Must run before any module so three/R3F capture the shimmed rAF.
+      if (new URLSearchParams(location.search).has('headless')) {
+        (function () {
+          var ids = new Map();
+          var nextId = 1;
+          window.requestAnimationFrame = function (cb) {
+            var id = nextId++;
+            ids.set(id, setTimeout(function () {
+              ids.delete(id);
+              cb(performance.now());
+            }, 33));
+            return id;
+          };
+          window.cancelAnimationFrame = function (id) {
+            var t = ids.get(id);
+            if (t !== undefined) { clearTimeout(t); ids.delete(id); }
+          };
+          Object.defineProperty(document, 'visibilityState', { get: function () { return 'visible'; }, configurable: true });
+          Object.defineProperty(document, 'hidden', { get: function () { return false; }, configurable: true });
+          // Hidden panes never deliver ResizeObserver entries, which R3F's
+          // Canvas needs before it will create the GL root — poll instead.
+          window.ResizeObserver = function (cb) {
+            var els = new Set();
+            var last = new Map();
+            var timer = setInterval(check, 300);
+            function check() {
+              var entries = [];
+              els.forEach(function (el) {
+                var r = el.getBoundingClientRect();
+                var key = r.width + 'x' + r.height;
+                if (last.get(el) !== key) {
+                  last.set(el, key);
+                  var box = [{ inlineSize: r.width, blockSize: r.height }];
+                  entries.push({ target: el, contentRect: r, borderBoxSize: box, contentBoxSize: box, devicePixelContentBoxSize: box });
+                }
+              });
+              if (entries.length) cb(entries);
+            }
+            this.observe = function (el) { els.add(el); setTimeout(check, 0); };
+            this.unobserve = function (el) { els.delete(el); last.delete(el); };
+            this.disconnect = function () { els.clear(); last.clear(); clearInterval(timer); };
+          };
+        })();
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

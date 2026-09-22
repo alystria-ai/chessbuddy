@@ -1,0 +1,44 @@
+[
+  {
+    "id": "leila-pin",
+    "coach": "leila",
+    "line": "e4 e5 Nf3 d6 Bc4 Bg4 Nc3 g6",
+    "q": "My knight looks pinned to the queen. Is there a way to exploit that?",
+    "context": "Verified legal teaching variation: after 1 e4 e5 2 Nf3 d6 3 Bc4 Bg4 4 Nc3 g6, White can play Nxe5. If Black greedily plays Bxd1, then Bxf7+ forces Ke7 and Nd5 is checkmate. Taking the queen is NOT forced or best defense. If Black instead plays dxe5, White can capture the bishop on g4 with Qxg4; White trades a knight for a bishop and pawn, NOT a forced mate. Explain only the line relevant to the student question in two or three clear, natural sentences. Do not enumerate notation without explaining what the pieces do. Do not claim Bxd1 is forced."
+  },
+  {
+    "id": "leila-mate",
+    "coach": "leila",
+    "line": "e4 e5 Nf3 d6 Bc4 Bg4 Nc3 g6",
+    "q": "If you take my queen, how do the bishop and knight finish the attack?",
+    "context": "Verified legal teaching variation: after 1 e4 e5 2 Nf3 d6 3 Bc4 Bg4 4 Nc3 g6, White can play Nxe5. If Black greedily plays Bxd1, then Bxf7+ forces Ke7 and Nd5 is checkmate. Taking the queen is NOT forced or best defense. If Black instead plays dxe5, White can capture the bishop on g4 with Qxg4; White trades a knight for a bishop and pawn, NOT a forced mate. Explain only the line relevant to the student question in two or three clear, natural sentences. Do not enumerate notation without explaining what the pieces do. Do not claim Bxd1 is forced."
+  },
+  {
+    "id": "leila-decline",
+    "coach": "leila",
+    "line": "e4 e5 Nf3 d6 Bc4 Bg4 Nc3 g6",
+    "q": "What if you ignore my queen and take the knight with your pawn?",
+    "context": "Verified legal teaching variation: after 1 e4 e5 2 Nf3 d6 3 Bc4 Bg4 4 Nc3 g6, White can play Nxe5. If Black greedily plays Bxd1, then Bxf7+ forces Ke7 and Nd5 is checkmate. Taking the queen is NOT forced or best defense. If Black instead plays dxe5, White can capture the bishop on g4 with Qxg4; White trades a knight for a bishop and pawn, NOT a forced mate. Explain only the line relevant to the student question in two or three clear, natural sentences. Do not enumerate notation without explaining what the pieces do. Do not claim Bxd1 is forced."
+  },
+  {
+    "id": "sofia-recapture",
+    "coach": "sofia",
+    "line": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3 Ba7 Nbd2 h6 Nf1 Be6 Ng3 Qd7 h3 Bxb3",
+    "q": "Your bishop just took mine on b3. Should I recapture or keep attacking?",
+    "context": "The black bishop from e6 has just captured the white bishop on b3. White to move: axb3 is legal, restores material balance, and opens the a file for the white rook a1. Explain the immediate loose piece before plans for an attack, in two natural sentences."
+  },
+  {
+    "id": "sofia-file",
+    "coach": "sofia",
+    "line": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3 Ba7 Nbd2 h6 Nf1 Be6 Ng3 Qd7 h3 Bxb3 axb3 Rfe8",
+    "q": "What changed for my rook after that recapture?",
+    "context": "White has just played axb3, Black Rfe8. The white a-pawn moved from a2 to b3 capturing the bishop. The a file is now SEMI-OPEN, not fully open, because Black still has a pawn on a6. The white rook a1 has a clear line toward that pawn. White accepted doubled b-pawns in exchange for rook activity. Explain this tradeoff in two natural sentences without claiming a forced win or a fully open file."
+  },
+  {
+    "id": "sofia-habit",
+    "coach": "sofia",
+    "line": "e4 e5 Nf3 Nc6 Bc4 Bc5 c3 Nf6 d3 d6 O-O O-O Re1 a6 Bb3 Ba7 Nbd2 h6 Nf1 Be6 Ng3 Qd7 h3 Bxb3 axb3 Rfe8",
+    "q": "I tend to rush attacks. What should I check before each move?",
+    "context": "Give a practical pre-move habit: opponent checks, captures and threats, then undefended own pieces. Refer to the just-seen need to recapture the bishop as an example. Two or three helpful natural sentences."
+  }
+]

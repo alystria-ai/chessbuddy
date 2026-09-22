@@ -1,0 +1,22 @@
+{
+  "arjun": {
+    "assetName": "Tyler",
+    "runtimeEnabled": false,
+    "values": { "leftL": 0.25, "leftR": 0.25 }
+  },
+  "leila": {
+    "assetName": "Leila",
+    "runtimeEnabled": false,
+    "values": { "rightL": 0.12, "leftR": 0.12, "downL": 0.40, "downR": 0.40 }
+  },
+  "magnus": {
+    "assetName": "Vincent",
+    "runtimeEnabled": false,
+    "values": { "leftL": 0.25, "leftR": 0.25 }
+  },
+  "sofia": {
+    "assetName": "Sofia",
+    "runtimeEnabled": false,
+    "values": { "rightL": 0.12, "leftR": 0.12, "downL": 0.40, "downR": 0.40 }
+  }
+}

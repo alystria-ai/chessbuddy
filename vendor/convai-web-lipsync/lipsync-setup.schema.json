@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://convai.com/schemas/web-lipsync-setup-v1.json",
+  "title": "Convai Web LipSync Setup",
+  "type": "object",
+  "required": ["schemaVersion", "transport", "defaultPreset", "presets", "runtimeSafety"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "id": {"type": "string"},
+    "transport": {
+      "type": "object",
+      "required": ["format", "channelCount", "channelOrderFile", "outputFps"],
+      "properties": {
+        "format": {"const": "mha"},
+        "channelCount": {"const": 251},
+        "channelOrderFile": {"type": "string"},
+        "outputFps": {"type": "number", "minimum": 1},
+        "framesBufferDurationSeconds": {"type": "number", "minimum": 0},
+        "deliverChunksAhead": {"type": "boolean"}
+      }
+    },
+    "defaultPreset": {"type": "string"},
+    "presets": {"type": "object", "minProperties": 1},
+    "runtimeSafety": {"type": "object"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,2655 @@
+/* Game-first home: the real chess room is the landing surface. */
+
+.route-loading-screen {
+  display: grid;
+  min-height: var(--viewport-h);
+  place-items: center;
+  background: rgba(232, 238, 234, 0.96);
+  color: #34403b;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.route-loading-screen > div {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow: 0 14px 38px rgba(42, 55, 50, 0.1);
+}
+
+.game-stage {
+  position: relative;
+}
+
+.game-screen.is-game-ready .board-wrap.is-disabled .square {
+  cursor: default !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
+
+.game-screen.is-game-ready {
+  overflow: hidden;
+}
+
+.game-screen.is-game-ready .coach-line-wrap,
+.game-screen.is-game-ready .coach-chat-row,
+.game-screen.is-game-ready .mobile-game-state {
+  display: none !important;
+}
+
+.game-screen.is-game-ready .coach-card {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.game-screen.is-game-ready .topbar-actions {
+  display: none !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .coach-card {
+  grid-template-rows: minmax(0, 1fr) 88px !important;
+}
+
+.game-screen.is-game-ready .character-window {
+  height: auto !important;
+  flex: 1 1 auto !important;
+  flex-basis: auto !important;
+}
+
+.character-window {
+  background: var(--coach-bg, #c3cbc6);
+}
+
+.character-warmup-img {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  background: var(--coach-bg, #c3cbc6);
+  opacity: 1;
+  pointer-events: none;
+}
+
+.character-ready-poster {
+  display: none;
+}
+
+.character-window canvas {
+  position: relative;
+  z-index: 1;
+  /* One atomic swap: a transparent PNG cannot occlude the live cutout. */
+  transition: none !important;
+}
+
+.character-window:not(.is-handoff-complete) canvas {
+  opacity: 0 !important;
+}
+
+.character-window.is-handoff-complete canvas {
+  opacity: 1 !important;
+}
+
+.character-window.is-handoff-complete .character-warmup-img {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.character-window:not(.is-ready) .character-loading {
+  inset: auto 0.75rem 0.75rem;
+  z-index: 3;
+  display: inline-flex;
+  width: fit-content;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.62rem;
+  border: 1px solid rgba(72, 84, 79, 0.18);
+  border-radius: 10px;
+  background: rgba(250, 252, 251, 0.84);
+  color: #35413c;
+  box-shadow: 0 10px 28px rgba(46, 58, 53, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+.character-window:not(.is-ready) .character-loading-mark {
+  width: 20px;
+  height: 20px;
+  background: rgba(192, 62, 53, 0.1);
+  color: #b33d35;
+  font-size: 0.65rem;
+}
+
+.character-window:not(.is-ready) .character-loading strong {
+  font-size: 0.6rem;
+  letter-spacing: 0.045em;
+}
+
+.game-ready-stage-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: grid;
+  place-items: center;
+  padding: clamp(0.8rem, 3vw, 2rem);
+  background: rgba(235, 240, 237, 0.12);
+}
+
+.game-ready-mobile-start {
+  display: none;
+}
+
+.game-ready-start-card {
+  display: grid;
+  width: min(520px, 78%);
+  gap: 0.82rem;
+  padding: clamp(1.35rem, 2.5vw, 2rem) clamp(1rem, 2vw, 1.35rem) clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  background: rgba(249, 251, 250, 0.9);
+  color: #26302c;
+  box-shadow: 0 24px 68px rgba(41, 54, 49, 0.2), inset 0 1px rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(24px) saturate(1.04);
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.game-ready-play {
+  min-height: clamp(62px, 8vh, 76px);
+  border: 1px solid #c7463d;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #df6c63, #d9584f);
+  color: #fff;
+  box-shadow: 0 12px 28px rgba(196, 59, 50, 0.22);
+  font-family: inherit;
+  font-size: clamp(1.3rem, 2.6vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  cursor: pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.game-ready-play:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #e4766d, #d94f46);
+  box-shadow: 0 16px 34px rgba(196, 59, 50, 0.28);
+}
+
+.game-ready-play:active {
+  transform: translateY(0);
+}
+
+.game-ready-powered-by {
+  display: inline-flex;
+  min-height: 20px;
+  align-items: center;
+  justify-self: center;
+  gap: 0.26rem;
+  margin-block: -0.35rem -0.5rem;
+  padding: 0 0.28rem;
+  border-radius: 8px;
+  color: #6a7670;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  line-height: 1;
+  text-decoration: none;
+  transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+.game-ready-powered-by img {
+  width: 19px;
+  height: 19px;
+  object-fit: contain;
+}
+
+.game-ready-powered-by strong {
+  color: #35413c;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.game-ready-powered-by:hover {
+  transform: translateY(-1px);
+  background: rgba(40, 183, 91, 0.08);
+  color: #3d4b45;
+}
+
+.game-ready-powered-by:hover strong {
+  color: #158a43;
+}
+
+.game-ready-summary,
+.game-ready-change {
+  border: 0;
+  background: transparent;
+  color: #66716c;
+  font: inherit;
+  cursor: pointer;
+}
+
+.game-ready-options-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding-top: 0.78rem;
+  border-top: 1px solid rgba(77, 91, 85, 0.14);
+}
+
+.game-ready-summary {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  padding-inline: 0.2rem;
+  border: 0;
+  font-size: 0.9rem;
+  cursor: default;
+}
+
+.game-ready-summary strong {
+  color: #2b3531;
+}
+
+.game-ready-change {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.48rem;
+  min-width: 122px;
+  padding: 0.62rem 0.85rem;
+  border: 1px solid rgba(189, 64, 56, 0.38);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #a9342d;
+  box-shadow: 0 5px 16px rgba(91, 54, 48, 0.08), inset 0 1px rgba(255, 255, 255, 0.92);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  transition: transform 160ms ease, border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+}
+
+.game-ready-change svg {
+  width: 16px;
+  height: 16px;
+  stroke-width: 2;
+}
+
+.game-ready-change:hover {
+  transform: translateY(-1px);
+  border-color: rgba(189, 64, 56, 0.62);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 20px rgba(91, 54, 48, 0.12), inset 0 1px #fff;
+}
+
+.game-ready-change:active {
+  transform: translateY(0);
+}
+
+.game-ready-play:focus-visible,
+.game-ready-powered-by:focus-visible,
+.game-ready-summary:focus-visible,
+.game-ready-change:focus-visible,
+.game-setup-panel button:focus-visible,
+.ready-more-sheet button:focus-visible {
+  outline: 3px solid rgba(199, 70, 61, 0.35);
+  outline-offset: 2px;
+}
+
+.game-ready-auth > .auth-control,
+.game-ready-auth .auth-control {
+  position: static;
+  inset: auto;
+  z-index: 150;
+}
+
+.game-screen.is-game-ready .game-ready-auth {
+  align-self: end;
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  place-items: center;
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-control {
+  align-items: center;
+  width: 100%;
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-signin-trigger,
+.game-screen.is-game-ready .game-ready-auth .auth-avatar-button {
+  min-width: 72px;
+  min-height: 42px;
+  border-color: rgba(71, 84, 79, 0.22);
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.72);
+  color: #26302c;
+  box-shadow: 0 8px 20px rgba(45, 58, 53, 0.08), inset 0 1px rgba(255, 255, 255, 0.9);
+  font-size: 0.67rem;
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-user-menu {
+  width: 72px;
+  max-width: 72px;
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-avatar-button {
+  justify-content: center;
+  padding: 0.3rem;
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-avatar-button span {
+  display: none;
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-popover {
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: calc(100% + 0.75rem);
+  border-color: rgba(71, 84, 79, 0.22);
+  background: rgba(247, 249, 248, 0.96);
+  color: #26302c;
+  box-shadow: 0 18px 42px rgba(45, 58, 53, 0.18);
+  backdrop-filter: blur(18px) saturate(1.05);
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-popover span {
+  color: #68736e;
+}
+
+.game-screen.is-game-ready .game-ready-auth .auth-popover button {
+  border-color: rgba(71, 84, 79, 0.2);
+  background: rgba(255, 255, 255, 0.82);
+  color: #29332f;
+}
+
+.game-setup-scrim,
+.ready-more-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 10050;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(222, 229, 225, 0.68);
+  backdrop-filter: blur(18px) saturate(0.92);
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
+.game-setup-panel {
+  display: grid;
+  width: min(980px, calc(100vw - 2rem));
+  max-height: min(820px, calc(100dvh - 2rem));
+  gap: 0;
+  overflow: auto;
+  border: 1px solid rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  background: rgba(248, 250, 249, 0.94);
+  color: #25302b;
+  box-shadow: 0 28px 90px rgba(42, 55, 50, 0.2);
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.game-setup-header,
+.ready-more-sheet > header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.35rem 1rem;
+  border-bottom: 1px solid rgba(76, 89, 83, 0.16);
+}
+
+.game-setup-header span,
+.ready-more-sheet header span {
+  color: #b53d35;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.game-setup-header h2,
+.ready-more-sheet h2 {
+  margin: 0.18rem 0 0;
+  color: #202a26;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.55rem, 3vw, 2.2rem);
+  letter-spacing: -0.035em;
+}
+
+.game-setup-header p {
+  max-width: 48rem;
+  margin: 0.35rem 0 0;
+  color: #68736e;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.game-setup-header > button,
+.ready-more-sheet header > button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  place-items: center;
+  border: 1px solid rgba(74, 87, 81, 0.2);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.66);
+  color: #4f5c56;
+  cursor: pointer;
+}
+
+.game-setup-header svg,
+.ready-more-sheet header svg {
+  width: 18px;
+  height: 18px;
+}
+
+.game-setup-group {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.28fr) minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem 1.35rem;
+  border-bottom: 1px solid rgba(76, 89, 83, 0.13);
+}
+
+.game-setup-label {
+  display: grid;
+  align-content: start;
+  gap: 0.24rem;
+  padding-top: 0.35rem;
+}
+
+.game-setup-label strong {
+  font-size: 0.8rem;
+}
+
+.game-setup-label small {
+  color: #78827d;
+  font-size: 0.66rem;
+  line-height: 1.35;
+}
+
+.game-ready-coach-picker {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.game-ready-coach-picker button,
+.game-ready-difficulty-picker button,
+.game-ready-mode-picker button {
+  min-width: 0;
+  border: 1px solid rgba(73, 86, 80, 0.18);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.54);
+  color: #394640;
+  cursor: pointer;
+}
+
+.game-ready-coach-picker button {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  min-height: 64px;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem;
+  text-align: left;
+}
+
+.game-ready-coach-picker img {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.game-ready-coach-picker span {
+  display: grid;
+  min-width: 0;
+  gap: 0.12rem;
+}
+
+.game-ready-coach-picker strong,
+.game-ready-difficulty-picker strong,
+.game-ready-mode-picker strong {
+  color: #26312c;
+  font-size: 0.74rem;
+}
+
+.game-ready-coach-picker small,
+.game-ready-difficulty-picker small,
+.game-ready-mode-picker small {
+  color: #74807a;
+  font-size: 0.6rem;
+  line-height: 1.3;
+}
+
+.game-ready-difficulty-picker {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.45rem;
+}
+
+.game-ready-difficulty-picker button {
+  display: grid;
+  min-height: 58px;
+  place-items: center;
+  gap: 0.18rem;
+  padding: 0.48rem 0.3rem;
+}
+
+.game-ready-mode-picker {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.game-ready-mode-picker button {
+  display: grid;
+  min-height: 64px;
+  align-content: center;
+  gap: 0.22rem;
+  padding: 0.65rem 0.8rem;
+  text-align: left;
+}
+
+.game-ready-coach-picker button.is-selected,
+.game-ready-difficulty-picker button.is-selected,
+.game-ready-mode-picker button.is-selected {
+  border-color: rgba(194, 61, 53, 0.72);
+  background: rgba(222, 101, 92, 0.09);
+  box-shadow: inset 0 -2px #c54239;
+}
+
+.game-setup-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.9rem 1.35rem 1.1rem;
+}
+
+.game-setup-footer button {
+  min-width: 130px;
+  min-height: 44px;
+  border: 1px solid #b93d35;
+  border-radius: 10px;
+  background: #c94d44;
+  color: #fff;
+  font: 800 0.74rem "Trebuchet MS", sans-serif;
+  cursor: pointer;
+}
+
+.ready-more-sheet {
+  position: fixed;
+  top: 1rem;
+  left: 116px;
+  width: min(340px, calc(100vw - 2rem));
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  background: rgba(248, 250, 249, 0.96);
+  color: #26312c;
+  box-shadow: 0 24px 70px rgba(42, 55, 50, 0.2);
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+.ready-more-sheet nav {
+  display: grid;
+  gap: 0.35rem;
+  padding: 0.65rem;
+}
+
+.ready-more-sheet nav > button {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  min-height: 58px;
+  align-items: center;
+  gap: 0.65rem;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #46534d;
+  text-align: left;
+  cursor: pointer;
+}
+
+.ready-more-sheet nav > button:hover {
+  background: rgba(215, 223, 219, 0.62);
+}
+
+.ready-more-sheet nav svg {
+  width: 20px;
+  height: 20px;
+  justify-self: center;
+}
+
+.ready-more-sheet nav span {
+  display: grid;
+  gap: 0.14rem;
+}
+
+.ready-more-sheet nav strong {
+  color: #29342f;
+  font-size: 0.76rem;
+}
+
+.ready-more-sheet nav small {
+  color: #74807a;
+  font-size: 0.62rem;
+}
+
+@media (max-width: 1199px), (max-height: 699px) {
+  .game-screen.is-game-ready {
+    height: var(--viewport-h);
+    min-height: var(--viewport-h);
+    overflow: hidden;
+  }
+
+  .game-screen.is-game-ready > .game-navigation-rail {
+    position: sticky !important;
+    top: 0;
+    z-index: 80;
+  }
+
+  .game-screen.is-game-ready .game-ready-auth {
+    width: auto;
+    margin-left: auto;
+  }
+
+  .game-screen.is-game-ready .game-ready-auth .auth-control {
+    width: auto;
+  }
+
+  .game-screen.is-game-ready .game-ready-auth .auth-user-menu {
+    width: auto;
+    max-width: min(10rem, 28vw);
+  }
+
+  .game-screen.is-game-ready .game-ready-auth .auth-avatar-button {
+    width: auto;
+    max-width: min(10rem, 28vw);
+    padding-inline: 0.4rem 0.7rem;
+  }
+
+  .game-screen.is-game-ready .game-ready-auth .auth-avatar-button span {
+    display: block;
+  }
+
+  .game-screen.is-game-ready .game-ready-auth .auth-popover {
+    top: calc(100% + 0.45rem);
+    right: 0;
+    bottom: auto;
+    left: auto;
+  }
+
+  .game-screen.is-game-ready .game-ready-more-button {
+    display: inline-flex !important;
+  }
+
+  .game-screen.is-game-ready > .app-shell:not(.analysis-shell) {
+    min-height: calc(var(--viewport-h) - var(--topbar-h)) !important;
+    max-height: calc(var(--viewport-h) - var(--topbar-h)) !important;
+    overflow: hidden !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .game-screen.is-game-ready:not([data-screen="game"]) .character-warmup-img {
+    object-fit: contain;
+    object-position: center 18%;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: clamp(190px, 30vh, 250px) minmax(0, 1fr) !important;
+    grid-template-areas: "coach" "board" !important;
+    gap: 0.55rem !important;
+    height: calc(var(--viewport-h) - var(--topbar-h)) !important;
+    padding: 0.55rem !important;
+    align-content: start !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .coach-card {
+    width: min(100%, 760px) !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    justify-self: center;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .character-window {
+    height: auto !important;
+    min-height: 0 !important;
+    flex-basis: auto !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .game-stage {
+    display: grid;
+    height: 100% !important;
+    min-height: 0;
+    max-height: 100% !important;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .board-wrap {
+    --board-size: min(calc(100vw - 3.65rem), calc(var(--viewport-h) - var(--topbar-h) - clamp(190px, 30vh, 250px) - 9.5rem)) !important;
+  }
+
+  .game-ready-start-card {
+    width: min(470px, calc(100% - 1rem));
+    gap: 0.55rem;
+    padding: 1rem 0.78rem 0.78rem;
+    border-radius: 14px;
+  }
+
+  .game-ready-powered-by {
+    margin-block: -0.2rem;
+  }
+
+  .game-ready-play {
+    min-height: 56px;
+    font-size: 1.25rem;
+  }
+
+  .game-ready-summary {
+    min-height: 40px;
+    font-size: 0.72rem;
+  }
+
+  .game-ready-change {
+    min-height: 44px;
+    font-size: 0.76rem;
+  }
+}
+
+/* Tablet ready layout: a very wide, shallow portrait viewport crops the coach
+   down to a strip of hair. Give the portrait a human aspect ratio beside the
+   caption while preserving the compact two-row page composition. */
+@media (min-width: 701px) and (max-width: 980px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .coach-card {
+    grid-template-columns: clamp(156px, 22vw, 190px) minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .character-window {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-right: 1px solid rgba(77, 91, 85, 0.16);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .character-caption {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 1rem 1.1rem !important;
+  }
+
+  .game-screen.is-game-ready .character-fallback-img {
+    object-position: 50% 4%;
+  }
+}
+
+@media (max-width: 700px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .game-stage {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-top: 0.5rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .game-stage > .board-wrap {
+    align-self: center !important;
+    justify-self: center !important;
+    margin-block: 0 !important;
+  }
+
+  .game-screen.is-game-ready .game-navigation-rail > .topbar-actions {
+    display: none !important;
+  }
+
+  .game-screen.is-game-ready .game-ready-auth .auth-control {
+    position: static !important;
+    inset: auto !important;
+  }
+
+  .game-screen.is-game-ready .game-ready-auth .auth-signin-trigger {
+    min-width: 66px;
+    min-height: 40px;
+    padding-inline: 0.65rem;
+  }
+
+  .game-screen.is-game-ready .character-caption {
+    min-height: 42px;
+    height: 42px;
+    flex-basis: 42px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .coach-card {
+    grid-template-rows: minmax(0, 1fr) 42px !important;
+  }
+
+  .game-screen.is-game-ready .coach-card.is-preview .character-ready-poster {
+    display: none !important;
+  }
+
+  .game-screen.is-game-ready .character-window:not(.is-ready) .character-loading {
+    inset: auto 0.45rem 0.45rem;
+  }
+
+  .game-ready-stage-overlay {
+    display: none;
+  }
+
+  .game-ready-mobile-start {
+    position: fixed;
+    inset: auto 0.55rem max(0.55rem, env(safe-area-inset-bottom));
+    z-index: 90;
+    display: block;
+  }
+
+  .game-ready-start-card {
+    width: 100%;
+    gap: 0.48rem;
+    padding: 0.78rem 0.65rem 0.65rem;
+  }
+
+  .game-ready-powered-by {
+    margin-block: -0.15rem;
+  }
+
+  .game-ready-play {
+    min-height: 52px;
+  }
+
+  .game-ready-options-row {
+    gap: 0.5rem;
+    padding-top: 0.55rem;
+  }
+
+  .game-ready-change {
+    min-width: 108px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready .board-wrap {
+    --board-size: min(calc(100vw - 3.65rem), calc(var(--viewport-h) - var(--topbar-h) - clamp(190px, 30vh, 250px) - 9.5rem)) !important;
+  }
+
+  .game-setup-scrim,
+  .ready-more-scrim {
+    place-items: end center;
+    padding: 0;
+  }
+
+  .game-setup-panel,
+  .ready-more-sheet {
+    position: static;
+    width: 100%;
+    max-height: min(86dvh, 760px);
+    border-radius: 20px 20px 0 0;
+    padding-bottom: max(0.25rem, env(safe-area-inset-bottom));
+  }
+
+  .game-setup-group {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .game-ready-coach-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .game-ready-difficulty-picker {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .game-ready-mode-picker {
+    grid-template-columns: 1fr;
+  }
+
+  .game-setup-header,
+  .ready-more-sheet > header {
+    padding: 1rem;
+  }
+
+  .game-setup-footer {
+    padding: 0.75rem 1rem;
+  }
+
+  .game-setup-footer button {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-ready-play,
+  .character-window canvas {
+    transition: none !important;
+  }
+}
+
+/* Final phone layout authority. This sheet loads after the historical
+   adaptive layout, so these rules intentionally collapse the former 340-520px
+   portrait track into a compact avatar/chat header and keep the whole game in
+   one viewport. Only the transcript scrolls. */
+@media (max-width: 767px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] {
+    height: var(--viewport-h) !important;
+    min-height: var(--viewport-h) !important;
+    max-height: var(--viewport-h) !important;
+    overflow: hidden !important;
+    overscroll-behavior: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    grid-template-areas: "coach" "board" "side" !important;
+    width: 100% !important;
+    height: calc(var(--viewport-h) - var(--topbar-h)) !important;
+    min-height: 0 !important;
+    gap: 0.5rem !important;
+    padding: 0.5rem 0.65rem 0.6rem !important;
+    overflow: hidden !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .coach-card,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .coach-card.has-chat {
+    order: 1;
+    grid-area: coach !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: 62px minmax(64px, 84px) 58px !important;
+    width: 100% !important;
+    height: 204px !important;
+    min-height: 204px !important;
+    max-height: 204px !important;
+    overflow: hidden !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .coach-card.is-preview {
+    grid-template-rows: 62px !important;
+    height: 62px !important;
+    min-height: 62px !important;
+    max-height: 62px !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .character-caption {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    min-height: 62px !important;
+    height: 62px !important;
+    max-height: 62px !important;
+    padding: 0.3rem 0.45rem !important;
+    gap: 0.55rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .character-caption .caption-actions {
+    gap: 0.5rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .character-caption .caption-actions > .tooltip-trigger {
+    position: relative;
+    display: inline-flex;
+    flex: 0 0 auto;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .character-caption .character-mute-btn {
+    position: relative;
+    top: auto;
+    right: auto;
+    z-index: auto;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .coach-line-wrap {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    height: 100% !important;
+    min-height: 64px !important;
+    max-height: 84px !important;
+    overflow-y: auto !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .coach-chat-row {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+    height: 58px !important;
+    min-height: 58px !important;
+    padding: 0.35rem 0.4rem !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .game-stage {
+    order: 2;
+    grid-area: board !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 0.2rem !important;
+    overflow: hidden !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage .board-wrap {
+    --board-size: min(640px, calc(100vw - 4.1rem), calc(var(--viewport-h) - var(--topbar-h) - 20rem)) !important;
+    width: fit-content !important;
+    max-width: 100% !important;
+    margin: auto !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .mobile-game-state {
+    order: 3;
+    grid-area: side !important;
+    display: block !important;
+    width: 100% !important;
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    overflow: hidden !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mobile-game-state > .panel-card {
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
+    padding: 0.2rem !important;
+    overflow: hidden !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mobile-game-state .turn-card-body {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.35rem;
+    height: 100%;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mobile-game-state .turn-card-body > :not(button) {
+    display: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mobile-game-state .turn-card-body button {
+    min-width: 0;
+    min-height: 44px;
+    height: 44px;
+    margin: 0 !important;
+    padding: 0.3rem 0.35rem;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) {
+    grid-template-rows: 62px minmax(0, 1fr) !important;
+    grid-template-areas: "coach" "board" !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .game-stage {
+    justify-content: center !important;
+    padding: 0.2rem 0.2rem 9.5rem !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .game-stage .board-wrap {
+    --board-size: min(calc(100vw - 3.65rem), calc(var(--viewport-h) - var(--topbar-h) - 11.5rem)) !important;
+    align-self: center !important;
+    margin: 0 auto !important;
+  }
+
+  html[data-theme="japanese-minimal"] .coach-line-wrap.has-conversation .coach-conversation-list {
+    gap: 0.38rem;
+    padding: 0.3rem 0.42rem 0.36rem;
+  }
+
+  html[data-theme="japanese-minimal"] .coach-line-wrap.has-conversation .coach-message {
+    padding: 0.34rem 0.48rem 0.4rem;
+  }
+
+  html[data-theme="japanese-minimal"] .coach-line-wrap.has-conversation .coach-message-author {
+    margin-bottom: 0.1rem;
+    font-size: 0.56rem;
+  }
+
+  html[data-theme="japanese-minimal"] .coach-line-wrap.has-conversation .coach-message p {
+    font-size: 0.82rem;
+    line-height: 1.32;
+  }
+}
+
+html[data-theme="japanese-minimal"] .game-ready-start-card .game-ready-change {
+  border: 1px solid rgba(189, 64, 56, 0.38);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 5px 16px rgba(91, 54, 48, 0.09), inset 0 1px rgba(255, 255, 255, 0.94);
+}
+
+.mobile-menu-trigger,
+.mobile-game-drawer {
+  display: none;
+}
+
+/* Touch-first composition. The condition mirrors isMobilePortrait() so the
+   markup CoachCard renders for a coarse pointer always meets the layout that
+   expects it. */
+@media (pointer: coarse), (max-width: 767px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] {
+    --topbar-h: 0px;
+    /* Every compact size is derived from the live viewport height, so the board
+       and the coach always fit together instead of pushing the page into a
+       scroll or clipping her below the fold. */
+    --compact-top: max(1.1rem, calc(env(safe-area-inset-top) + .9rem));
+    --compact-bottom: max(.4rem, env(safe-area-inset-bottom));
+    --compact-inline: .45rem;
+    --compact-gutter: 1.25rem;
+    /* Match rank-label inset toward the board (.24rem on the gutter edge). */
+    --compact-file-gap: 0.24rem;
+    --compact-file-bottom-gap: 0.32rem;
+    --compact-label-row: 1.05rem;
+    --compact-board: min(
+      calc(100vw - 2 * var(--compact-inline) - 2 * var(--compact-gutter) - .2rem),
+      calc(var(--viewport-h) * .5)
+    );
+    --compact-coach-h: max(
+      236px,
+      calc(
+        var(--viewport-h) - var(--compact-top) - var(--compact-bottom)
+        - var(--compact-board) - var(--compact-gutter) - var(--compact-file-gap)
+        - var(--compact-label-row) - var(--compact-file-bottom-gap) - .2rem
+      )
+    );
+    --compact-fab-r: clamp(58px, 17vw, 80px);
+    height: var(--viewport-h);
+    min-height: var(--viewport-h);
+    padding-left: 0 !important;
+    overflow: hidden;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .game-navigation-rail {
+    display: none !important;
+  }
+
+  .mobile-menu-trigger {
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: calc(.6rem + env(safe-area-inset-bottom));
+    left: calc(var(--compact-inline) + .15rem);
+    z-index: 9;
+    display: grid;
+    width: clamp(42px, 11.5vw, 50px);
+    height: clamp(42px, 11.5vw, 50px);
+    place-items: center;
+    padding: 0;
+    border: 1.5px solid rgba(255, 252, 246, .95);
+    border-radius: 50%;
+    background:
+      radial-gradient(120% 90% at 32% 18%, #fffef9, transparent 58%),
+      #f3eee4;
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .08),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 10px 22px rgba(36, 48, 44, .14);
+    color: #24302c;
+    cursor: pointer;
+    transition: filter 200ms ease, box-shadow 200ms ease;
+  }
+
+  .mobile-menu-trigger:hover {
+    filter: brightness(1.04);
+  }
+
+  .mobile-menu-trigger:active {
+    filter: brightness(.96);
+  }
+
+  .mobile-menu-trigger svg {
+    display: none;
+  }
+
+  .mobile-menu-mark {
+    display: grid;
+    width: 16px;
+    gap: 3.5px;
+  }
+
+  .mobile-menu-mark i {
+    display: block;
+    height: 1.5px;
+    background: #1f2a26;
+  }
+
+  .mobile-menu-mark i:nth-child(1) { width: 16px; }
+  .mobile-menu-mark i:nth-child(2) { width: 12px; }
+  .mobile-menu-mark i:nth-child(3) { width: 9px; }
+
+  .mobile-menu-trigger:focus-visible,
+  .mobile-game-drawer button:focus-visible,
+  .mobile-game-drawer a:focus-visible {
+    outline: 3px solid rgba(196, 59, 50, .38);
+    outline-offset: 3px;
+  }
+
+  .mobile-game-drawer[open] {
+    position: fixed;
+    inset: 0;
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: hidden;
+  }
+
+  .mobile-game-drawer::backdrop {
+    background: rgba(23, 29, 27, .28);
+  }
+
+  .mobile-game-drawer-panel {
+    display: flex;
+    width: min(86vw, 348px);
+    height: 100%;
+    flex-direction: column;
+    padding: max(1rem, env(safe-area-inset-top)) .9rem max(.9rem, env(safe-area-inset-bottom));
+    border-right: 1px solid rgba(72, 85, 80, .2);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, .72), rgba(255, 255, 255, .5)),
+      var(--theme-page-art, #dfe5e1);
+    box-shadow: 18px 0 48px rgba(28, 39, 35, .16);
+    font-family: var(--theme-font-body, system-ui, sans-serif);
+    animation: mobile-drawer-enter 220ms cubic-bezier(.2, .75, .25, 1);
+  }
+
+  @keyframes mobile-drawer-enter {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+  }
+
+  .mobile-game-drawer-panel > header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .45rem .4rem 1rem;
+    border-bottom: 1px solid rgba(70, 84, 78, .18);
+  }
+
+  .mobile-game-drawer-panel > header span,
+  .mobile-drawer-account > span {
+    color: #a8322b;
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .mobile-game-drawer-panel h2 {
+    margin: .18rem 0 0;
+    color: #202a26;
+    font-family: var(--theme-font-display, Georgia, serif);
+    font-size: 1.65rem;
+    font-weight: 500;
+    letter-spacing: -.035em;
+  }
+
+  .mobile-game-drawer-panel > header button {
+    display: grid;
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #2b3732;
+  }
+
+  .mobile-game-drawer-panel > header svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mobile-game-drawer-panel > nav {
+    display: grid;
+    gap: .22rem;
+    min-height: 0;
+    padding: .7rem 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .mobile-drawer-kicker {
+    margin: .85rem .2rem .28rem;
+    color: #a8322b;
+    font-size: .58rem;
+    font-weight: 800;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+  }
+
+  .mobile-drawer-kicker:first-child {
+    margin-top: .15rem;
+  }
+
+  .mobile-game-drawer-panel > nav > button,
+  .mobile-drawer-utility .rail-tool {
+    display: grid;
+    width: 100% !important;
+    min-height: 58px;
+    grid-template-columns: 38px minmax(0, 1fr);
+    align-items: center;
+    gap: .55rem;
+    margin: 0 !important;
+    padding: .55rem .65rem !important;
+    border: 1px solid transparent !important;
+    border-radius: 2px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #2c3833 !important;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .mobile-game-drawer-panel > nav > button:hover,
+  .mobile-drawer-utility .rail-tool:hover {
+    border-color: rgba(255, 255, 255, .8) !important;
+    background: rgba(255, 255, 255, .48) !important;
+  }
+
+  .mobile-game-drawer-panel > nav > button > svg,
+  .mobile-drawer-utility .rail-tool > svg,
+  .mobile-drawer-piece {
+    width: 20px;
+    height: 20px;
+    justify-self: center;
+    color: #596761;
+  }
+
+  .mobile-drawer-piece {
+    font: 1.35rem/20px Georgia, serif;
+    text-align: center;
+  }
+
+  .mobile-game-drawer-panel > nav > button > span:last-child,
+  .mobile-drawer-utility .rail-tool {
+    min-width: 0;
+  }
+
+  .mobile-game-drawer-panel > nav strong,
+  .mobile-drawer-utility .rail-tool strong {
+    display: block !important;
+    color: #27322e;
+    font-size: .78rem;
+    font-weight: 750;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .mobile-game-drawer-panel > nav small,
+  .mobile-drawer-utility .rail-tool small {
+    display: block;
+    margin-top: .12rem;
+    color: #74807b;
+    font-size: .64rem;
+    font-weight: 400;
+    line-height: 1.25;
+  }
+
+  .mobile-game-drawer-panel > nav .is-danger,
+  .mobile-game-drawer-panel > nav .is-danger svg {
+    color: #a53a33 !important;
+  }
+
+  .mobile-drawer-utility,
+  .mobile-drawer-utility > div {
+    width: 100%;
+  }
+
+  .mobile-drawer-account {
+    display: grid;
+    gap: .55rem;
+    padding: .75rem .45rem;
+    border-top: 1px solid rgba(70, 84, 78, .18);
+  }
+
+  .mobile-drawer-account .auth-control {
+    position: static !important;
+    inset: auto !important;
+    z-index: auto;
+    width: 100%;
+    align-items: stretch;
+  }
+
+  .mobile-drawer-account :where(.auth-user-menu, .auth-signin-trigger, .auth-avatar-button) {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .mobile-drawer-account :where(.auth-signin-trigger, .auth-avatar-button) {
+    min-height: 44px;
+    justify-content: flex-start;
+    border-color: rgba(69, 84, 77, .2);
+    background: rgba(255, 255, 255, .68);
+    color: #26312c;
+  }
+
+  .mobile-drawer-account .auth-avatar-button span {
+    display: block !important;
+  }
+
+  .mobile-drawer-powered {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    gap: .28rem;
+    min-height: 26px;
+    padding: .25rem .45rem;
+    color: #76817c;
+    font-size: .61rem;
+    text-decoration: none;
+  }
+
+  .mobile-drawer-powered img {
+    width: 15px;
+    height: 15px;
+    object-fit: contain;
+  }
+
+  .mobile-drawer-powered strong {
+    color: #46534d;
+    font-size: .65rem;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage .board-wrap,
+  #root .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .game-stage .board-wrap {
+    --board-size: var(--compact-board) !important;
+    position: relative;
+    display: grid !important;
+    grid-template-columns: var(--compact-board) !important;
+    grid-template-rows: var(--compact-board) !important;
+    column-gap: 0 !important;
+    row-gap: 0 !important;
+    box-sizing: border-box;
+    width: calc(var(--compact-board) + var(--compact-gutter) * 2) !important;
+    min-width: 0;
+    max-width: 100%;
+    height: calc(
+      var(--compact-board) + var(--compact-gutter) + var(--compact-file-gap)
+      + var(--compact-label-row) + var(--compact-file-bottom-gap)
+    ) !important;
+    max-height: none !important;
+    flex-shrink: 0;
+    margin: 0 auto !important;
+    padding: var(--compact-gutter) var(--compact-gutter) var(--compact-file-bottom-gap) var(--compact-gutter) !important;
+    background: rgba(255, 255, 255, .78) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    box-shadow: 0 16px 36px rgba(38, 49, 45, .1), inset 0 1px rgba(255, 255, 255, .92);
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage .chess-board {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    width: var(--compact-board) !important;
+    height: var(--compact-board) !important;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage .rank-labels {
+    position: absolute !important;
+    top: var(--compact-gutter) !important;
+    left: 0 !important;
+    width: var(--compact-gutter) !important;
+    height: var(--compact-board) !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    padding-inline: .1rem .24rem;
+    box-sizing: border-box;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage .file-labels {
+    position: absolute !important;
+    top: calc(var(--compact-gutter) + var(--compact-board) + var(--compact-file-gap)) !important;
+    right: var(--compact-gutter) !important;
+    bottom: auto !important;
+    left: var(--compact-gutter) !important;
+    width: auto !important;
+    height: var(--compact-label-row) !important;
+    grid-column: auto !important;
+    grid-row: auto !important;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage .rank-labels span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage .file-labels span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0 !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-window {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent 0, #000 9%, #000 86%, transparent 99%);
+    mask-image:
+      linear-gradient(to bottom, transparent 0, #000 9%, #000 86%, transparent 99%);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-window canvas,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-warmup-img,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-ready-poster,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-fallback-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    object-position: 46% 10%;
+    background: transparent !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-warmup-img,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-ready-poster,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-fallback-img {
+    -webkit-mask-image: radial-gradient(118% 92% at 52% 28%, #000 48%, transparent 84%);
+    mask-image: radial-gradient(118% 92% at 52% 28%, #000 48%, transparent 84%);
+  }
+
+  .game-screen.is-game-ready .coach-card.is-preview .character-window.is-handoff-complete canvas {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-loading {
+    inset: auto 14% 1.2rem 14%;
+    padding: .42rem;
+    border-radius: 999px;
+    background: rgba(239, 243, 241, .78);
+    color: #4d5a54;
+    backdrop-filter: blur(8px);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-loading-mark {
+    display: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-caption {
+    position: absolute;
+    inset: 0;
+    z-index: 4;
+    display: block;
+    width: 100%;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    pointer-events: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-info,
+  #root .game-screen[data-screen="game"] .caption-info {
+    display: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card.is-composing .caption-actions,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card.has-chat .caption-actions {
+    position: absolute;
+    top: auto;
+    right: var(--compact-inline);
+    bottom: calc(.6rem + env(safe-area-inset-bottom));
+    left: auto;
+    z-index: 8;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(.42rem, 1.8vw, .6rem);
+    width: auto;
+    height: auto;
+    margin: 0;
+    transform: none !important;
+    pointer-events: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .character-caption .caption-actions > .tooltip-trigger,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-controls,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .tooltip-trigger {
+    display: contents !important;
+    position: static !important;
+    flex: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-btn,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .character-caption .character-mute-btn {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: clamp(42px, 11.5vw, 50px) !important;
+    height: clamp(42px, 11.5vw, 50px) !important;
+    margin: 0;
+    right: auto !important;
+    border: 1.5px solid rgba(255, 252, 246, .95) !important;
+    border-radius: 50% !important;
+    background:
+      radial-gradient(120% 90% at 32% 18%, #fffef9, transparent 58%),
+      radial-gradient(80% 120% at 70% 110%, rgba(196, 69, 60, .08), transparent 55%),
+      #f3eee4 !important;
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .08),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 10px 22px rgba(36, 48, 44, .14);
+    color: #24302c !important;
+    backdrop-filter: none;
+    pointer-events: auto;
+    transition: box-shadow 240ms ease, filter 240ms ease;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-btn:hover {
+    filter: brightness(1.04);
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .1),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 14px 26px rgba(36, 48, 44, .16);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-btn:active {
+    filter: brightness(.96);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .mic-btn.is-live {
+    border-color: rgba(255, 248, 244, .92) !important;
+    background:
+      radial-gradient(120% 80% at 32% 16%, rgba(255, 255, 255, .32), transparent 52%),
+      #c4453c !important;
+    color: #fff8f4 !important;
+    box-shadow:
+      0 0 0 1px rgba(161, 45, 38, .28),
+      0 10px 20px rgba(161, 45, 38, .22);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .character-mute-btn.is-live {
+    border-color: rgba(255, 252, 246, .95) !important;
+    background:
+      radial-gradient(120% 90% at 32% 18%, #fffef9, transparent 58%),
+      radial-gradient(80% 120% at 70% 110%, rgba(196, 69, 60, .08), transparent 55%),
+      #f3eee4 !important;
+    color: #24302c !important;
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .08),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 10px 22px rgba(36, 48, 44, .14);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-btn.is-off {
+    border-color: rgba(255, 252, 246, .9) !important;
+    background:
+      radial-gradient(120% 90% at 32% 18%, #fffef9, transparent 58%),
+      #ece6db !important;
+    color: #6a736e !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions > :nth-child(1) .audio-btn,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions > .audio-btn:nth-child(1) {
+    animation: coach-fab-in 640ms cubic-bezier(.18, .9, .22, 1) both;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions > :nth-child(2) .audio-btn,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions > .audio-btn:nth-child(2) {
+    animation: coach-fab-in 640ms cubic-bezier(.18, .9, .22, 1) 90ms both;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions > :nth-child(3) .audio-btn,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions > .audio-btn:nth-child(3) {
+    animation: coach-fab-in 640ms cubic-bezier(.18, .9, .22, 1) 180ms both;
+  }
+
+  @keyframes coach-fab-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toggle.is-open,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card.is-composing .coach-chat-toggle {
+    border-color: rgba(255, 252, 246, .95) !important;
+    background:
+      radial-gradient(120% 90% at 32% 18%, #fffef9, transparent 58%),
+      radial-gradient(80% 120% at 70% 110%, rgba(196, 69, 60, .08), transparent 55%),
+      #f3eee4 !important;
+    color: #24302c !important;
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .08),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 10px 22px rgba(36, 48, 44, .14);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card.is-composing .coach-line-wrap {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line-wrap {
+    position: absolute;
+    top: .45rem;
+    right: var(--compact-inline);
+    bottom: auto;
+    left: var(--compact-inline);
+    z-index: 5;
+    display: block !important;
+    width: auto;
+    max-width: none;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: 0;
+    overflow: visible !important;
+    border: 0;
+    border-radius: 0;
+    background: transparent !important;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line-wrap:empty {
+    display: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line-wrap:empty::before,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line-wrap::before {
+    content: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line {
+    position: relative;
+    margin: 0;
+    padding: .82rem 1rem .88rem !important;
+    border: 1px solid rgba(255, 255, 255, .92);
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255, 253, 248, .96), rgba(246, 240, 230, .94));
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .05),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 14px 30px rgba(36, 48, 44, .12);
+    color: #1f2a26;
+    font-family: var(--theme-font-display, Georgia, serif);
+    font-size: clamp(.86rem, 3.6vw, 1.02rem) !important;
+    font-weight: 500;
+    letter-spacing: .004em;
+    line-height: 1.36;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: break-word;
+    word-break: normal;
+    text-overflow: unset !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line::before {
+    content: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-row,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card.is-composing .coach-chat-row {
+    position: absolute;
+    top: .45rem !important;
+    right: var(--compact-inline) !important;
+    bottom: auto !important;
+    left: var(--compact-inline) !important;
+    z-index: 30 !important;
+    display: grid;
+    height: auto !important;
+    min-height: 54px !important;
+    max-height: none !important;
+    grid-template-columns: minmax(0, 1fr) 48px;
+    gap: .35rem;
+    padding: .28rem .28rem .28rem .72rem !important;
+    border: 1px solid rgba(255, 255, 255, .96);
+    border-radius: 999px;
+    background: rgba(255, 252, 246, .96) !important;
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .06),
+      0 18px 40px rgba(28, 38, 34, .18);
+    backdrop-filter: blur(18px) saturate(1.08);
+    transform: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) :where(.coach-chat-input, .coach-chat-send) {
+    min-width: 0;
+    min-height: 46px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-input {
+    padding-inline: .1rem .15rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #1f2a26;
+    font-family: var(--theme-font-body, system-ui, sans-serif);
+    font-size: .9rem;
+    box-shadow: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-input:focus,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-input:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-send {
+    display: grid;
+    width: 48px;
+    place-items: center;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background:
+      radial-gradient(120% 80% at 32% 18%, rgba(255, 255, 255, .28), transparent 52%),
+      #c4453c;
+    color: #fff8f4;
+    font-size: 0;
+    letter-spacing: 0;
+    text-transform: none;
+    box-shadow: 0 8px 16px rgba(161, 45, 38, .22);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-send svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-send:disabled {
+    background: #d8d2c8;
+    color: #8b938e;
+    box-shadow: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .side-panel {
+    display: none !important;
+  }
+
+  .game-ready-mobile-start {
+    display: none !important;
+  }
+
+  .game-ready-stage-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 14;
+    display: grid !important;
+    place-items: end center;
+    padding: 0 var(--compact-inline) calc(6.9rem + env(safe-area-inset-bottom));
+    background: radial-gradient(ellipse 72% 48% at 50% 48%, rgba(255, 252, 246, .22), transparent 70%);
+    pointer-events: none;
+  }
+
+  .game-ready-stage-overlay .game-ready-start-card {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+    backdrop-filter: none;
+    pointer-events: auto;
+  }
+
+  .game-ready-stage-overlay .game-ready-options-row,
+  .game-ready-stage-overlay .game-ready-powered-by {
+    display: none;
+  }
+
+  /* Premium primary CTA: cream paper, ink edge, red hanko accent. Sizes are
+     viewport-derived so the button keeps its proportions from a 360px SE to a
+     430px Pro Max instead of collapsing into a bare rectangle. */
+  .game-ready-stage-overlay .game-ready-play {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .85em;
+    width: 100%;
+    min-width: 0;
+    min-height: clamp(56px, 7.4vh, 68px);
+    padding: .8rem clamp(1.6rem, 7vw, 2.8rem) .9rem;
+    border: 1.5px solid rgba(31, 42, 38, .92);
+    border-radius: 16px;
+    background:
+      radial-gradient(130% 110% at 28% 10%, #fffef9 0%, transparent 55%),
+      linear-gradient(180deg, #fdfaf2 0%, #f0e8d9 100%);
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .05),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 -1px 0 rgba(31, 42, 38, .05) inset,
+      0 22px 44px rgba(15, 22, 19, .38);
+    color: #1f2a26;
+    font-family: var(--theme-font-display, Georgia, serif);
+    font-size: clamp(1rem, 2.5vh, 1.22rem);
+    font-weight: 600;
+    font-style: normal;
+    letter-spacing: .22em;
+    text-indent: .22em;
+    text-transform: uppercase;
+    transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+  }
+
+  .game-ready-stage-overlay .game-ready-play::before {
+    content: '';
+    flex: none;
+    width: .52em;
+    height: .52em;
+    border-radius: 2px;
+    background: #c7463d;
+    box-shadow: 0 1px 2px rgba(150, 35, 28, .45);
+    transform: translateY(-.02em);
+  }
+
+  .game-ready-stage-overlay .game-ready-play:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.03);
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .05),
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 -1px 0 rgba(31, 42, 38, .05) inset,
+      0 26px 52px rgba(15, 22, 19, .42);
+  }
+
+  .game-ready-stage-overlay .game-ready-play:active {
+    transform: translateY(1px) scale(.985);
+    box-shadow:
+      0 0 0 1px rgba(42, 54, 49, .05),
+      0 1px 0 rgba(255, 255, 255, .9) inset,
+      0 12px 26px rgba(15, 22, 19, .32);
+  }
+
+  .game-screen.is-game-ready .coach-card.is-preview .caption-actions {
+    display: block !important;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .coach-line-wrap {
+    display: block !important;
+  }
+
+  /* The ready-state stylesheet has intentionally strong, state-specific grid
+     rules. Anchor the final phone composition at #root so the same board-first
+     flow wins in both ready and active states without affecting larger views. */
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+    display: flex !important;
+    width: 100% !important;
+    height: var(--viewport-h) !important;
+    min-height: 0 !important;
+    max-height: var(--viewport-h) !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    padding: var(--compact-top) var(--compact-inline) var(--compact-bottom) !important;
+    overflow: hidden !important;
+  }
+
+  /* Auto block margins centre the board in whatever height is left over once
+     the coach has her band at the bottom, so tall phones stay balanced and
+     short ones simply pack tight. */
+  /* The board wrapper carries max-height: 100%, so an auto-height stage would
+     resolve circularly and collapse. Derive the stage height from the board
+     instead: the square plus its file labels, wrapper padding and own padding. */
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .game-stage {
+    position: relative !important;
+    order: 1 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: calc(
+      var(--compact-board) + var(--compact-gutter) + var(--compact-file-gap)
+      + var(--compact-label-row) + var(--compact-file-bottom-gap)
+    ) !important;
+    min-height: calc(
+      var(--compact-board) + var(--compact-gutter) + var(--compact-file-gap)
+      + var(--compact-label-row) + var(--compact-file-bottom-gap)
+    ) !important;
+    max-height: none !important;
+    flex: 0 0 auto !important;
+    margin-block: 0 !important;
+    margin-inline: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .game-stage,
+  html[data-theme="japanese-minimal"] .game-screen[data-screen="game"] .game-stage {
+    background: transparent !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .coach-card,
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .coach-card.is-preview,
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .coach-card.has-chat {
+    position: relative !important;
+    order: 2 !important;
+    display: block !important;
+    width: calc(100% + 2 * var(--compact-inline)) !important;
+    height: var(--compact-coach-h) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    flex: 0 0 var(--compact-coach-h) !important;
+    margin-inline: calc(var(--compact-inline) * -1) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    overflow: hidden !important;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .coach-card > .character-caption {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .side-panel {
+    display: none !important;
+  }
+}
+
+/* Small desktop windows (768–1023px) fell into the tablet ready layout, which
+   stacks a full-width coach band over a board squeezed to a third of the
+   viewport. Give that range the same two-column composition the live game
+   already uses at this width. */
+@media (min-width: 768px) and (max-width: 1023px) and (any-pointer: fine) {
+  #root .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) {
+    grid-template-columns: minmax(196px, .72fr) minmax(0, 2fr) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-areas: "coach board" !important;
+    gap: .7rem !important;
+    padding: .65rem .75rem .75rem !important;
+    align-content: stretch !important;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .coach-card {
+    width: 100% !important;
+    grid-area: coach !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) auto !important;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .character-window {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    border-right: 0 !important;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .character-caption {
+    grid-column: 1 !important;
+    grid-row: 2 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: .7rem .85rem .8rem !important;
+  }
+
+
+  #root .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .game-stage {
+    grid-area: board !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    padding: .25rem !important;
+    container-type: size;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready > .app-shell:not(.analysis-shell) > .game-stage .board-wrap {
+    --board-size: min(calc(100cqw - 2.6rem), calc(100cqh - 2.6rem)) !important;
+    margin: auto !important;
+  }
+}
+
+/* Live game on a small desktop window. The wide layout puts the coach, board
+   and action panel side by side; below 1200px the panel dropped into a second
+   full-width row, which pushed roughly a third of the game below the fold. Keep
+   the three columns and let each one shrink instead. */
+@media (min-width: 768px) and (max-width: 1199px) and (any-pointer: fine) {
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) {
+    height: var(--viewport-h) !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) > .app-shell:not(.analysis-shell) {
+    display: grid !important;
+    width: calc(100vw - 1.1rem) !important;
+    max-width: none !important;
+    height: calc(var(--viewport-h) - var(--topbar-h, 58px)) !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    grid-template-columns:
+      minmax(184px, .82fr)
+      minmax(0, 1.62fr)
+      minmax(172px, .74fr) !important;
+    grid-template-rows: minmax(0, 1fr) !important;
+    grid-template-areas: "coach board side" !important;
+    gap: .55rem !important;
+    padding: .5rem .55rem .6rem !important;
+    overflow: hidden !important;
+  }
+
+  /* A short window cannot afford the wide layout's fixed caption, guidance and
+     composer bands, so the portrait keeps whatever height is left. */
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) > .app-shell:not(.analysis-shell) > .coach-card {
+    grid-area: coach !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: minmax(0, 1fr) auto auto !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) > .app-shell:not(.analysis-shell) > .coach-card.has-chat {
+    grid-template-rows: minmax(0, 1fr) auto auto auto !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) .character-window {
+    grid-row: 1 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) .character-caption {
+    grid-row: 2 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: .6rem .7rem !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) .coach-line-wrap {
+    grid-row: 3 !important;
+    height: auto !important;
+    min-height: clamp(52px, 9vh, 74px) !important;
+    max-height: clamp(52px, 9vh, 74px) !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) .coach-chat-row {
+    grid-row: 4 !important;
+    height: auto !important;
+    min-height: 56px !important;
+    padding: .48rem .55rem !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) > .app-shell:not(.analysis-shell) > .game-stage {
+    grid-area: board !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: .3rem !important;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) > .app-shell:not(.analysis-shell) > .side-panel {
+    grid-area: side !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+  }
+
+  #root .game-screen[data-screen="game"]:not(.is-game-ready) > .app-shell:not(.analysis-shell) > .side-panel > .panel-card {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-game-drawer-panel {
+    animation: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-btn {
+    animation: none !important;
+    transition: none;
+  }
+}
+
+/* Final phone composition authority. */
+@media (pointer: coarse), (max-width: 767px) {
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+    --compact-chat-left: clamp(154px, 44vw, 188px);
+    --compact-controls-h: clamp(36px, 9.5vw, 40px);
+    --compact-lower-top: .35rem;
+    --compact-lower-bottom: calc(.35rem + env(safe-area-inset-bottom));
+  }
+
+  #root .game-screen[data-screen="game"] .character-caption .caption-actions {
+    display: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .coach-card,
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .coach-card.is-preview,
+  #root .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) > .coach-card.has-chat {
+    display: block !important;
+  }
+
+  /* Compact portrait: deliberately shorter than the board and bounded to the
+     left column instead of filling the entire coach band. */
+  #root .game-screen[data-screen="game"] .coach-card .character-window {
+    top: var(--compact-lower-top) !important;
+    right: auto !important;
+    bottom: var(--compact-lower-bottom) !important;
+    left: .12rem !important;
+    width: calc(var(--compact-chat-left) - .35rem) !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .character-window canvas,
+  #root .game-screen[data-screen="game"] .coach-card .character-warmup-img,
+  #root .game-screen[data-screen="game"] .coach-card .character-ready-poster,
+  #root .game-screen[data-screen="game"] .coach-card .character-fallback-img {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .character-warmup-img,
+  #root .game-screen[data-screen="game"] .coach-card .character-ready-poster,
+  #root .game-screen[data-screen="game"] .coach-card .character-fallback-img {
+    object-fit: cover !important;
+    object-position: var(--mobile-warmup-object-position, 46% 6%) !important;
+  }
+
+  /* Single desktop-style chat card: transcript and composer share one panel. */
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-panel,
+  #root .game-screen[data-screen="game"].is-game-ready .coach-card .coach-chat-panel {
+    position: absolute !important;
+    top: var(--compact-lower-top);
+    right: var(--compact-inline);
+    bottom: var(--compact-lower-bottom);
+    left: var(--compact-chat-left);
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    width: auto !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .82) !important;
+    border-radius: 8px !important;
+    background: rgba(255, 255, 255, .4) !important;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .95) inset,
+      0 10px 28px rgba(43, 57, 51, .13) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    z-index: 5;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-panel .coach-line-wrap,
+  #root .game-screen[data-screen="game"].is-game-ready .coach-card .coach-chat-panel .coach-line-wrap {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    display: block !important;
+    order: 1;
+    flex: 1 1 auto;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto !important;
+    overscroll-behavior: contain;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-panel .coach-line-wrap:empty {
+    display: block !important;
+    min-height: 0 !important;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-line-wrap .coach-line {
+    width: 100%;
+    max-width: 100%;
+    writing-mode: horizontal-tb !important;
+    margin: 0;
+    padding: .75rem .72rem .8rem !important;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    color: #1f2a26;
+    font-family: var(--theme-font-display, Georgia, serif);
+    font-size: clamp(.78rem, 3vw, .9rem) !important;
+    font-weight: 400;
+    line-height: 1.4;
+    white-space: normal !important;
+    overflow: visible !important;
+    overflow-wrap: break-word;
+    text-overflow: unset !important;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-line-wrap .coach-conversation-list {
+    gap: .42rem;
+    padding: .5rem;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-panel .coach-chat-toolbar {
+    display: flex !important;
+    order: 2;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-start;
+    align-self: stretch;
+    width: 100% !important;
+    box-sizing: border-box;
+    gap: clamp(.32rem, 1.6vw, .46rem);
+    padding: .28rem .34rem;
+    border-top: 1px solid rgba(76, 89, 84, .16);
+    pointer-events: auto;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-toolbar > .tooltip-trigger,
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-toolbar .audio-controls {
+    display: contents !important;
+  }
+
+  /* Composer stays visible from the ready screen through play. */
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-panel .coach-chat-row,
+  #root .game-screen[data-screen="game"].is-game-ready .coach-card .coach-chat-panel .coach-chat-row,
+  #root .game-screen[data-screen="game"] .coach-card.has-chat .coach-chat-panel .coach-chat-row {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    display: grid !important;
+    order: 3;
+    flex: 0 0 auto;
+    align-self: stretch;
+    width: 100% !important;
+    box-sizing: border-box;
+    min-height: 48px !important;
+    grid-template-columns: minmax(0, 1fr) 40px;
+    gap: .25rem;
+    padding: .22rem .22rem .22rem .55rem !important;
+    border: 0 !important;
+    border-top: 1px solid rgba(76, 89, 84, .16) !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-input {
+    min-height: 38px;
+    border: 0;
+    background: transparent;
+    font-size: .78rem;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-send {
+    width: 40px;
+    min-height: 40px;
+    border-radius: 8px;
+  }
+
+  /* Match the quiet desktop control language: compact, thin-bordered, and
+     lightly elevated rather than large porcelain bubbles. */
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toolbar .audio-btn,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toolbar .coach-speaker-btn,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-btn,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] .character-caption .character-mute-btn,
+  .mobile-menu-trigger {
+    width: var(--compact-controls-h) !important;
+    height: var(--compact-controls-h) !important;
+    border: 1px solid rgba(76, 89, 84, .3) !important;
+    border-radius: 999px !important;
+    background: rgba(255, 255, 255, .68) !important;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .9) inset,
+      0 5px 14px rgba(43, 57, 51, .14);
+    color: #24302c !important;
+    backdrop-filter: blur(8px);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toolbar .audio-btn.is-off,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toolbar .coach-speaker-btn.is-off {
+    border-color: rgba(76, 89, 84, .3) !important;
+    background: rgba(255, 255, 255, .68) !important;
+    color: #24302c !important;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .9) inset,
+      0 5px 14px rgba(43, 57, 51, .14);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toolbar .mic-btn.is-live {
+    border-color: rgba(255, 248, 244, .92) !important;
+    background:
+      radial-gradient(120% 80% at 32% 16%, rgba(255, 255, 255, .32), transparent 52%),
+      #c4453c !important;
+    color: #fff8f4 !important;
+    box-shadow:
+      0 0 0 1px rgba(161, 45, 38, .28),
+      0 10px 20px rgba(161, 45, 38, .22);
+  }
+
+  #root .game-screen[data-screen="game"] .mobile-menu-trigger {
+    display: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toolbar .audio-btn:hover,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .audio-btn:hover,
+  .mobile-menu-trigger:hover {
+    filter: brightness(1.04);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .9) inset,
+      0 7px 18px rgba(43, 57, 51, .18);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-toolbar .coach-resign-btn:disabled,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .caption-actions .coach-resign-btn:disabled {
+    cursor: not-allowed;
+    opacity: .42;
+    filter: grayscale(.55);
+    transform: none;
+  }
+
+  /* Play belongs to the board, matching the desktop vermilion primary action. */
+  #root .game-screen[data-screen="game"].is-game-ready .game-ready-stage-overlay {
+    position: absolute;
+    inset: 0;
+    display: grid !important;
+    place-items: center;
+    padding: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, .18), transparent 42%);
+    pointer-events: none;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .game-ready-stage-overlay .game-ready-start-card {
+    width: auto;
+    pointer-events: auto;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .game-ready-stage-overlay .game-ready-play {
+    width: clamp(196px, 62vw, 260px);
+    min-height: clamp(48px, 7vh, 58px);
+    padding: .65rem 1rem;
+    border: 1px solid #a8322b;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #e5756c 0%, #d8564d 52%, #b83e36 100%);
+    color: #fff;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .34) inset,
+      0 -2px 0 rgba(122, 32, 26, .38) inset,
+      0 16px 32px rgba(137, 45, 39, .42),
+      0 5px 12px rgba(137, 45, 39, .24);
+    font-family: var(--theme-font-ui, "Trebuchet MS", sans-serif);
+    font-size: clamp(1rem, 4.4vw, 1.18rem);
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: .12em;
+    text-indent: .12em;
+    text-transform: none;
+    text-shadow: 0 1px 0 rgba(122, 32, 26, .22);
+  }
+
+  #root .game-screen[data-screen="game"] .mobile-game-drawer-panel > header > button {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  #root .game-screen[data-screen="game"] .mobile-game-drawer-panel > header > button:hover {
+    background: transparent;
+    color: #a8322b;
+  }
+
+  #root .game-screen[data-screen="game"] .mobile-drawer-account .auth-signin-trigger,
+  #root .game-screen[data-screen="game"].is-game-ready .game-ready-auth .auth-signin-trigger {
+    min-width: 88px;
+    min-height: 42px;
+    border: 1px solid #b83e36 !important;
+    border-radius: 8px !important;
+    background: linear-gradient(180deg, #df6c63, #d8564d) !important;
+    color: #fff !important;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .24) inset,
+      0 7px 18px rgba(137, 45, 39, .2) !important;
+    font-size: .72rem;
+    font-weight: 700;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .caption-info strong {
+    display: none;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .game-ready-stage-overlay .game-ready-play::before {
+    content: none;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .game-ready-stage-overlay .game-ready-play:hover {
+    background: linear-gradient(180deg, #ea857c 0%, #de5f55 52%, #c7463d 100%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .36) inset,
+      0 -2px 0 rgba(122, 32, 26, .4) inset,
+      0 18px 36px rgba(137, 45, 39, .48),
+      0 6px 14px rgba(137, 45, 39, .28);
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .game-ready-stage-overlay .game-ready-play:active {
+    background: linear-gradient(180deg, #cf564e 0%, #b83e36 100%);
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, .2) inset,
+      0 2px 0 rgba(122, 32, 26, .28) inset,
+      0 8px 18px rgba(137, 45, 39, .32);
+    transform: translateY(1px);
+  }
+
+  #root .game-screen[data-screen="game"] {
+    --compact-gutter: 1.25rem;
+    --compact-file-gap: 0.24rem;
+    --compact-file-bottom-gap: 0.32rem;
+    --compact-label-row: 1.05rem;
+  }
+
+  #root .game-screen[data-screen="game"].is-game-ready .coach-card .coach-chat-panel .coach-line-wrap,
+  #root .game-screen[data-screen="game"] .coach-card.is-composing .coach-chat-panel .coach-line-wrap {
+    display: block !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card .coach-chat-panel .coach-line-wrap,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card .coach-chat-panel .coach-chat-row {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-card .coach-chat-panel .coach-line-wrap {
+    flex: 1 1 auto !important;
+    max-height: none !important;
+  }
+
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-toolbar .coach-speaker-btn,
+  #root .game-screen[data-screen="game"] .coach-card .coach-chat-toolbar .audio-btn {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+  }
+}

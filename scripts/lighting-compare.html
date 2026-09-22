@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Coach lighting comparison</title>
+<style>html,body{margin:0;background:#15171a;overflow:hidden}canvas{display:block}</style>
+</head>
+<body>
+<script type="importmap">
+{ "imports": {
+    "three": "/vendor/three/build/three.module.js",
+    "three/addons/": "/vendor/three/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+/**
+ * Renders one coach under one named lighting config and hands the PNG back to
+ * Playwright. Mirrors the app's live-character path (PortraitScene +
+ * portraitSelfIllumination): ACES tone mapping, no dedicated lights, optional
+ * RoomEnvironment IBL.
+ *
+ * Framing matches scripts/portrait-capture.html (idle pose + fixed camera) so
+ * Box3 bounds are valid on skinned meshes — without the pose, setFromObject
+ * returns bind-pose crumbs and the character renders off-screen.
+ */
+
+const LEVELS = { skin: 0.74, base: 0.66, eyes: 0.48, mouthInterior: 0.26 };
+const EMISSIVE_SKIP = /^Std_Cornea|^Std_Tearline|^Std_Eye_Occlusion/i;
+const MOUTH_INTERIOR = /teeth|tongue/i;
+const EYEBALL = /^Std_Eye_[LR]|^Eyes$/i;
+
+const FRAMING = {
+  modelScale: 0.01,
+  lookAtY: 1.4,
+  cameraZ: 0.9,
+  topInsetWorld: 0.035,
+  portraitCropBias: 0.02,
+  horizontalOffset: 0,
+  fov: 36,
+};
+
+function levelFor(name) {
+  if (EMISSIVE_SKIP.test(name)) return null;
+  if (MOUTH_INTERIOR.test(name)) return LEVELS.mouthInterior;
+  if (EYEBALL.test(name)) return LEVELS.eyes;
+  if (/skin|^head\b/i.test(name)) return LEVELS.skin;
+  return LEVELS.base;
+}
+
+function vendorEmissiveStrength(material) {
+  const peak = Math.max(material.emissive.r, material.emissive.g, material.emissive.b);
+  return peak * material.emissiveIntensity;
+}
+
+/**
+ * mode:
+ *   current  — uniform category levels (ships today)
+ *   vendor   — GLB emissiveFactor only, category fallback when absent
+ *   unlit    — emissive 1.0 on every mapped material, no scene lighting
+ */
+function applyIllumination(root, mode) {
+  root.traverse((obj) => {
+    if (!obj.isMesh || !obj.material) return;
+    for (const material of (Array.isArray(obj.material) ? obj.material : [obj.material])) {
+      const std = material;
+      if (!std?.isMeshStandardMaterial && !std?.isMeshPhysicalMaterial) continue;
+      if (!std.map) continue;
+      const name = std.name || '';
+      const categoryLevel = levelFor(name);
+      if (categoryLevel === null) continue;
+
+      if (mode === 'current') {
+        std.emissiveMap = std.map;
+        std.emissive.copy(std.color);
+        std.emissiveIntensity = categoryLevel;
+      } else if (mode === 'vendor' || mode === 'unlit') {
+        std.emissiveMap = std.map;
+        std.emissive.copy(std.color);
+        std.emissiveIntensity = 1;
+      }
+      std.needsUpdate = true;
+    }
+  });
+}
+
+function setEnvMap(root, env, intensity) {
+  root.traverse((obj) => {
+    if (!obj.isMesh || !obj.material) return;
+    for (const material of (Array.isArray(obj.material) ? obj.material : [obj.material])) {
+      if (!material?.isMeshStandardMaterial && !material?.isMeshPhysicalMaterial) continue;
+      material.envMap = env;
+      material.envMapIntensity = intensity;
+      material.needsUpdate = true;
+    }
+  });
+}
+
+function applyIdlePose(root, clips, idleTime = 0) {
+  if (!clips?.length) return;
+  const idleClip = clips.find((clip) => clip.name.toLowerCase().includes('idle')) ?? clips[0];
+  const mixer = new THREE.AnimationMixer(root);
+  const action = mixer.clipAction(idleClip);
+  action.play();
+  action.paused = true;
+  action.time = idleTime;
+  mixer.update(0);
+  root.updateMatrixWorld(true);
+}
+
+function frameCharacter(root, camera) {
+  const { modelScale, lookAtY, cameraZ, topInsetWorld, portraitCropBias, horizontalOffset, fov } = FRAMING;
+  root.position.set(0, 0, 0);
+  root.rotation.set(0, 0, 0);
+  root.scale.setScalar(modelScale);
+  root.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(root);
+  const visibleHalfHeight = Math.tan((fov * Math.PI) / 360) * cameraZ;
+  const visibleTop = lookAtY + visibleHalfHeight;
+  const targetTop = visibleTop - topInsetWorld;
+  root.position.y = targetTop - box.max.y + portraitCropBias;
+  root.position.x = horizontalOffset;
+  root.updateMatrixWorld(true);
+  camera.position.set(0, lookAtY, cameraZ);
+  camera.lookAt(0, lookAtY, 0);
+}
+
+async function main() {
+  const params = new URLSearchParams(location.search);
+  const coach = params.get('coach') || 'sofia';
+  const mode = params.get('mode') || 'current';
+  const useEnv = params.get('env') !== '0';
+  const envIntensity = parseFloat(params.get('envIntensity') || '1');
+  const W = 700;
+  const H = 900;
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, preserveDrawingBuffer: true });
+  renderer.setPixelRatio(2);
+  renderer.setSize(W, H);
+  renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.0;
+  renderer.shadowMap.enabled = false;
+  document.body.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#15171a');
+
+  if (useEnv) {
+    const pmrem = new THREE.PMREMGenerator(renderer);
+    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+    pmrem.dispose();
+  }
+
+  const camera = new THREE.PerspectiveCamera(FRAMING.fov, W / H, 0.01, 20);
+
+  const draco = new DRACOLoader().setDecoderPath('/draco/');
+  await MeshoptDecoder.ready;
+  const loader = new GLTFLoader().setDRACOLoader(draco).setMeshoptDecoder(MeshoptDecoder);
+  const [modelGltf, animGltf] = await Promise.all([
+    loader.loadAsync(`/${coach}.glb`),
+    loader.loadAsync(`/${coach}-animations.glb`),
+  ]);
+  const model = modelGltf.scene;
+
+  applyIdlePose(model, animGltf.animations, 0);
+  applyIllumination(model, mode);
+  if (useEnv) setEnvMap(model, scene.environment, envIntensity);
+  frameCharacter(model, camera);
+  scene.add(model);
+
+  renderer.render(scene, camera);
+  await new Promise((r) => requestAnimationFrame(r));
+  renderer.render(scene, camera);
+
+  window.__SHOT__ = renderer.domElement.toDataURL('image/png');
+  window.__READY__ = true;
+}
+
+main().catch((err) => {
+  window.__ERROR__ = String(err && err.stack || err);
+  window.__READY__ = true;
+});
+</script>
+</body>
+</html>

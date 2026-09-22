@@ -1,0 +1,74 @@
+{
+  "$schema": "./lipsync-setup.schema.json",
+  "schemaVersion": 1,
+  "id": "convai-web-mha-metahuman-verified-v1",
+  "displayName": "Convai Web MHA MetaHuman - Web Studio Verified",
+  "compatibility": {
+    "convaiUnityReference": "4.4.1",
+    "convaiWebStudioReference": "2",
+    "renderers": ["Three.js WebGL", "Babylon.js WebGL", "custom WebGL"],
+    "inputRange": [0, 1],
+    "outputRange": [0, 1]
+  },
+  "transport": {
+    "enableLipsync": true,
+    "format": "mha",
+    "channelCount": 251,
+    "channelOrderFile": "./metahuman-order-251.json",
+    "outputFps": 90,
+    "framesBufferDurationSeconds": 0.5,
+    "deliverChunksAhead": false
+  },
+  "defaultPreset": "webStudioVerified",
+  "presets": {
+    "webStudioVerified": {
+      "description": "Exact tuning used by Convai Web Studio 2 after visual lip-sync validation.",
+      "interpolation": {"enabled": true, "method": "linear"},
+      "timing": {"timeOffsetSeconds": 0.02, "maxFramesConsumedPerRender": 8},
+      "smoothing": {"enabled": true, "method": "frameRateIndependentDecay", "speed": 0.9, "referenceFps": 60},
+      "starvation": {"fadeInSeconds": 0.1, "fadeOutSeconds": 0.8, "resetAtAlpha": 0.001},
+      "mapping": {
+        "mode": "identity",
+        "globalMultiplier": 1.0,
+        "globalOffset": 0.0,
+        "lowerFaceAlpha": 1.0,
+        "upperFaceAlpha": 0.7,
+        "upperFaceChannels": [],
+        "jawOpen": {"name": "CTRL_expressions_jawOpen", "multiplier": 0.9, "min": 0.0, "max": 0.35}
+      },
+      "application": {"mode": "add", "removePreviousContributionBeforeApply": true}
+    },
+    "unity441Parity": {
+      "description": "Optional parity preset based on Convai Unity SDK 4.4.1 MetaHuman map and playback defaults.",
+      "interpolation": {"enabled": true, "method": "catmullRom"},
+      "timing": {"timeOffsetSeconds": 0.0, "maxBufferedSeconds": 3.0, "minResumeHeadroomSeconds": 0.12},
+      "smoothing": {"enabled": true, "method": "frameRateIndependentDecay", "factor": 0.5, "referenceFps": 60},
+      "starvation": {"fadeInSeconds": 0.1, "fadeOutSeconds": 0.2},
+      "mapping": {"mode": "mappingFile", "file": "./unity-metahuman-map-4.4.1.json"},
+      "application": {"mode": "add", "removePreviousContributionBeforeApply": true}
+    }
+  },
+  "runtimeSafety": {
+    "rejectNonFiniteValues": true,
+    "clampEveryChannel": true,
+    "disableFrustumCullingOnMorphedMeshes": true,
+    "neverReplaceMorphTargetInfluenceArrays": true,
+    "resetOnNormalizationSignal": true,
+    "resetWhenConversationEnds": true
+  },
+  "minimumValidation": {
+    "requiredChannelCount": 251,
+    "requiredMorphCoverage": 0.95,
+    "requiredChannels": [
+      "CTRL_expressions_jawOpen",
+      "CTRL_expressions_mouthLipsTogetherDL",
+      "CTRL_expressions_mouthLipsTogetherDR",
+      "CTRL_expressions_mouthLipsTogetherUL",
+      "CTRL_expressions_mouthLipsTogetherUR",
+      "CTRL_expressions_mouthFunnelDL",
+      "CTRL_expressions_mouthFunnelDR",
+      "CTRL_expressions_mouthFunnelUL",
+      "CTRL_expressions_mouthFunnelUR"
+    ]
+  }
+}

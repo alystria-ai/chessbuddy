@@ -1,0 +1,3775 @@
+{
+  "schemaVersion": 1,
+  "profileId": "metahuman",
+  "transportFormat": "mha",
+  "source": "Convai Unity SDK 4.4.1 / ConvaiLipSyncDefaultMap_MetaHuman.asset",
+  "globalMultiplier": 0.9,
+  "globalOffset": 0.0,
+  "mappings": [
+    {
+      "source": "CTRL_expressions_browDownL",
+      "targets": [
+        "CTRL_expressions_browDownL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_browDownR",
+      "targets": [
+        "CTRL_expressions_browDownR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_browLateralL",
+      "targets": [
+        "CTRL_expressions_browLateralL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_browLateralR",
+      "targets": [
+        "CTRL_expressions_browLateralR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_browRaiseInL",
+      "targets": [
+        "CTRL_expressions_browRaiseInL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_browRaiseInR",
+      "targets": [
+        "CTRL_expressions_browRaiseInR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_browRaiseOuterL",
+      "targets": [
+        "CTRL_expressions_browRaiseOuterL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_browRaiseOuterR",
+      "targets": [
+        "CTRL_expressions_browRaiseOuterR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_earUpL",
+      "targets": [
+        "CTRL_expressions_earUpL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_earUpR",
+      "targets": [
+        "CTRL_expressions_earUpR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeBlinkL",
+      "targets": [
+        "CTRL_expressions_eyeBlinkL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeBlinkR",
+      "targets": [
+        "CTRL_expressions_eyeBlinkR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeCheekRaiseL",
+      "targets": [
+        "CTRL_expressions_eyeCheekRaiseL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeCheekRaiseR",
+      "targets": [
+        "CTRL_expressions_eyeCheekRaiseR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeFaceScrunchL",
+      "targets": [
+        "CTRL_expressions_eyeFaceScrunchL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeFaceScrunchR",
+      "targets": [
+        "CTRL_expressions_eyeFaceScrunchR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesDownINL",
+      "targets": [
+        "CTRL_expressions_eyelashesDownINL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesDownINR",
+      "targets": [
+        "CTRL_expressions_eyelashesDownINR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesDownOUTL",
+      "targets": [
+        "CTRL_expressions_eyelashesDownOUTL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesDownOUTR",
+      "targets": [
+        "CTRL_expressions_eyelashesDownOUTR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesUpINL",
+      "targets": [
+        "CTRL_expressions_eyelashesUpINL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesUpINR",
+      "targets": [
+        "CTRL_expressions_eyelashesUpINR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesUpOUTL",
+      "targets": [
+        "CTRL_expressions_eyelashesUpOUTL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyelashesUpOUTR",
+      "targets": [
+        "CTRL_expressions_eyelashesUpOUTR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLidPressL",
+      "targets": [
+        "CTRL_expressions_eyeLidPressL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLidPressR",
+      "targets": [
+        "CTRL_expressions_eyeLidPressR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookDownL",
+      "targets": [
+        "CTRL_expressions_eyeLookDownL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookDownR",
+      "targets": [
+        "CTRL_expressions_eyeLookDownR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookLeftL",
+      "targets": [
+        "CTRL_expressions_eyeLookLeftL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookLeftR",
+      "targets": [
+        "CTRL_expressions_eyeLookLeftR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookRightL",
+      "targets": [
+        "CTRL_expressions_eyeLookRightL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookRightR",
+      "targets": [
+        "CTRL_expressions_eyeLookRightR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookUpL",
+      "targets": [
+        "CTRL_expressions_eyeLookUpL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLookUpR",
+      "targets": [
+        "CTRL_expressions_eyeLookUpR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLowerLidDownL",
+      "targets": [
+        "CTRL_expressions_eyeLowerLidDownL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLowerLidDownR",
+      "targets": [
+        "CTRL_expressions_eyeLowerLidDownR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLowerLidUpL",
+      "targets": [
+        "CTRL_expressions_eyeLowerLidUpL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeLowerLidUpR",
+      "targets": [
+        "CTRL_expressions_eyeLowerLidUpR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeParallelLookDirection",
+      "targets": [
+        "CTRL_expressions_eyeParallelLookDirection"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyePupilNarrowL",
+      "targets": [
+        "CTRL_expressions_eyePupilNarrowL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyePupilNarrowR",
+      "targets": [
+        "CTRL_expressions_eyePupilNarrowR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyePupilWideL",
+      "targets": [
+        "CTRL_expressions_eyePupilWideL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyePupilWideR",
+      "targets": [
+        "CTRL_expressions_eyePupilWideR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeRelaxL",
+      "targets": [
+        "CTRL_expressions_eyeRelaxL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeRelaxR",
+      "targets": [
+        "CTRL_expressions_eyeRelaxR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeSquintInnerL",
+      "targets": [
+        "CTRL_expressions_eyeSquintInnerL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeSquintInnerR",
+      "targets": [
+        "CTRL_expressions_eyeSquintInnerR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeUpperLidUpL",
+      "targets": [
+        "CTRL_expressions_eyeUpperLidUpL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeUpperLidUpR",
+      "targets": [
+        "CTRL_expressions_eyeUpperLidUpR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeWidenL",
+      "targets": [
+        "CTRL_expressions_eyeWidenL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_eyeWidenR",
+      "targets": [
+        "CTRL_expressions_eyeWidenR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawBack",
+      "targets": [
+        "CTRL_expressions_jawBack"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawChinCompressL",
+      "targets": [
+        "CTRL_expressions_jawChinCompressL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawChinCompressR",
+      "targets": [
+        "CTRL_expressions_jawChinCompressR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawChinRaiseDL",
+      "targets": [
+        "CTRL_expressions_jawChinRaiseDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawChinRaiseDR",
+      "targets": [
+        "CTRL_expressions_jawChinRaiseDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawChinRaiseUL",
+      "targets": [
+        "CTRL_expressions_jawChinRaiseUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawChinRaiseUR",
+      "targets": [
+        "CTRL_expressions_jawChinRaiseUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawClenchL",
+      "targets": [
+        "CTRL_expressions_jawClenchL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawClenchR",
+      "targets": [
+        "CTRL_expressions_jawClenchR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawFwd",
+      "targets": [
+        "CTRL_expressions_jawFwd"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawLeft",
+      "targets": [
+        "CTRL_expressions_jawLeft"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawOpen",
+      "targets": [
+        "CTRL_expressions_jawOpen"
+      ],
+      "multiplier": 0.5,
+      "offset": 0,
+      "curveExponent": 0.8,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 0.55
+    },
+    {
+      "source": "CTRL_expressions_jawOpenExtreme",
+      "targets": [
+        "CTRL_expressions_jawOpenExtreme"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_jawRight",
+      "targets": [
+        "CTRL_expressions_jawRight"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCheekBlowL",
+      "targets": [
+        "CTRL_expressions_mouthCheekBlowL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCheekBlowR",
+      "targets": [
+        "CTRL_expressions_mouthCheekBlowR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCheekSuckL",
+      "targets": [
+        "CTRL_expressions_mouthCheekSuckL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCheekSuckR",
+      "targets": [
+        "CTRL_expressions_mouthCheekSuckR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerDepressL",
+      "targets": [
+        "CTRL_expressions_mouthCornerDepressL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerDepressR",
+      "targets": [
+        "CTRL_expressions_mouthCornerDepressR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerDownL",
+      "targets": [
+        "CTRL_expressions_mouthCornerDownL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerDownR",
+      "targets": [
+        "CTRL_expressions_mouthCornerDownR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerNarrowL",
+      "targets": [
+        "CTRL_expressions_mouthCornerNarrowL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerNarrowR",
+      "targets": [
+        "CTRL_expressions_mouthCornerNarrowR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerPullL",
+      "targets": [
+        "CTRL_expressions_mouthCornerPullL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerPullR",
+      "targets": [
+        "CTRL_expressions_mouthCornerPullR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerRounderDL",
+      "targets": [
+        "CTRL_expressions_mouthCornerRounderDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerRounderDR",
+      "targets": [
+        "CTRL_expressions_mouthCornerRounderDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerRounderUL",
+      "targets": [
+        "CTRL_expressions_mouthCornerRounderUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerRounderUR",
+      "targets": [
+        "CTRL_expressions_mouthCornerRounderUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerSharpenDL",
+      "targets": [
+        "CTRL_expressions_mouthCornerSharpenDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerSharpenDR",
+      "targets": [
+        "CTRL_expressions_mouthCornerSharpenDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerSharpenUL",
+      "targets": [
+        "CTRL_expressions_mouthCornerSharpenUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerSharpenUR",
+      "targets": [
+        "CTRL_expressions_mouthCornerSharpenUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerUpL",
+      "targets": [
+        "CTRL_expressions_mouthCornerUpL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerUpR",
+      "targets": [
+        "CTRL_expressions_mouthCornerUpR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerWideL",
+      "targets": [
+        "CTRL_expressions_mouthCornerWideL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthCornerWideR",
+      "targets": [
+        "CTRL_expressions_mouthCornerWideR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthDimpleL",
+      "targets": [
+        "CTRL_expressions_mouthDimpleL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthDimpleR",
+      "targets": [
+        "CTRL_expressions_mouthDimpleR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthDown",
+      "targets": [
+        "CTRL_expressions_mouthDown"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthFunnelDL",
+      "targets": [
+        "CTRL_expressions_mouthFunnelDL"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthFunnelDR",
+      "targets": [
+        "CTRL_expressions_mouthFunnelDR"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthFunnelUL",
+      "targets": [
+        "CTRL_expressions_mouthFunnelUL"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthFunnelUR",
+      "targets": [
+        "CTRL_expressions_mouthFunnelUR"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLeft",
+      "targets": [
+        "CTRL_expressions_mouthLeft"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsBlowL",
+      "targets": [
+        "CTRL_expressions_mouthLipsBlowL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsBlowR",
+      "targets": [
+        "CTRL_expressions_mouthLipsBlowR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPressL",
+      "targets": [
+        "CTRL_expressions_mouthLipsPressL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPressR",
+      "targets": [
+        "CTRL_expressions_mouthLipsPressR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPullDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsPullDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPullDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsPullDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPullUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsPullUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPullUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsPullUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPurseDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsPurseDL"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPurseDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsPurseDR"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPurseUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsPurseUL"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPurseUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsPurseUR"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPushDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsPushDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPushDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsPushDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPushUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsPushUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsPushUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsPushUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsStickyLPh1",
+      "targets": [
+        "CTRL_expressions_mouthLipsStickyLPh1"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsStickyLPh2",
+      "targets": [
+        "CTRL_expressions_mouthLipsStickyLPh2"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsStickyLPh3",
+      "targets": [
+        "CTRL_expressions_mouthLipsStickyLPh3"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsStickyRPh1",
+      "targets": [
+        "CTRL_expressions_mouthLipsStickyRPh1"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsStickyRPh2",
+      "targets": [
+        "CTRL_expressions_mouthLipsStickyRPh2"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsStickyRPh3",
+      "targets": [
+        "CTRL_expressions_mouthLipsStickyRPh3"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickInwardDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickInwardDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickInwardDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickInwardDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickInwardUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickInwardUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickInwardUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickInwardUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThickUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThickUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinInwardDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinInwardDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinInwardDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinInwardDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinInwardUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinInwardUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinInwardUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinInwardUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsThinUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsThinUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTightenDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsTightenDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTightenDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsTightenDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTightenUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsTightenUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTightenUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsTightenUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTogetherDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsTogetherDL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTogetherDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsTogetherDR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTogetherUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsTogetherUL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTogetherUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsTogetherUR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTowardsDL",
+      "targets": [
+        "CTRL_expressions_mouthLipsTowardsDL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTowardsDR",
+      "targets": [
+        "CTRL_expressions_mouthLipsTowardsDR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTowardsUL",
+      "targets": [
+        "CTRL_expressions_mouthLipsTowardsUL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLipsTowardsUR",
+      "targets": [
+        "CTRL_expressions_mouthLipsTowardsUR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipBiteL",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipBiteL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipBiteR",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipBiteR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipDepressL",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipDepressL"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipDepressR",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipDepressR"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipRollInL",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipRollInL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipRollInR",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipRollInR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipRollOutL",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipRollOutL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipRollOutR",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipRollOutR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipShiftLeft",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipShiftLeft"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipShiftRight",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipShiftRight"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipTowardsTeethL",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipTowardsTeethL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthLowerLipTowardsTeethR",
+      "targets": [
+        "CTRL_expressions_mouthLowerLipTowardsTeethR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthPressDL",
+      "targets": [
+        "CTRL_expressions_mouthPressDL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthPressDR",
+      "targets": [
+        "CTRL_expressions_mouthPressDR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthPressUL",
+      "targets": [
+        "CTRL_expressions_mouthPressUL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthPressUR",
+      "targets": [
+        "CTRL_expressions_mouthPressUR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.95,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthRight",
+      "targets": [
+        "CTRL_expressions_mouthRight"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthSharpCornerPullL",
+      "targets": [
+        "CTRL_expressions_mouthSharpCornerPullL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthSharpCornerPullR",
+      "targets": [
+        "CTRL_expressions_mouthSharpCornerPullR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyDC",
+      "targets": [
+        "CTRL_expressions_mouthStickyDC"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyDINL",
+      "targets": [
+        "CTRL_expressions_mouthStickyDINL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyDINR",
+      "targets": [
+        "CTRL_expressions_mouthStickyDINR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyDOUTL",
+      "targets": [
+        "CTRL_expressions_mouthStickyDOUTL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyDOUTR",
+      "targets": [
+        "CTRL_expressions_mouthStickyDOUTR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyUC",
+      "targets": [
+        "CTRL_expressions_mouthStickyUC"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyUINL",
+      "targets": [
+        "CTRL_expressions_mouthStickyUINL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyUINR",
+      "targets": [
+        "CTRL_expressions_mouthStickyUINR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyUOUTL",
+      "targets": [
+        "CTRL_expressions_mouthStickyUOUTL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStickyUOUTR",
+      "targets": [
+        "CTRL_expressions_mouthStickyUOUTR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStretchL",
+      "targets": [
+        "CTRL_expressions_mouthStretchL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStretchLipsCloseL",
+      "targets": [
+        "CTRL_expressions_mouthStretchLipsCloseL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStretchLipsCloseR",
+      "targets": [
+        "CTRL_expressions_mouthStretchLipsCloseR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthStretchR",
+      "targets": [
+        "CTRL_expressions_mouthStretchR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUp",
+      "targets": [
+        "CTRL_expressions_mouthUp"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipBiteL",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipBiteL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipBiteR",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipBiteR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipRaiseL",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipRaiseL"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipRaiseR",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipRaiseR"
+      ],
+      "multiplier": 1.1,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipRollInL",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipRollInL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipRollInR",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipRollInR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipRollOutL",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipRollOutL"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipRollOutR",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipRollOutR"
+      ],
+      "multiplier": 1.05,
+      "offset": 0,
+      "curveExponent": 0.9,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipShiftLeft",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipShiftLeft"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipShiftRight",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipShiftRight"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipTowardsTeethL",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipTowardsTeethL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_mouthUpperLipTowardsTeethR",
+      "targets": [
+        "CTRL_expressions_mouthUpperLipTowardsTeethR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckDigastricDown",
+      "targets": [
+        "CTRL_expressions_neckDigastricDown"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckDigastricUp",
+      "targets": [
+        "CTRL_expressions_neckDigastricUp"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckMastoidContractL",
+      "targets": [
+        "CTRL_expressions_neckMastoidContractL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckMastoidContractR",
+      "targets": [
+        "CTRL_expressions_neckMastoidContractR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckStretchL",
+      "targets": [
+        "CTRL_expressions_neckStretchL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckStretchR",
+      "targets": [
+        "CTRL_expressions_neckStretchR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckSwallowPh1",
+      "targets": [
+        "CTRL_expressions_neckSwallowPh1"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckSwallowPh2",
+      "targets": [
+        "CTRL_expressions_neckSwallowPh2"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckSwallowPh3",
+      "targets": [
+        "CTRL_expressions_neckSwallowPh3"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckSwallowPh4",
+      "targets": [
+        "CTRL_expressions_neckSwallowPh4"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckThroatDown",
+      "targets": [
+        "CTRL_expressions_neckThroatDown"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckThroatExhale",
+      "targets": [
+        "CTRL_expressions_neckThroatExhale"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckThroatInhale",
+      "targets": [
+        "CTRL_expressions_neckThroatInhale"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_neckThroatUp",
+      "targets": [
+        "CTRL_expressions_neckThroatUp"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNasolabialDeepenL",
+      "targets": [
+        "CTRL_expressions_noseNasolabialDeepenL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNasolabialDeepenR",
+      "targets": [
+        "CTRL_expressions_noseNasolabialDeepenR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNostrilCompressL",
+      "targets": [
+        "CTRL_expressions_noseNostrilCompressL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNostrilCompressR",
+      "targets": [
+        "CTRL_expressions_noseNostrilCompressR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNostrilDepressL",
+      "targets": [
+        "CTRL_expressions_noseNostrilDepressL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNostrilDepressR",
+      "targets": [
+        "CTRL_expressions_noseNostrilDepressR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNostrilDilateL",
+      "targets": [
+        "CTRL_expressions_noseNostrilDilateL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseNostrilDilateR",
+      "targets": [
+        "CTRL_expressions_noseNostrilDilateR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseWrinkleL",
+      "targets": [
+        "CTRL_expressions_noseWrinkleL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseWrinkleR",
+      "targets": [
+        "CTRL_expressions_noseWrinkleR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseWrinkleUpperL",
+      "targets": [
+        "CTRL_expressions_noseWrinkleUpperL"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_noseWrinkleUpperR",
+      "targets": [
+        "CTRL_expressions_noseWrinkleUpperR"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethBackD",
+      "targets": [
+        "CTRL_expressions_teethBackD"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethBackU",
+      "targets": [
+        "CTRL_expressions_teethBackU"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethDownD",
+      "targets": [
+        "CTRL_expressions_teethDownD"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethDownU",
+      "targets": [
+        "CTRL_expressions_teethDownU"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethFwdD",
+      "targets": [
+        "CTRL_expressions_teethFwdD"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethFwdU",
+      "targets": [
+        "CTRL_expressions_teethFwdU"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethLeftD",
+      "targets": [
+        "CTRL_expressions_teethLeftD"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethLeftU",
+      "targets": [
+        "CTRL_expressions_teethLeftU"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethRightD",
+      "targets": [
+        "CTRL_expressions_teethRightD"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethRightU",
+      "targets": [
+        "CTRL_expressions_teethRightU"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethUpD",
+      "targets": [
+        "CTRL_expressions_teethUpD"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_teethUpU",
+      "targets": [
+        "CTRL_expressions_teethUpU"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueBendDown",
+      "targets": [
+        "CTRL_expressions_tongueBendDown"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueBendUp",
+      "targets": [
+        "CTRL_expressions_tongueBendUp"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueDown",
+      "targets": [
+        "CTRL_expressions_tongueDown"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueIn",
+      "targets": [
+        "CTRL_expressions_tongueIn"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueLeft",
+      "targets": [
+        "CTRL_expressions_tongueLeft"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueNarrow",
+      "targets": [
+        "CTRL_expressions_tongueNarrow"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueOut",
+      "targets": [
+        "CTRL_expressions_tongueOut"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tonguePress",
+      "targets": [
+        "CTRL_expressions_tonguePress"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueRight",
+      "targets": [
+        "CTRL_expressions_tongueRight"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueRoll",
+      "targets": [
+        "CTRL_expressions_tongueRoll"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueThick",
+      "targets": [
+        "CTRL_expressions_tongueThick"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueThin",
+      "targets": [
+        "CTRL_expressions_tongueThin"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueTipDown",
+      "targets": [
+        "CTRL_expressions_tongueTipDown"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueTipLeft",
+      "targets": [
+        "CTRL_expressions_tongueTipLeft"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueTipRight",
+      "targets": [
+        "CTRL_expressions_tongueTipRight"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueTipUp",
+      "targets": [
+        "CTRL_expressions_tongueTipUp"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueTwistLeft",
+      "targets": [
+        "CTRL_expressions_tongueTwistLeft"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueTwistRight",
+      "targets": [
+        "CTRL_expressions_tongueTwistRight"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueUp",
+      "targets": [
+        "CTRL_expressions_tongueUp"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    },
+    {
+      "source": "CTRL_expressions_tongueWide",
+      "targets": [
+        "CTRL_expressions_tongueWide"
+      ],
+      "multiplier": 1,
+      "offset": 0,
+      "curveExponent": 1,
+      "enabled": 1,
+      "useOverrideValue": 0,
+      "overrideValue": 0,
+      "ignoreGlobalModifiers": 0,
+      "clampMinValue": 0,
+      "clampMaxValue": 1
+    }
+  ]
+}

@@ -1,0 +1,708 @@
+/*
+ * Preset composition system
+ *
+ * The original Classic preset intentionally receives none of these rules.
+ * Every art preset chooses a named menu composition, setup composition, and
+ * live-game composition. Theme changes remain CSS-only: no React key, board,
+ * canvas, timer, audio, or Convai lifecycle participates in a layout change.
+ * Named areas follow CSS Grid Layout Level 2; the desktop-only gate preserves
+ * the app's deliberately compact tablet, phone, and short-landscape fallbacks.
+ */
+
+@media (min-width: 1280px) and (min-height: 700px) {
+  html[data-theme]:not([data-theme="classic"]) .menu-workspace {
+    width: min(var(--layout-menu-width, 1240px), calc(100vw - 10rem));
+    grid-template-columns: var(--layout-menu-cols, minmax(0, 1fr));
+    grid-template-areas: var(--layout-menu-areas, "hero" "modes" "setup" "launch");
+    align-items: var(--layout-menu-align, stretch);
+    column-gap: var(--layout-menu-column-gap, 1rem);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .menu-heading { grid-area: hero; align-self: var(--layout-hero-align, stretch); text-align: var(--layout-hero-text, left); }
+  html[data-theme]:not([data-theme="classic"]) .mode-grid { grid-area: modes; grid-template-columns: repeat(var(--layout-mode-count, 2), minmax(0, 1fr)); align-self: var(--layout-modes-align, stretch); }
+  html[data-theme]:not([data-theme="classic"]) .setup-panel { grid-area: setup; grid-template-columns: var(--layout-setup-cols, minmax(0, 1.3fr) minmax(0, 1fr) minmax(230px, 320px)); grid-template-areas: var(--layout-setup-areas, "coach difficulty summary"); align-self: var(--layout-setup-align, stretch); }
+  html[data-theme]:not([data-theme="classic"]) .mode-launch { grid-area: launch; align-self: var(--layout-launch-align, end); justify-content: var(--layout-launch-justify, center); }
+  html[data-theme]:not([data-theme="classic"]) .mode-tile:first-child { grid-column: span var(--layout-feature-span, 1); }
+
+  html[data-theme]:not([data-theme="classic"]) .setup-panel > .setup-panel-coach { grid-area: coach; }
+  html[data-theme]:not([data-theme="classic"]) .setup-panel > :nth-child(2) { grid-area: difficulty; }
+  html[data-theme]:not([data-theme="classic"]) .setup-panel > .coach-summary-stack { grid-area: summary; }
+
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) {
+    width: min(var(--layout-game-width, 1260px), calc(100vw - 10rem));
+    max-width: calc(100vw - 10rem);
+    grid-template-columns: var(--layout-game-cols, minmax(230px, 280px) minmax(0, 720px) minmax(230px, 280px));
+    grid-template-areas: var(--layout-game-areas, "coach board side");
+    gap: var(--layout-game-gap, 22px);
+    align-items: var(--layout-game-align, center);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) > .coach-card {
+    grid-area: coach;
+    width: min(100%, var(--layout-coach-width, 300px));
+    align-self: var(--layout-coach-align, center);
+    justify-self: var(--layout-coach-justify, center);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) > .game-stage {
+    grid-area: board;
+    align-self: var(--layout-board-self, center);
+    justify-self: var(--layout-board-justify, center);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) > .side-panel {
+    grid-area: side;
+    width: min(100%, var(--layout-side-width, 300px));
+    align-self: var(--layout-side-align, center);
+    justify-self: var(--layout-side-justify, center);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .topbar h1 {
+    text-align: var(--layout-topbar-text, center);
+    justify-self: var(--layout-topbar-justify, center);
+  }
+}
+
+/* Ten editorial menu compositions. */
+@media (min-width: 1280px) and (min-height: 700px) {
+  :is(html[data-theme="newspaper"], html[data-theme="wooden"], html[data-theme="mediterranean-ceramic"], html[data-theme="alpine-lodge"]) { --layout-menu-cols: minmax(0, .92fr) minmax(0, 1.38fr); --layout-menu-areas: "hero hero" "modes setup" "launch setup"; }
+  :is(html[data-theme="hand-drawn"], html[data-theme="desktop-90s"], html[data-theme="botanical-engraving"]) { --layout-menu-cols: minmax(0, .76fr) minmax(0, 1.34fr); --layout-menu-areas: "hero modes" "hero setup" "launch setup"; }
+  :is(html[data-theme="marble"], html[data-theme="japanese-minimal"], html[data-theme="noir-detective"], html[data-theme="oceanic-biome"], html[data-theme="nordic-frost"]) { --layout-menu-cols: minmax(0, 1.34fr) minmax(0, .76fr); --layout-menu-areas: "modes hero" "setup hero" "setup launch"; }
+  :is(html[data-theme="art-deco"], html[data-theme="cyberpunk-hud"], html[data-theme="royal-opera"], html[data-theme="persian-miniature"]) { --layout-menu-cols: minmax(0, 1fr) minmax(0, 1.25fr); --layout-menu-areas: "hero setup" "modes setup" "modes launch"; }
+  :is(html[data-theme="terminal"], html[data-theme="editorial"], html[data-theme="library-at-midnight"], html[data-theme="dark-academia"]) { --layout-menu-cols: minmax(0, 1.25fr) minmax(0, 1fr); --layout-menu-areas: "setup hero" "setup modes" "setup launch"; }
+  :is(html[data-theme="swiss"], html[data-theme="stained-glass"], html[data-theme="cosmic-observatory"], html[data-theme="lunar-colony"], html[data-theme="kinetic-chrome"]) { --layout-menu-cols: minmax(0, .75fr) minmax(0, .75fr) minmax(0, 1.1fr); --layout-menu-areas: "hero hero setup" "modes modes setup" "launch launch setup"; }
+  :is(html[data-theme="neo-brutalist"], html[data-theme="arcade-neon"], html[data-theme="bauhaus"], html[data-theme="memphis-pop"], html[data-theme="pop-art-comic"]) { --layout-menu-cols: minmax(0, .72fr) minmax(0, 1fr) minmax(0, 1fr); --layout-menu-areas: "modes hero hero" "modes setup setup" "launch launch launch"; }
+  :is(html[data-theme="flat-icon"], html[data-theme="risograph"], html[data-theme="soft-clay"], html[data-theme="desert-modernism"], html[data-theme="vaporwave-dream"]) { --layout-menu-cols: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .7fr); --layout-menu-areas: "hero modes modes" "setup setup launch"; }
+  :is(html[data-theme="blueprint"], html[data-theme="frutiger-aero"], html[data-theme="solarpunk-conservatory"], html[data-theme="candy-kawaii"], html[data-theme="tropical-resort"]) { --layout-menu-cols: minmax(0, 1fr) minmax(0, 1fr) minmax(0, .7fr); --layout-menu-areas: "hero setup setup" "modes modes launch"; }
+}
+
+/* Eight setup-panel compositions. */
+@media (min-width: 1280px) and (min-height: 700px) {
+  :is(html[data-theme="swiss"], html[data-theme="wooden"]) { --layout-setup-cols: minmax(0, 1.2fr) minmax(150px, .8fr) minmax(220px, 1fr); --layout-setup-areas: "coach difficulty summary"; }
+  :is(html[data-theme="hand-drawn"], html[data-theme="blueprint"], html[data-theme="editorial"], html[data-theme="solarpunk-conservatory"], html[data-theme="cosmic-observatory"], html[data-theme="oceanic-biome"], html[data-theme="vaporwave-dream"]) { --layout-setup-cols: minmax(0, 1fr) minmax(0, 1fr); --layout-setup-areas: "coach coach" "difficulty summary"; }
+  :is(html[data-theme="terminal"], html[data-theme="noir-detective"], html[data-theme="library-at-midnight"], html[data-theme="dark-academia"]) { --layout-setup-cols: minmax(220px, .8fr) minmax(0, 1.2fr); --layout-setup-areas: "summary coach" "summary difficulty"; }
+  :is(html[data-theme="newspaper"], html[data-theme="arcade-neon"], html[data-theme="soft-clay"], html[data-theme="botanical-engraving"], html[data-theme="candy-kawaii"], html[data-theme="pop-art-comic"]) { --layout-setup-cols: minmax(0, .82fr) minmax(0, 1.18fr); --layout-setup-areas: "difficulty summary" "coach coach"; }
+  :is(html[data-theme="flat-icon"], html[data-theme="art-deco"], html[data-theme="marble"], html[data-theme="frutiger-aero"], html[data-theme="stained-glass"], html[data-theme="memphis-pop"], html[data-theme="alpine-lodge"], html[data-theme="nordic-frost"]) { --layout-setup-cols: minmax(0, 1fr) minmax(0, 1fr); --layout-setup-areas: "summary summary" "coach difficulty"; }
+  :is(html[data-theme="risograph"], html[data-theme="japanese-minimal"], html[data-theme="mediterranean-ceramic"], html[data-theme="persian-miniature"], html[data-theme="tropical-resort"]) { --layout-setup-cols: minmax(150px, .75fr) minmax(0, 1.35fr) minmax(220px, .9fr); --layout-setup-areas: "difficulty coach summary"; }
+  :is(html[data-theme="neo-brutalist"], html[data-theme="cyberpunk-hud"], html[data-theme="bauhaus"], html[data-theme="royal-opera"], html[data-theme="lunar-colony"], html[data-theme="kinetic-chrome"]) { --layout-setup-cols: minmax(0, 1.25fr) minmax(220px, .9fr) minmax(150px, .75fr); --layout-setup-areas: "coach summary difficulty"; }
+  :is(html[data-theme="desktop-90s"], html[data-theme="desert-modernism"]) { --layout-setup-cols: minmax(0, 1fr); --layout-setup-areas: "coach" "difficulty" "summary"; }
+}
+
+/* Per-preset fingerprints. Each tuple changes real grid geometry, not metadata. */
+@media (min-width: 1280px) and (min-height: 700px) {
+  html[data-theme="flat-icon"] { --layout-code: flat-01; --layout-mode-count: 3; --layout-feature-span: 2; --layout-menu-width: 1246px; --layout-game-areas: "board coach side"; --layout-game-cols: minmax(0, 720px) minmax(218px, .8fr) minmax(250px, 1fr); --layout-coach-align: start; --layout-side-align: center; --layout-topbar-text: left; }
+  html[data-theme="hand-drawn"] { --layout-code: sketch-02; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1196px; --layout-game-areas: "coach board side"; --layout-game-cols: minmax(250px, .92fr) minmax(0, 720px) minmax(230px, .82fr); --layout-coach-align: start; --layout-side-align: end; --layout-topbar-text: left; }
+  html[data-theme="swiss"] { --layout-code: swiss-03; --layout-mode-count: 5; --layout-feature-span: 1; --layout-menu-width: 1260px; --layout-game-areas: "coach board side"; --layout-game-cols: minmax(228px, .88fr) minmax(0, 720px) minmax(228px, .88fr); --layout-coach-align: start; --layout-side-align: start; --layout-topbar-text: left; }
+  html[data-theme="art-deco"] { --layout-code: deco-04; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1218px; --layout-game-areas: "side board coach"; --layout-game-cols: minmax(242px, .9fr) minmax(0, 720px) minmax(242px, .9fr); --layout-coach-align: center; --layout-side-align: center; --layout-topbar-text: center; }
+  html[data-theme="newspaper"] { --layout-code: news-05; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1208px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(252px, .94fr) minmax(222px, .78fr); --layout-coach-align: start; --layout-side-align: start; --layout-topbar-text: left; }
+  html[data-theme="neo-brutalist"] { --layout-code: brutal-06; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1254px; --layout-game-areas: "side coach board"; --layout-game-cols: minmax(258px, .98fr) minmax(220px, .76fr) minmax(0, 720px); --layout-coach-align: end; --layout-side-align: start; --layout-topbar-text: right; }
+  html[data-theme="terminal"] { --layout-code: term-07; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1168px; --layout-game-areas: "side board coach"; --layout-game-cols: minmax(270px, 1.08fr) minmax(0, 720px) minmax(208px, .7fr); --layout-coach-align: end; --layout-side-align: start; --layout-topbar-text: left; }
+  html[data-theme="blueprint"] { --layout-code: blue-08; --layout-mode-count: 3; --layout-feature-span: 2; --layout-menu-width: 1262px; --layout-game-areas: "coach board side"; --layout-game-cols: minmax(210px, .72fr) minmax(0, 720px) minmax(270px, 1.08fr); --layout-coach-align: start; --layout-side-align: center; --layout-topbar-text: right; }
+  html[data-theme="risograph"] { --layout-code: riso-09; --layout-mode-count: 2; --layout-feature-span: 2; --layout-menu-width: 1232px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(220px, .78fr) minmax(265px, 1.04fr); --layout-coach-align: end; --layout-side-align: start; --layout-topbar-text: center; }
+  html[data-theme="wooden"] { --layout-code: wood-10; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1180px; --layout-game-areas: "coach board side"; --layout-game-cols: minmax(240px, .86fr) minmax(0, 720px) minmax(240px, .86fr); --layout-coach-align: center; --layout-side-align: center; --layout-topbar-text: center; }
+  html[data-theme="marble"] { --layout-code: marble-11; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1224px; --layout-game-areas: "board coach side"; --layout-game-cols: minmax(0, 720px) minmax(205px, .7fr) minmax(278px, 1.12fr); --layout-coach-align: start; --layout-side-align: end; --layout-topbar-text: right; }
+  html[data-theme="arcade-neon"] { --layout-code: arcade-12; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1264px; --layout-game-areas: "coach side board"; --layout-game-cols: minmax(230px, .8fr) minmax(260px, 1.02fr) minmax(0, 720px); --layout-coach-align: start; --layout-side-align: end; --layout-topbar-text: right; }
+  html[data-theme="frutiger-aero"] { --layout-code: aero-13; --layout-mode-count: 3; --layout-feature-span: 1; --layout-menu-width: 1250px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(280px, 1.12fr) minmax(205px, .68fr); --layout-coach-align: center; --layout-side-align: center; --layout-topbar-text: left; }
+  html[data-theme="desktop-90s"] { --layout-code: desktop-14; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1148px; --layout-game-areas: "side board coach"; --layout-game-cols: minmax(236px, .84fr) minmax(0, 720px) minmax(250px, .96fr); --layout-coach-align: start; --layout-side-align: end; --layout-topbar-text: left; }
+  html[data-theme="editorial"] { --layout-code: edit-15; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1192px; --layout-game-areas: "board coach side"; --layout-game-cols: minmax(0, 720px) minmax(280px, 1.1fr) minmax(200px, .66fr); --layout-coach-align: end; --layout-side-align: start; --layout-topbar-text: right; }
+  html[data-theme="cyberpunk-hud"] { --layout-code: cyber-16; --layout-mode-count: 2; --layout-feature-span: 2; --layout-menu-width: 1258px; --layout-game-areas: "side coach board"; --layout-game-cols: minmax(275px, 1.1fr) minmax(210px, .7fr) minmax(0, 720px); --layout-coach-align: start; --layout-side-align: center; --layout-topbar-text: right; }
+  html[data-theme="japanese-minimal"] { --layout-code: japan-17; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1128px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(215px, .72fr) minmax(255px, .98fr); --layout-coach-align: end; --layout-side-align: end; --layout-topbar-text: left; }
+  html[data-theme="stained-glass"] { --layout-code: glass-18; --layout-mode-count: 4; --layout-feature-span: 2; --layout-menu-width: 1270px; --layout-game-areas: "coach side board"; --layout-game-cols: minmax(245px, .9fr) minmax(245px, .9fr) minmax(0, 720px); --layout-coach-align: center; --layout-side-align: center; --layout-topbar-text: center; }
+  html[data-theme="bauhaus"] { --layout-code: bauhaus-19; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1242px; --layout-game-areas: "side coach board"; --layout-game-cols: minmax(220px, .75fr) minmax(278px, 1.12fr) minmax(0, 720px); --layout-coach-align: end; --layout-side-align: start; --layout-topbar-text: left; }
+  html[data-theme="soft-clay"] { --layout-code: clay-20; --layout-mode-count: 3; --layout-feature-span: 2; --layout-menu-width: 1202px; --layout-game-areas: "coach side board"; --layout-game-cols: minmax(258px, 1fr) minmax(225px, .77fr) minmax(0, 720px); --layout-coach-align: center; --layout-side-align: start; --layout-topbar-text: center; }
+  html[data-theme="solarpunk-conservatory"] { --layout-code: solar-21; --layout-mode-count: 3; --layout-feature-span: 2; --layout-menu-width: 1268px; --layout-game-areas: "board coach side"; --layout-game-cols: minmax(0, 720px) minmax(238px, .84fr) minmax(248px, .94fr); --layout-coach-align: start; --layout-side-align: center; --layout-topbar-text: left; }
+  html[data-theme="noir-detective"] { --layout-code: noir-22; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1154px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(230px, .8fr) minmax(252px, .96fr); --layout-coach-align: end; --layout-side-align: end; --layout-topbar-text: right; }
+  html[data-theme="cosmic-observatory"] { --layout-code: cosmos-23; --layout-mode-count: 5; --layout-feature-span: 1; --layout-menu-width: 1272px; --layout-game-areas: "coach board side"; --layout-game-cols: minmax(218px, .74fr) minmax(0, 720px) minmax(268px, 1.06fr); --layout-coach-align: center; --layout-side-align: start; --layout-topbar-text: center; }
+  html[data-theme="royal-opera"] { --layout-code: opera-24; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1228px; --layout-game-areas: "coach side board"; --layout-game-cols: minmax(268px, 1.06fr) minmax(215px, .72fr) minmax(0, 720px); --layout-coach-align: start; --layout-side-align: center; --layout-topbar-text: right; }
+  html[data-theme="library-at-midnight"] { --layout-code: library-25; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1176px; --layout-game-areas: "side coach board"; --layout-game-cols: minmax(248px, .94fr) minmax(238px, .84fr) minmax(0, 720px); --layout-coach-align: end; --layout-side-align: center; --layout-topbar-text: left; }
+  html[data-theme="mediterranean-ceramic"] { --layout-code: med-26; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1212px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(262px, 1.02fr) minmax(220px, .74fr); --layout-coach-align: start; --layout-side-align: center; --layout-topbar-text: center; }
+  html[data-theme="botanical-engraving"] { --layout-code: botany-27; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1136px; --layout-game-areas: "coach board side"; --layout-game-cols: minmax(205px, .68fr) minmax(0, 720px) minmax(278px, 1.12fr); --layout-coach-align: start; --layout-side-align: end; --layout-topbar-text: left; }
+  html[data-theme="memphis-pop"] { --layout-code: memphis-28; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1256px; --layout-game-areas: "side coach board"; --layout-game-cols: minmax(282px, 1.14fr) minmax(202px, .66fr) minmax(0, 720px); --layout-coach-align: center; --layout-side-align: end; --layout-topbar-text: right; }
+  html[data-theme="desert-modernism"] { --layout-code: desert-29; --layout-mode-count: 2; --layout-feature-span: 2; --layout-menu-width: 1188px; --layout-game-areas: "board coach side"; --layout-game-cols: minmax(0, 720px) minmax(266px, 1.04fr) minmax(216px, .72fr); --layout-coach-align: center; --layout-side-align: end; --layout-topbar-text: left; }
+  html[data-theme="oceanic-biome"] { --layout-code: ocean-30; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1236px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(286px, 1.16fr) minmax(196px, .62fr); --layout-coach-align: end; --layout-side-align: start; --layout-topbar-text: center; }
+  html[data-theme="alpine-lodge"] { --layout-code: alpine-31; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1204px; --layout-game-areas: "side board coach"; --layout-game-cols: minmax(255px, .98fr) minmax(0, 720px) minmax(228px, .78fr); --layout-coach-align: center; --layout-side-align: center; --layout-topbar-text: right; }
+  html[data-theme="candy-kawaii"] { --layout-code: candy-32; --layout-mode-count: 3; --layout-feature-span: 2; --layout-menu-width: 1222px; --layout-game-areas: "coach side board"; --layout-game-cols: minmax(225px, .76fr) minmax(258px, 1fr) minmax(0, 720px); --layout-coach-align: end; --layout-side-align: start; --layout-topbar-text: center; }
+  html[data-theme="lunar-colony"] { --layout-code: lunar-33; --layout-mode-count: 4; --layout-feature-span: 1; --layout-menu-width: 1274px; --layout-game-areas: "side coach board"; --layout-game-cols: minmax(270px, 1.08fr) minmax(212px, .7fr) minmax(0, 720px); --layout-coach-align: center; --layout-side-align: start; --layout-topbar-text: left; }
+  html[data-theme="persian-miniature"] { --layout-code: persian-34; --layout-mode-count: 2; --layout-feature-span: 1; --layout-menu-width: 1244px; --layout-game-areas: "side board coach"; --layout-game-cols: minmax(244px, .9fr) minmax(0, 720px) minmax(240px, .86fr); --layout-coach-align: end; --layout-side-align: center; --layout-topbar-text: center; }
+  html[data-theme="vaporwave-dream"] { --layout-code: vapor-35; --layout-mode-count: 3; --layout-feature-span: 2; --layout-menu-width: 1266px; --layout-game-areas: "board side coach"; --layout-game-cols: minmax(0, 720px) minmax(210px, .7fr) minmax(274px, 1.1fr); --layout-coach-align: end; --layout-side-align: end; --layout-topbar-text: right; }
+  html[data-theme="dark-academia"] { --layout-code: academia-36; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1162px; --layout-game-areas: "coach side board"; --layout-game-cols: minmax(278px, 1.12fr) minmax(205px, .68fr) minmax(0, 720px); --layout-coach-align: start; --layout-side-align: end; --layout-topbar-text: left; }
+  html[data-theme="pop-art-comic"] { --layout-code: comic-37; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1276px; --layout-game-areas: "side coach board"; --layout-game-cols: minmax(232px, .8fr) minmax(252px, .96fr) minmax(0, 720px); --layout-coach-align: start; --layout-side-align: center; --layout-topbar-text: right; }
+  html[data-theme="nordic-frost"] { --layout-code: nordic-38; --layout-mode-count: 1; --layout-feature-span: 1; --layout-menu-width: 1118px; --layout-game-areas: "coach board side"; --layout-game-cols: minmax(198px, .62fr) minmax(0, 720px) minmax(282px, 1.14fr); --layout-coach-align: end; --layout-side-align: center; --layout-topbar-text: center; }
+  html[data-theme="tropical-resort"] { --layout-code: tropic-39; --layout-mode-count: 3; --layout-feature-span: 1; --layout-menu-width: 1238px; --layout-game-areas: "board coach side"; --layout-game-cols: minmax(0, 720px) minmax(230px, .8fr) minmax(254px, .98fr); --layout-coach-align: start; --layout-side-align: start; --layout-topbar-text: left; }
+  html[data-theme="kinetic-chrome"] { --layout-code: chrome-40; --layout-mode-count: 5; --layout-feature-span: 2; --layout-menu-width: 1278px; --layout-game-areas: "coach side board"; --layout-game-cols: minmax(214px, .72fr) minmax(270px, 1.08fr) minmax(0, 720px); --layout-coach-align: center; --layout-side-align: end; --layout-topbar-text: right; }
+}
+
+/* Compact screens retain the proven single-column geometry, but the first
+   visible composition beat still varies by collection without changing DOM. */
+@media (max-width: 980px) {
+  html[data-theme]:not([data-theme="classic"]) .menu-workspace { --layout-mobile-inset: 0; padding-inline: var(--layout-mobile-inset); }
+  :is(html[data-theme="swiss"], html[data-theme="newspaper"], html[data-theme="editorial"], html[data-theme="japanese-minimal"], html[data-theme="nordic-frost"]) .menu-heading { text-align: left; }
+  :is(html[data-theme="art-deco"], html[data-theme="stained-glass"], html[data-theme="royal-opera"], html[data-theme="persian-miniature"], html[data-theme="cosmic-observatory"]) .menu-heading { text-align: center; }
+  :is(html[data-theme="terminal"], html[data-theme="blueprint"], html[data-theme="cyberpunk-hud"], html[data-theme="lunar-colony"], html[data-theme="kinetic-chrome"]) .mode-grid { grid-auto-flow: dense; }
+}
+
+/* --------------------------------------------------------------------------
+   Full-resolution repair pass
+
+   The first composition matrix was geometrically unique but allowed a narrow
+   modes rail or setup rail to become taller than a 900px viewport. These
+   bounded variants retain distinct reading orders while reserving full width
+   for the information-dense setup panel and keeping every primary action in
+   the initial viewport. Later rules intentionally win over the fingerprints
+   above; per-theme widths, game orders, alignments, and art remain bespoke.
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 1280px) and (min-height: 700px) {
+  html[data-theme]:not([data-theme="classic"]) .menu-workspace {
+    max-height: none;
+    align-content: center;
+    grid-auto-flow: row;
+    gap: clamp(.55rem, 1vh, .8rem);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .menu-heading {
+    min-height: 0;
+    max-height: 225px;
+    padding: clamp(.85rem, 1.5vh, 1.2rem) clamp(1rem, 1.6vw, 1.5rem);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .menu-heading > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .menu-api-key-trigger {
+    position: absolute;
+    z-index: 3;
+    top: 3.35rem;
+    right: clamp(1rem, 1.6vw, 1.5rem);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .menu-heading h1 {
+    max-width: calc(100% - 6.25rem);
+    margin-block: .15rem .35rem;
+    font-size: clamp(2.35rem, 4vw, 4.25rem);
+    line-height: .95;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .menu-heading p:not(.eyebrow) {
+    max-width: min(42rem, 100%);
+    overflow: visible;
+    font-size: clamp(.78rem, .95vw, .95rem);
+    line-height: 1.35;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .mode-grid {
+    min-height: 0;
+    max-height: 205px;
+    overflow: visible;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: minmax(78px, 96px);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .mode-tile {
+    min-height: 78px;
+    max-height: 96px;
+    padding: .65rem .75rem;
+    overflow: hidden;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .mode-tile strong {
+    display: block;
+    overflow: visible;
+    font-size: clamp(.62rem, .72vw, .78rem);
+    line-height: 1.25;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .setup-panel {
+    width: 100%;
+    max-height: none;
+    padding: clamp(.7rem, 1.25vh, .95rem);
+    overflow: visible;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(.65rem, 1vw, 1rem);
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .coach-picker,
+  html[data-theme]:not([data-theme="classic"]) .difficulty-picker {
+    gap: .45rem;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .coach-picker button,
+  html[data-theme]:not([data-theme="classic"]) .difficulty-picker button {
+    min-height: 48px;
+    padding: .42rem .55rem;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .coach-picker-avatar-wrap {
+    width: 44px;
+    height: 44px;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .difficulty-picker button {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .difficulty-picker small {
+    white-space: nowrap;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .difficulty-note {
+    margin-bottom: .4rem;
+    font-size: .72rem;
+    line-height: 1.3;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .coach-summary-stack {
+    gap: .55rem;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .coach-summary :where(p, small),
+  html[data-theme]:not([data-theme="classic"]) .coaching-control-sub {
+    line-height: 1.3;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .coaching-control-card {
+    gap: .35rem;
+    padding-top: .55rem;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .mode-launch {
+    min-height: 48px;
+    padding-top: 0;
+  }
+
+  /* Each composition keeps the dense mode board beside the short hero. The
+     left/right ratios and reading order remain distinct without adding a
+     fifth vertical track that can fall below a laptop viewport. */
+  :is(html[data-theme="newspaper"], html[data-theme="wooden"], html[data-theme="mediterranean-ceramic"], html[data-theme="alpine-lodge"]) {
+    --layout-menu-cols: minmax(300px, .72fr) minmax(0, 1.28fr);
+    --layout-menu-areas: "hero modes" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="hand-drawn"], html[data-theme="desktop-90s"], html[data-theme="botanical-engraving"]) {
+    --layout-menu-cols: minmax(330px, .82fr) minmax(0, 1.18fr);
+    --layout-menu-areas: "hero modes" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="marble"], html[data-theme="japanese-minimal"], html[data-theme="noir-detective"], html[data-theme="oceanic-biome"], html[data-theme="nordic-frost"]) {
+    --layout-menu-cols: minmax(0, 1.22fr) minmax(300px, .78fr);
+    --layout-menu-areas: "modes hero" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="art-deco"], html[data-theme="cyberpunk-hud"], html[data-theme="royal-opera"], html[data-theme="persian-miniature"]) {
+    --layout-menu-cols: minmax(0, 1.3fr) minmax(300px, .7fr);
+    --layout-menu-areas: "modes hero" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="terminal"], html[data-theme="editorial"], html[data-theme="library-at-midnight"], html[data-theme="dark-academia"]) {
+    --layout-menu-cols: minmax(290px, .65fr) minmax(0, 1.35fr);
+    --layout-menu-areas: "hero modes" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="swiss"], html[data-theme="stained-glass"], html[data-theme="cosmic-observatory"], html[data-theme="lunar-colony"], html[data-theme="kinetic-chrome"]) {
+    --layout-menu-cols: minmax(320px, .76fr) minmax(0, 1.24fr);
+    --layout-menu-areas: "hero modes" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="neo-brutalist"], html[data-theme="arcade-neon"], html[data-theme="bauhaus"], html[data-theme="memphis-pop"], html[data-theme="pop-art-comic"]) {
+    --layout-menu-cols: minmax(0, 1.24fr) minmax(320px, .76fr);
+    --layout-menu-areas: "modes hero" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="flat-icon"], html[data-theme="risograph"], html[data-theme="soft-clay"], html[data-theme="desert-modernism"], html[data-theme="vaporwave-dream"]) {
+    --layout-menu-cols: minmax(310px, .7fr) minmax(0, 1.3fr);
+    --layout-menu-areas: "hero modes" "setup setup" "launch launch";
+  }
+
+  :is(html[data-theme="blueprint"], html[data-theme="frutiger-aero"], html[data-theme="solarpunk-conservatory"], html[data-theme="candy-kawaii"], html[data-theme="tropical-resort"]) {
+    --layout-menu-cols: minmax(0, 1.3fr) minmax(310px, .7fr);
+    --layout-menu-areas: "modes hero" "setup setup" "launch launch";
+  }
+
+  /* The setup section always stays a single row at desktop sizes. Presets
+     still change the order of coach, difficulty, and summary, but none hide
+     an essential choice behind an internal scrollbar. */
+  :is(html[data-theme="swiss"], html[data-theme="wooden"], html[data-theme="desktop-90s"], html[data-theme="desert-modernism"]) {
+    --layout-setup-areas: "coach difficulty summary";
+  }
+  :is(html[data-theme="hand-drawn"], html[data-theme="blueprint"], html[data-theme="editorial"], html[data-theme="solarpunk-conservatory"], html[data-theme="cosmic-observatory"], html[data-theme="oceanic-biome"], html[data-theme="vaporwave-dream"]) { --layout-setup-areas: "difficulty coach summary"; }
+  :is(html[data-theme="terminal"], html[data-theme="noir-detective"], html[data-theme="library-at-midnight"], html[data-theme="dark-academia"]) { --layout-setup-areas: "summary coach difficulty"; }
+  :is(html[data-theme="newspaper"], html[data-theme="arcade-neon"], html[data-theme="soft-clay"], html[data-theme="botanical-engraving"], html[data-theme="candy-kawaii"], html[data-theme="pop-art-comic"]) { --layout-setup-areas: "difficulty summary coach"; }
+  :is(html[data-theme="flat-icon"], html[data-theme="art-deco"], html[data-theme="marble"], html[data-theme="frutiger-aero"], html[data-theme="stained-glass"], html[data-theme="memphis-pop"], html[data-theme="alpine-lodge"], html[data-theme="nordic-frost"]) { --layout-setup-areas: "summary difficulty coach"; }
+  :is(html[data-theme="risograph"], html[data-theme="japanese-minimal"], html[data-theme="mediterranean-ceramic"], html[data-theme="persian-miniature"], html[data-theme="tropical-resort"]) { --layout-setup-areas: "difficulty coach summary"; }
+  :is(html[data-theme="neo-brutalist"], html[data-theme="cyberpunk-hud"], html[data-theme="bauhaus"], html[data-theme="royal-opera"], html[data-theme="lunar-colony"], html[data-theme="kinetic-chrome"]) { --layout-setup-areas: "coach summary difficulty"; }
+
+  /* Display-serifs still feel monumental without forcing their track taller
+     than the rest of the workspace. */
+  :is(html[data-theme="editorial"], html[data-theme="japanese-minimal"], html[data-theme="marble"]) .menu-heading h1 {
+    font-size: clamp(2.7rem, 4.4vw, 4.4rem);
+    line-height: .9;
+  }
+}
+
+/* Component safety and contrast layer. It deliberately lives after every art
+   pack so decorative selectors cannot make controls unreadable or reshape the
+   persistent left rail. Classic remains the unchanged original stylesheet. */
+html[data-theme]:not([data-theme="classic"]) :where(.mode-tile, .coach-picker button, .difficulty-picker button) {
+  color: var(--theme-text) !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) :where(.mode-tile strong, .coach-picker small, .difficulty-picker small) {
+  color: var(--theme-muted) !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) :where(.selected-mode-tile, .selected-option, .coaching-control-option.is-selected) {
+  border-color: color-mix(in srgb, var(--theme-accent), var(--theme-text) 18%) !important;
+  background: var(--theme-accent) !important;
+  background-image: none !important;
+  color: var(--theme-control-on-accent, #fff) !important;
+  -webkit-text-fill-color: var(--theme-control-on-accent, #fff) !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) :where(.selected-mode-tile, .selected-option, .coaching-control-option.is-selected) :where(span, strong, small) {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) .coaching-control-toggle {
+  border-color: var(--theme-border-strong) !important;
+  background: var(--theme-surface-2) !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) .coaching-control-option:not(.is-selected) {
+  background: var(--theme-surface-2) !important;
+  color: var(--theme-text) !important;
+  -webkit-text-fill-color: var(--theme-text) !important;
+  opacity: 1 !important;
+}
+
+/* The coaching segmented control must remain readable even in presets whose
+   accent is intentionally close to a panel color. The text/page pairing is
+   the strongest contrast pair in every preset's semantic palette. */
+html[data-theme]:not([data-theme="classic"]) .coaching-control-option.is-selected {
+  border-color: var(--theme-text) !important;
+  background: var(--theme-text) !important;
+  color: var(--theme-page) !important;
+  -webkit-text-fill-color: var(--theme-page) !important;
+}
+
+:is(
+  html[data-theme="art-deco"], html[data-theme="terminal"],
+  html[data-theme="frutiger-aero"], html[data-theme="candy-kawaii"],
+  html[data-theme="kinetic-chrome"], html[data-theme="dark-academia"]
+) { --theme-control-on-accent: #10151a; }
+
+@media (min-width: 761px) {
+  html[data-theme]:not([data-theme="classic"]) .theme-switcher {
+    left: max(.55rem, env(safe-area-inset-left)) !important;
+    z-index: 10000 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(-50%) !important;
+    filter: none !important;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .theme-switcher-trigger {
+    width: 4.25rem !important;
+    min-width: 4.25rem !important;
+    max-width: 4.25rem !important;
+    min-height: 12.5rem !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    clip-path: none !important;
+    border-color: var(--theme-border-strong) !important;
+    background: var(--theme-surface-raised) !important;
+    color: var(--theme-text) !important;
+    backdrop-filter: none !important;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .theme-switcher-trigger :where(.theme-switcher-current, .theme-switcher-kicker, .theme-switcher-chevron) {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+
+html[data-theme]:not([data-theme="classic"]) :where(.character-caption, .coach-chat-row, .coach-line-wrap) {
+  border-color: var(--theme-border) !important;
+  background: var(--theme-surface-raised) !important;
+  color: var(--theme-text) !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) :where(.character-caption strong, .character-caption span, .coach-line, .coach-chat-input) {
+  color: var(--theme-text) !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) .coach-chat-input::placeholder {
+  color: color-mix(in srgb, var(--theme-text), transparent 38%) !important;
+}
+
+html[data-theme]:not([data-theme="classic"]) .coach-chat-input {
+  padding-inline: .7rem;
+  font-size: .78rem;
+}
+
+html[data-theme]:not([data-theme="classic"]) .coach-chat-send {
+  padding-inline: .7rem;
+}
+
+/* Keep signature hero art behind the reading column instead of over it. */
+html[data-theme="flat-icon"] .menu-heading::after,
+html[data-theme="soft-clay"] .menu-heading::after,
+html[data-theme="bauhaus"] .menu-heading::after,
+html[data-theme="botanical-engraving"] .menu-heading::after,
+html[data-theme="pop-art-comic"] .menu-heading::after {
+  z-index: 0 !important;
+  right: .75rem !important;
+  bottom: .5rem !important;
+  max-width: 34% !important;
+  max-height: 70% !important;
+  opacity: .2 !important;
+  transform: none !important;
+}
+
+html[data-theme="flat-icon"] .menu-heading::after,
+html[data-theme="soft-clay"] .menu-heading::after {
+  width: 6.5rem !important;
+  height: 6.5rem !important;
+  font-size: 4rem !important;
+}
+
+html[data-theme="botanical-engraving"] .menu-heading::after {
+  font-size: 6rem !important;
+}
+
+html[data-theme="pop-art-comic"] .menu-heading::after {
+  width: auto !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  font-size: 1rem !important;
+  opacity: .78 !important;
+}
+
+html[data-theme="pop-art-comic"] .topbar h1 {
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Theme-specific containment repairs found by native-resolution screenshot
+   review. These motifs still appear throughout the page background, board,
+   and panels; only the copies that painted over live text are suppressed. */
+html[data-theme]:not([data-theme="classic"]) .menu-heading::after {
+  content: none !important;
+}
+
+html[data-theme="swiss"] .menu-heading h1 {
+  max-width: none;
+  font-size: clamp(3rem, 5vw, 4.6rem);
+  line-height: .9;
+}
+
+html[data-theme="swiss"] .mode-tile {
+  padding: .65rem 2.35rem .65rem .75rem;
+}
+
+html[data-theme="swiss"] .mode-tile::before {
+  top: .6rem;
+  right: .7rem;
+  left: auto;
+  opacity: .55;
+}
+
+html[data-theme="art-deco"] .menu-heading {
+  background: var(--theme-surface) !important;
+  color: var(--theme-text) !important;
+}
+
+html[data-theme="art-deco"] .menu-heading :where(h1, p, .eyebrow) {
+  color: #f5e7bf !important;
+}
+
+html[data-theme="art-deco"] :where(.mode-tile:not(.selected-mode-tile)) {
+  background: var(--theme-surface-2) !important;
+  color: #f5e7bf !important;
+}
+
+html[data-theme="art-deco"] .mode-tile:not(.selected-mode-tile) :where(span, strong) {
+  color: #f5e7bf !important;
+}
+
+html[data-theme="desktop-90s"] :where(.menu-heading, .setup-panel) {
+  padding-top: 2.45rem !important;
+}
+
+html[data-theme="desktop-90s"] {
+  --theme-control-on-accent: #fff;
+}
+
+html[data-theme="desktop-90s"] .menu-play {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+html[data-theme="desktop-90s"] .mode-tile :where(span, strong) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Palette-specific text repairs discovered by native-resolution review. */
+html[data-theme="frutiger-aero"] .mode-tile :where(span, strong) {
+  color: #123e59 !important;
+  -webkit-text-fill-color: #123e59 !important;
+}
+
+html[data-theme="japanese-minimal"] .menu-heading,
+html[data-theme="japanese-minimal"] .menu-heading :where(h1, p, .eyebrow, button, span) {
+  color: #201d18 !important;
+  -webkit-text-fill-color: #201d18 !important;
+}
+
+html[data-theme="japanese-minimal"] .menu-heading :where(button, .api-key-badge) {
+  border-color: rgba(32, 29, 24, .56) !important;
+}
+
+html[data-theme="stained-glass"] .mode-tile :where(span, strong) {
+  color: #fff3b0 !important;
+  -webkit-text-fill-color: #fff3b0 !important;
+}
+
+/* Explicit high-contrast segmented pairs keep the label readable while the
+   surrounding panel, borders, and geometry continue to carry each theme. */
+:is(html[data-theme="art-deco"], html[data-theme="japanese-minimal"]) .coaching-control-option.is-selected {
+  background: #173c35 !important; color: #fff !important; -webkit-text-fill-color: #fff !important;
+}
+:is(html[data-theme="art-deco"], html[data-theme="japanese-minimal"]) .coaching-control-option:not(.is-selected) {
+  background: #f7f3e8 !important; color: #173c35 !important; -webkit-text-fill-color: #173c35 !important;
+}
+html[data-theme="frutiger-aero"] .coaching-control-option.is-selected,
+html[data-theme="arcade-neon"] .coaching-control-option.is-selected {
+  background: #075985 !important; color: #fff !important; -webkit-text-fill-color: #fff !important;
+}
+html[data-theme="frutiger-aero"] .coaching-control-option:not(.is-selected),
+html[data-theme="arcade-neon"] .coaching-control-option:not(.is-selected) {
+  background: #e0f2fe !important; color: #0c3b55 !important; -webkit-text-fill-color: #0c3b55 !important;
+}
+html[data-theme="stained-glass"] .coaching-control-option.is-selected {
+  background: #4c1d95 !important; color: #fff7cc !important; -webkit-text-fill-color: #fff7cc !important;
+}
+html[data-theme="stained-glass"] .coaching-control-option:not(.is-selected) {
+  background: #1e1b4b !important; color: #fff7cc !important; -webkit-text-fill-color: #fff7cc !important;
+}
+html[data-theme="alpine-lodge"] .coaching-control-option.is-selected {
+  background: #274c3d !important; color: #fff !important; -webkit-text-fill-color: #fff !important;
+}
+html[data-theme="alpine-lodge"] .coaching-control-option:not(.is-selected) {
+  background: #f3f0e8 !important; color: #243c32 !important; -webkit-text-fill-color: #243c32 !important;
+}
+html[data-theme="candy-kawaii"] .coaching-control-option.is-selected {
+  background: #6c4d9e !important; color: #fff !important; -webkit-text-fill-color: #fff !important;
+}
+html[data-theme="candy-kawaii"] .coaching-control-option:not(.is-selected) {
+  background: #fff !important; color: #4d3769 !important; -webkit-text-fill-color: #4d3769 !important;
+}
+html[data-theme="oceanic-biome"] .coaching-control-option.is-selected {
+  background: #064e5b !important; color: #fff !important; -webkit-text-fill-color: #fff !important;
+}
+html[data-theme="oceanic-biome"] .coaching-control-option:not(.is-selected) {
+  background: #e6f7f3 !important; color: #063944 !important; -webkit-text-fill-color: #063944 !important;
+}
+html[data-theme="dark-academia"] .coaching-control-option.is-selected {
+  background: #3b2626 !important; color: #fff3e7 !important; -webkit-text-fill-color: #fff3e7 !important;
+}
+html[data-theme="dark-academia"] .coaching-control-option:not(.is-selected) {
+  background: #f0e6df !important; color: #321f1f !important; -webkit-text-fill-color: #321f1f !important;
+}
+
+/* Theme selection is deliberately instantaneous. Disable inherited colour
+   transitions for the two layout frames while the root palette swaps, then
+   restore normal hover/focus motion two animation frames later. */
+html.theme-switching :where(.menu-screen, .game-screen, .theme-switcher) * {
+  transition: none !important;
+}
+
+html[data-theme="art-deco"] .mode-tile strong {
+  font-size: .68rem;
+}
+
+:is(html[data-theme="vaporwave-dream"], html[data-theme="kinetic-chrome"]) .mode-tile {
+  border-radius: 18px 3px !important;
+  padding-inline: 1rem !important;
+}
+
+html[data-theme="tropical-resort"] .mode-tile {
+  border-radius: 8px 22px !important;
+  padding-inline: 1rem !important;
+}
+
+:is(html[data-theme="editorial"], html[data-theme="library-at-midnight"]) .menu-heading h1 {
+  font-size: clamp(2.55rem, 3.7vw, 3.65rem);
+}
+
+@media (min-width: 1280px) and (min-height: 700px) {
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) {
+    --layout-game-width: 1228px;
+    --layout-game-gap: 14px;
+    max-width: calc(100vw - 12rem);
+  }
+
+  :is(html[data-theme="hand-drawn"], html[data-theme="swiss"], html[data-theme="wooden"], html[data-theme="blueprint"], html[data-theme="cosmic-observatory"], html[data-theme="botanical-engraving"], html[data-theme="nordic-frost"], html[data-theme="art-deco"], html[data-theme="terminal"], html[data-theme="desktop-90s"], html[data-theme="alpine-lodge"], html[data-theme="persian-miniature"]) {
+    --layout-game-cols: minmax(272px, 280px) minmax(0, 640px) minmax(272px, 280px);
+  }
+
+  :is(html[data-theme="flat-icon"], html[data-theme="marble"], html[data-theme="editorial"], html[data-theme="solarpunk-conservatory"], html[data-theme="desert-modernism"], html[data-theme="tropical-resort"], html[data-theme="newspaper"], html[data-theme="risograph"], html[data-theme="frutiger-aero"], html[data-theme="japanese-minimal"], html[data-theme="noir-detective"], html[data-theme="mediterranean-ceramic"], html[data-theme="oceanic-biome"], html[data-theme="vaporwave-dream"]) {
+    --layout-game-cols: minmax(0, 640px) minmax(272px, 280px) minmax(272px, 280px);
+  }
+
+  :is(html[data-theme="neo-brutalist"], html[data-theme="cyberpunk-hud"], html[data-theme="bauhaus"], html[data-theme="library-at-midnight"], html[data-theme="memphis-pop"], html[data-theme="lunar-colony"], html[data-theme="pop-art-comic"], html[data-theme="arcade-neon"], html[data-theme="stained-glass"], html[data-theme="soft-clay"], html[data-theme="royal-opera"], html[data-theme="candy-kawaii"], html[data-theme="dark-academia"], html[data-theme="kinetic-chrome"]) {
+    --layout-game-cols: minmax(272px, 280px) minmax(272px, 280px) minmax(0, 640px);
+  }
+
+  /* Preserve distinct computed compositions for presets that intentionally
+     share the same three-column reading order and vertical alignment. */
+  :is(html[data-theme="solarpunk-conservatory"], html[data-theme="botanical-engraving"], html[data-theme="alpine-lodge"], html[data-theme="bauhaus"], html[data-theme="oceanic-biome"], html[data-theme="dark-academia"], html[data-theme="pop-art-comic"], html[data-theme="noir-detective"]) { --layout-game-gap: 13px; }
+  html[data-theme="vaporwave-dream"] { --layout-game-gap: 12px; }
+
+  /* Keep every art direction structurally distinct even after the safe,
+     collision-free track normalization above. These vertical compositions
+     are visible layout choices and are included in the runtime signature. */
+  html[data-theme="solarpunk-conservatory"] { --layout-coach-align: center; --layout-side-align: center; }
+  html[data-theme="botanical-engraving"] { --layout-coach-align: end; --layout-side-align: end; }
+  html[data-theme="alpine-lodge"] { --layout-coach-align: center; --layout-side-align: start; }
+  html[data-theme="bauhaus"] { --layout-coach-align: end; --layout-side-align: end; }
+  html[data-theme="oceanic-biome"] { --layout-coach-align: center; --layout-side-align: start; }
+  html[data-theme="dark-academia"] { --layout-coach-align: end; --layout-side-align: end; }
+  html[data-theme="pop-art-comic"] { --layout-coach-align: start; --layout-side-align: start; }
+  html[data-theme="noir-detective"] { --layout-coach-align: center; --layout-side-align: end; }
+  html[data-theme="vaporwave-dream"] { --layout-coach-align: start; --layout-side-align: end; }
+
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) > .coach-card,
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) > .side-panel {
+    width: 100%;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) > :where(.coach-card, .game-stage, .side-panel) {
+    transform: none !important;
+  }
+
+  html[data-theme]:not([data-theme="classic"]) .app-shell:not(.analysis-shell) .board-wrap {
+    --board-size: min(
+      570px,
+      calc(var(--viewport-h) - var(--topbar-h) - 5.5rem)
+    );
+    transform: none !important;
+  }
+}
+
+html[data-theme="desktop-90s"] :where(.game-screen .primary-action, .game-screen .ghost-action, .game-screen .coach-chat-send) {
+  border-color: #fff #000 #000 #fff !important;
+  background: #c0c0c0 !important;
+  color: #000 !important;
+  -webkit-text-fill-color: #000 !important;
+}

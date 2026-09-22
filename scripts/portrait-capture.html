@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chess Avatars V2 Portrait Capture</title>
+  <style>
+    html, body { margin: 0; overflow: hidden; background: #111; }
+    canvas { display: block; }
+  </style>
+</head>
+<body>
+  <canvas id="portrait" width="1200" height="1600"></canvas>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "/vendor/three/build/three.module.js",
+      "three/": "/vendor/three/",
+      "three/addons/": "/vendor/three/examples/jsm/",
+      "postprocessing": "/vendor/postprocessing/build/index.js",
+      "n8ao": "/vendor/n8ao/dist/N8AO.js",
+      "buffer": "/vendor/buffer-shim.js"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+    import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+    import { MeshoptDecoder } from 'three/addons/libs/meshopt_decoder.module.js';
+    import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+    import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+    import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+    import { SMAAPass } from 'three/addons/postprocessing/SMAAPass.js';
+    import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+    import { N8AOPass } from 'n8ao';
+
+    const WIDTH = 1200;
+    const HEIGHT = 1600;
+    const LOOK_URL = '/character-assets/chess-avatars-v2/lighting-setup.json';
+    const ENVIRONMENT_URL = '/character-assets/chess-avatars-v2/potsdamer_platz_1k.hdr';
+    const SKIN_LUT_SIZE = 64;
+    const SKIN_TRANSMITTANCE_COLOR = '#ff4d33';
+    const SKIN_TRANSMITTANCE_WEIGHT = 0.25;
+    const VIGNETTE_SHADER = {
+      uniforms: {
+        tDiffuse: { value: null },
+        offset: { value: 0.25 },
+        darkness: { value: 0 },
+      },
+      vertexShader: [
+        'varying vec2 vUv;',
+        'void main() {',
+        '  vUv = uv;',
+        '  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);',
+        '}',
+      ].join('\n'),
+      fragmentShader: [
+        'uniform sampler2D tDiffuse;',
+        'uniform float offset;',
+        'uniform float darkness;',
+        'varying vec2 vUv;',
+        'void main() {',
+        '  vec4 texel = texture2D(tDiffuse, vUv);',
+        '  vec2 centered = vUv - vec2(0.5);',
+        '  float edge = smoothstep(0.8, offset * 0.799, dot(centered, centered));',
+        '  texel.rgb = mix(texel.rgb, texel.rgb * edge, darkness);',
+        '  gl_FragColor = texel;',
+        '}',
+      ].join('\n'),
+    };
+
+    window.__PORTRAIT_READY__ = false;
+    window.__PORTRAIT_ERROR__ = '';
+    window.__PORTRAIT_DIAGNOSTICS__ = null;
+
+    const params = new URLSearchParams(location.search);
+    const coachId = (params.get('coach') || 'leila').toLowerCase();
+    const presentationZoom = THREE.MathUtils.clamp(Number(params.get('zoom') || 1), 1, 1.8);
+    const requestedIblFloor = params.has('iblFloor')
+      ? THREE.MathUtils.clamp(Number(params.get('iblFloor')), 0, 1)
+      : null;
+    const studioBackdropStrength = THREE.MathUtils.clamp(
+      Number(params.get('studioBackdrop') || 0),
+      0,
+      1,
+    );
+    const pageCutout = params.get('cutout') === '1';
+    const CUTOUT_CHROMA = '#6bffd4';
+    function finiteParam(name, fallback) {
+      if (!params.has(name)) return fallback;
+      const value = Number(params.get(name));
+      if (!Number.isFinite(value)) fail(name + ' must be finite');
+      return value;
+    }
+    const portraitFraming = {
+      topInsetWorld: finiteParam('topInsetWorld', 0.035),
+      portraitCropBias: finiteParam('portraitCropBias', 0.02),
+      // Match the authored camera target so the subject, not world x=0, lands
+      // on the optical centre of the portrait.
+      horizontalOffset: finiteParam('horizontalOffset', -0.032),
+      modelScale: finiteParam('modelScale', 0.01),
+      modelYawDegrees: finiteParam('modelYaw', 0),
+    };
+    const configs = {
+      magnus: {
+        ...portraitFraming,
+        model: '/magnus.glb',
+        idle: '/character-assets/chess-avatars-v2/magnus-chess-animations/body/Anim_M02_UserIdle.glb',
+        bg: '#b9c2bf',
+        idleTime: 0,
+        modelScale: portraitFraming.modelScale,
+      },
+      sofia: {
+        ...portraitFraming,
+        // Sofia's asymmetrical ponytail makes the shared camera-target offset
+        // read left-heavy; this rig-specific optical correction recentres her.
+        horizontalOffset: params.has('horizontalOffset') ? portraitFraming.horizontalOffset : -0.022,
+        model: '/sofia.glb',
+        idle: '/character-assets/chess-avatars-v2/sofia-chess-animations/body/Anim_F02_UserIdle.glb',
+        bg: '#c3cbc6',
+        idleTime: 0,
+        modelScale: portraitFraming.modelScale,
+      },
+      arjun: {
+        ...portraitFraming,
+        model: '/arjun.glb',
+        idle: '/character-assets/chess-avatars-v2/arjun-chess-animations/body/Anim_M01_UserIdle.glb',
+        bg: '#cbc4bb',
+        idleTime: 0,
+        modelScale: portraitFraming.modelScale,
+      },
+      leila: {
+        ...portraitFraming,
+        model: '/leila.glb',
+        idle: '/character-assets/chess-avatars-v2/leila-chess-animations/body/Anim_F01_UserIdle.glb',
+        bg: '#c8c1c4',
+        idleTime: 0,
+        modelScale: portraitFraming.modelScale,
+      },
+    };
+
+    const config = Object.prototype.hasOwnProperty.call(configs, coachId)
+      ? { ...configs[coachId] }
+      : null;
+    if (!config) {
+      window.__PORTRAIT_ERROR__ = 'Unknown coach: ' + coachId;
+      window.__PORTRAIT_READY__ = true;
+      throw new Error(window.__PORTRAIT_ERROR__);
+    }
+
+    const variant = params.get('variant') === 'mobile' ? 'mobile' : 'web';
+    const APPLIED_CSS_CONTRAST_PERCENT = 100;
+    const COLOR_GRADE_TRANSFER = 'shadow-preserving-css';
+    if (variant === 'mobile') config.model = config.model.replace(/\.glb$/, '.mobile.glb');
+    if (params.get('model')) config.model = params.get('model');
+    if (params.get('idleTime') !== null && Number.isFinite(Number(params.get('idleTime')))) {
+      config.idleTime = Number(params.get('idleTime'));
+    }
+
+    let hidePattern = null;
+    try {
+      hidePattern = params.get('hide') ? new RegExp(params.get('hide'), 'i') : null;
+    } catch (error) {
+      window.__PORTRAIT_ERROR__ = 'Invalid hide pattern: ' + String(error?.message || error);
+      window.__PORTRAIT_READY__ = true;
+      throw error;
+    }
+
+    function requireExactLook(look) {
+      const fail = (message) => { throw new Error('Invalid Chess Avatars V2 look export: ' + message); };
+      if (look?.renderer?.toneMapping !== 'ACESFilmic') fail('tone mapping must be ACESFilmic');
+      if (look?.renderer?.outputColorSpace !== 'sRGB') fail('output color space must be sRGB');
+      if (look?.renderer?.toneMappingExposure !== 1) fail('exposure must be 1');
+      if (look?.environment?.intensity !== 0.25 || look.environment.showAsBackground !== false) {
+        fail('environment must use intensity 0.25 without becoming the background');
+      }
+      if (look?.camera?.fov !== 20) fail('camera FOV must be 20 degrees');
+      if (!Array.isArray(look?.lights) || look.lights.length !== 4) fail('all four exported lights are required');
+      if (look?.postProcessing?.ambientOcclusion?.effect !== 'N8AO') fail('AO must use N8AO');
+      if (look?.postProcessing?.ambientOcclusion?.aoRadius !== 0.02) fail('N8AO radius must be 0.02');
+      if (look?.postProcessing?.ambientOcclusion?.intensity !== 3) fail('N8AO intensity must be 3');
+      if (look?.skinShading?.strength !== 1.3) fail('Penner skin strength must be 1.3');
+      return look;
+    }
+
+    function whiteBalancedColor(color, look) {
+      return new THREE.Color(color).multiply(new THREE.Color(look.whiteBalance.appliedColor));
+    }
+
+    function getLight(look, name, type) {
+      const light = look.lights.find((candidate) => candidate.name === name);
+      if (!light || light.type !== type) {
+        throw new Error('Missing ' + name + ' ' + type + ' in Chess Avatars V2 light export');
+      }
+      return light;
+    }
+
+    function addExactLightRig(scene, look) {
+      const ambientData = getLight(look, 'ambient', 'AmbientLight');
+      const keyData = getLight(look, 'key', 'DirectionalLight');
+      const rimData = getLight(look, 'rim', 'DirectionalLight');
+      const catchData = getLight(look, 'catchlight', 'PointLight');
+
+      const ambient = new THREE.AmbientLight(
+        whiteBalancedColor(ambientData.color, look),
+        ambientData.intensity,
+      );
+      ambient.name = 'ChessAvatarsV2_ambient';
+
+      const key = new THREE.DirectionalLight(
+        whiteBalancedColor(keyData.color, look),
+        keyData.intensity,
+      );
+      key.name = 'ChessAvatarsV2_key';
+      key.position.fromArray(keyData.position);
+      key.castShadow = Boolean(keyData.castShadow);
+      key.shadow.bias = keyData.shadowBias;
+      key.shadow.mapSize.set(2048, 2048);
+      key.shadow.camera.near = 0.1;
+      key.shadow.camera.far = 12;
+      key.shadow.camera.left = -2.5;
+      key.shadow.camera.right = 2.5;
+      key.shadow.camera.top = 3;
+      key.shadow.camera.bottom = -0.5;
+
+      const rim = new THREE.DirectionalLight(
+        whiteBalancedColor(rimData.color, look),
+        rimData.intensity,
+      );
+      rim.name = 'ChessAvatarsV2_rim';
+      rim.position.fromArray(rimData.position);
+
+      const catchlight = new THREE.PointLight(
+        whiteBalancedColor(catchData.color, look),
+        catchData.intensity,
+        catchData.distance,
+      );
+      catchlight.name = 'ChessAvatarsV2_catchlight';
+      catchlight.position.fromArray(catchData.position);
+
+      scene.add(ambient, key, rim, catchlight);
+      return { key, count: 4 };
+    }
+
+    const PROFILE = [
+      { variance: 0.0064, weight: [0.233, 0.455, 0.649] },
+      { variance: 0.0484, weight: [0.100, 0.336, 0.344] },
+      { variance: 0.1870, weight: [0.118, 0.198, 0.000] },
+      { variance: 0.5670, weight: [0.113, 0.007, 0.007] },
+      { variance: 1.9900, weight: [0.358, 0.004, 0.000] },
+      { variance: 7.4100, weight: [0.078, 0.000, 0.000] },
+    ];
+
+    function evaluateDiffusion(distance) {
+      const rgb = [0, 0, 0];
+      for (const lobe of PROFILE) {
+        const gaussian = Math.exp(-(distance * distance) / (2 * lobe.variance))
+          / Math.sqrt(2 * Math.PI * lobe.variance);
+        rgb[0] += lobe.weight[0] * gaussian;
+        rgb[1] += lobe.weight[1] * gaussian;
+        rgb[2] += lobe.weight[2] * gaussian;
+      }
+      return rgb;
+    }
+
+    function createSkinDiffusionLut(size) {
+      const pixels = new Uint8Array(size * size * 4);
+      const integrationSamples = 64;
+      for (let y = 0; y < size; y++) {
+        const curvature = Math.max(0.015, y / (size - 1));
+        for (let x = 0; x < size; x++) {
+          const ndotl = (x / (size - 1)) * 2 - 1;
+          const baseAngle = Math.acos(THREE.MathUtils.clamp(ndotl, -1, 1));
+          const integrated = [0, 0, 0];
+          let normalization = 0;
+          for (let sample = 0; sample < integrationSamples; sample++) {
+            const offset = ((sample + 0.5) / integrationSamples * 2 - 1) * Math.PI;
+            const distance = Math.abs(offset) / (0.12 + curvature * 2.4);
+            const diffusion = evaluateDiffusion(distance);
+            const irradiance = Math.max(Math.cos(baseAngle + offset), 0);
+            integrated[0] += irradiance * diffusion[0];
+            integrated[1] += irradiance * diffusion[1];
+            integrated[2] += irradiance * diffusion[2];
+            normalization += (diffusion[0] + diffusion[1] + diffusion[2]) / 3;
+          }
+          const index = (y * size + x) * 4;
+          const scale = normalization > 0 ? 1 / normalization : 0;
+          pixels[index] = Math.round(THREE.MathUtils.clamp(integrated[0] * scale, 0, 1) * 255);
+          pixels[index + 1] = Math.round(THREE.MathUtils.clamp(integrated[1] * scale, 0, 1) * 255);
+          pixels[index + 2] = Math.round(THREE.MathUtils.clamp(integrated[2] * scale, 0, 1) * 255);
+          pixels[index + 3] = 255;
+        }
+      }
+      const texture = new THREE.DataTexture(
+        pixels,
+        size,
+        size,
+        THREE.RGBAFormat,
+        THREE.UnsignedByteType,
+      );
+      texture.name = 'ChessAvatarsV2_PennerSkinLUT';
+      texture.colorSpace = THREE.NoColorSpace;
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.wrapS = THREE.ClampToEdgeWrapping;
+      texture.wrapT = THREE.ClampToEdgeWrapping;
+      texture.generateMipmaps = false;
+      texture.needsUpdate = true;
+      return texture;
+    }
+
+    function applyPennerSkin(root, look) {
+      const match = /head|skin|body|face/i;
+      const exclude = /eye|cornea|sclera|iris|teeth|tooth|lash|hair|brow|cloth|shirt|jacket|dress|tongue|mouth|gum|nail/i;
+      const lut = createSkinDiffusionLut(SKIN_LUT_SIZE);
+      const strength = { value: look.skinShading.strength };
+      const transmittance = { value: new THREE.Color(SKIN_TRANSMITTANCE_COLOR) };
+      const transmittanceWeight = { value: SKIN_TRANSMITTANCE_WEIGHT };
+      const patched = new Set();
+      const materialNames = [];
+      const compiledMaterials = new Set();
+      const shaderDiagnostics = {
+        compiledMaterialCount: 0,
+        directLightDirection: false,
+        directLightColor: false,
+        directDiffuseInjection: false,
+        postLightOutgoingSss: false,
+      };
+
+      root.traverse((object) => {
+        if (!object.isMesh || !object.material) return;
+        const materials = Array.isArray(object.material) ? object.material : [object.material];
+        for (const material of materials) {
+          if (!material || patched.has(material)) continue;
+          patched.add(material);
+          const materialName = material.name || '';
+          if (!material.isMeshStandardMaterial
+            || !match.test(materialName)
+            || exclude.test(materialName)) continue;
+
+          materialNames.push(materialName);
+          const previousCompile = material.onBeforeCompile.bind(material);
+          const previousCacheKey = material.customProgramCacheKey.bind(material);
+          material.onBeforeCompile = (shader, renderer) => {
+            previousCompile(shader, renderer);
+            shader.uniforms.chessSkinLut = { value: lut };
+            shader.uniforms.chessSkinStrength = strength;
+            shader.uniforms.chessSkinTransmittance = transmittance;
+            shader.uniforms.chessSkinTransmittanceWeight = transmittanceWeight;
+
+            const directDiffuseHook = 'reflectedLight.directDiffuse += irradiance * BRDF_Lambert( material.diffuseColor );';
+            const physicalChunk = THREE.ShaderChunk.lights_physical_pars_fragment;
+            const patchedPhysicalChunk = physicalChunk.replace(
+              directDiffuseHook,
+              [
+                directDiffuseHook,
+                '// Chess Avatars V2: pre-integrated skin scattering inside direct lighting.',
+                '// directLight.color already contains light color/intensity, attenuation and shadow visibility.',
+                'float chessSkinNdotL = dot( geometryNormal, directLight.direction );',
+                'float chessSkinNormalDerivative = length( fwidth( geometryNormal ) );',
+                'float chessSkinPositionDerivative = max( length( fwidth( geometryPosition ) ), 1e-4 );',
+                'float chessSkinCurvature = clamp( chessSkinNormalDerivative / chessSkinPositionDerivative * 0.018, 0.0, 1.0 );',
+                'vec3 chessSkinIntegrated = texture2D( chessSkinLut, vec2( chessSkinNdotL * 0.5 + 0.5, chessSkinCurvature ) ).rgb;',
+                'float chessSkinLambert = max( chessSkinNdotL, 0.0 );',
+                'vec3 chessSkinScatter = max( chessSkinIntegrated - vec3( chessSkinLambert ), vec3( 0.0 ) );',
+                'float chessSkinBacklight = pow( max( dot( -geometryNormal, directLight.direction ), 0.0 ), 3.0 );',
+                'vec3 chessSkinDirectColor = directLight.color * BRDF_Lambert( material.diffuseColor );',
+                'reflectedLight.directDiffuse += chessSkinDirectColor * chessSkinScatter * chessSkinStrength;',
+                'reflectedLight.directDiffuse += chessSkinDirectColor * chessSkinTransmittance * chessSkinBacklight * chessSkinTransmittanceWeight * chessSkinStrength;',
+              ].join('\n\t'),
+            );
+            if (patchedPhysicalChunk === physicalChunk) {
+              throw new Error('Chess Avatars V2 direct-light skin shader hook was not found');
+            }
+
+            const includeHook = '#include <lights_physical_pars_fragment>';
+            const declarations = [
+              'uniform sampler2D chessSkinLut;',
+              'uniform float chessSkinStrength;',
+              'uniform vec3 chessSkinTransmittance;',
+              'uniform float chessSkinTransmittanceWeight;',
+              patchedPhysicalChunk,
+            ].join('\n');
+            shader.fragmentShader = shader.fragmentShader.replace(includeHook, declarations);
+            if (!shader.fragmentShader.includes('chessSkinDirectColor')) {
+              throw new Error('Chess Avatars V2 physical-light shader include was not found');
+            }
+
+            compiledMaterials.add(material.uuid);
+            shaderDiagnostics.compiledMaterialCount = compiledMaterials.size;
+            shaderDiagnostics.directLightDirection = shader.fragmentShader
+              .includes('directLight.direction');
+            shaderDiagnostics.directLightColor = shader.fragmentShader.includes('directLight.color');
+            shaderDiagnostics.directDiffuseInjection = shader.fragmentShader
+              .includes('reflectedLight.directDiffuse += chessSkinDirectColor');
+            shaderDiagnostics.postLightOutgoingSss = shader.fragmentShader
+              .includes('outgoingLight += diffuseColor.rgb * chessSkin');
+          };
+          material.customProgramCacheKey = () =>
+            previousCacheKey() + '|chess-avatar-v2-penner-sss-v2-direct-light';
+          material.needsUpdate = true;
+        }
+      });
+
+      return { count: materialNames.length, materialNames, lut, shaderDiagnostics };
+    }
+
+    function prepareV2Materials(root, renderer, environmentIntensity, environmentBlur) {
+      const anisotropy = Math.min(8, Math.max(1, renderer.capabilities.getMaxAnisotropy()));
+      const envMapChunkInclude = '#include <envmap_physical_pars_fragment>';
+      const envMapSample = 'textureCubeUV( envMap, reflectVec, roughness )';
+      const blurredEnvMapSample = 'textureCubeUV( envMap, reflectVec, max( roughness, chessEnvironmentBlur ) )';
+      const envMapChunk = THREE.ShaderChunk.envmap_physical_pars_fragment;
+      if (!envMapChunk.includes(envMapSample)) {
+        throw new Error('Three.js env-map shader changed: unable to install the V2 IBL blur patch');
+      }
+      const blurredEnvMapChunk = envMapChunk.replace(envMapSample, blurredEnvMapSample);
+      const environmentBlurUniform = { value: environmentBlur };
+      const compiledIblBlurMaterials = new Set();
+      const iblBlurDiagnostics = {
+        value: environmentBlur,
+        materialCount: 0,
+        compiledMaterialCount: 0,
+        shaderReplacementCount: 0,
+        target: 'specular IBL roughness only',
+        expression: 'max(roughness, chessEnvironmentBlur)',
+      };
+      let meshCount = 0;
+      let materialCount = 0;
+      let triangleCount = 0;
+      const seen = new Set();
+      root.traverse((object) => {
+        if (!object.isMesh || !object.material) return;
+        meshCount += 1;
+        if (object.geometry?.index) {
+          triangleCount += object.geometry.index.count / 3;
+        } else if (object.geometry?.attributes?.position) {
+          triangleCount += object.geometry.attributes.position.count / 3;
+        }
+        object.frustumCulled = false;
+        object.receiveShadow = true;
+        const materials = Array.isArray(object.material) ? object.material : [object.material];
+        configurePortraitShadowCasting(object, materials.filter(Boolean));
+        for (const material of materials) {
+          if (!material || seen.has(material)) continue;
+          seen.add(material);
+          materialCount += 1;
+          if (material.map) {
+            material.map.colorSpace = THREE.SRGBColorSpace;
+            material.map.anisotropy = anisotropy;
+            material.map.needsUpdate = true;
+          }
+          if (material.emissiveMap) {
+            material.emissiveMap.colorSpace = THREE.SRGBColorSpace;
+            material.emissiveMap.anisotropy = anisotropy;
+            material.emissiveMap.needsUpdate = true;
+          }
+          for (const texture of [
+            material.normalMap,
+            material.roughnessMap,
+            material.metalnessMap,
+            material.aoMap,
+          ]) {
+            if (!texture) continue;
+            texture.colorSpace = THREE.NoColorSpace;
+            texture.anisotropy = anisotropy;
+            texture.needsUpdate = true;
+          }
+          if (material.isMeshStandardMaterial || material.isMeshPhysicalMaterial) {
+            material.envMapIntensity = environmentIntensity;
+            iblBlurDiagnostics.materialCount += 1;
+            const previousCompile = material.onBeforeCompile.bind(material);
+            const previousCacheKey = material.customProgramCacheKey.bind(material);
+            material.onBeforeCompile = (shader, activeRenderer) => {
+              previousCompile(shader, activeRenderer);
+              if (!shader.fragmentShader.includes(envMapChunkInclude)) {
+                throw new Error(
+                  'Three.js material shader changed: missing envmap_physical_pars_fragment include',
+                );
+              }
+              shader.uniforms.chessEnvironmentBlur = environmentBlurUniform;
+              shader.fragmentShader = shader.fragmentShader
+                .replace(
+                  envMapChunkInclude,
+                  'uniform float chessEnvironmentBlur;\n' + blurredEnvMapChunk,
+                );
+              iblBlurDiagnostics.shaderReplacementCount += 1;
+              compiledIblBlurMaterials.add(material.uuid);
+              iblBlurDiagnostics.compiledMaterialCount = compiledIblBlurMaterials.size;
+            };
+            material.customProgramCacheKey = () =>
+              previousCacheKey() + '|chess-avatar-v2-ibl-blur-' + environmentBlur;
+          }
+          material.needsUpdate = true;
+        }
+      });
+      return {
+        meshCount,
+        materialCount,
+        triangleCount,
+        anisotropy,
+        iblBlur: iblBlurDiagnostics,
+      };
+    }
+
+    function isUnsafeTransparentShadowMaterial(material) {
+      const name = material?.name || '';
+      return /hide/i.test(name)
+        || (material?.transparent && material.alphaTest <= 0
+          && /hair|blend|blind|lash|occlusion/i.test(name));
+    }
+
+    function configurePortraitShadowCasting(mesh, materials) {
+      const unsafeIndices = new Set();
+      materials.forEach((material, index) => {
+        if (isUnsafeTransparentShadowMaterial(material)) unsafeIndices.add(index);
+      });
+      mesh.castShadow = materials.some((material) => !isUnsafeTransparentShadowMaterial(material));
+      if (!Array.isArray(mesh.material) || unsafeIndices.size === 0) return;
+      const previousBefore = mesh.onBeforeShadow.bind(mesh);
+      const previousAfter = mesh.onAfterShadow.bind(mesh);
+      mesh.onBeforeShadow = (...args) => {
+        previousBefore(...args);
+        const depthMaterial = args[5];
+        const group = args[6];
+        if (!unsafeIndices.has(group?.materialIndex ?? -1)) return;
+        depthMaterial.userData.chessPortraitShadowWriteState = {
+          colorWrite: depthMaterial.colorWrite,
+          depthWrite: depthMaterial.depthWrite,
+        };
+        depthMaterial.colorWrite = false;
+        depthMaterial.depthWrite = false;
+      };
+      mesh.onAfterShadow = (...args) => {
+        const depthMaterial = args[5];
+        const state = depthMaterial.userData.chessPortraitShadowWriteState;
+        if (state) {
+          depthMaterial.colorWrite = state.colorWrite;
+          depthMaterial.depthWrite = state.depthWrite;
+          delete depthMaterial.userData.chessPortraitShadowWriteState;
+        }
+        previousAfter(...args);
+      };
+    }
+
+    function createStudioBackdrop(colorValue, strength) {
+      if (strength <= 0) return new THREE.Color(colorValue);
+      const color = new THREE.Color(colorValue);
+      const canvas = document.createElement('canvas');
+      canvas.width = 512;
+      canvas.height = 512;
+      const context = canvas.getContext('2d');
+      const center = color.clone().lerp(new THREE.Color('#ffffff'), strength * 0.08);
+      const edge = color.clone().lerp(new THREE.Color('#28302d'), strength * 0.42);
+      const gradient = context.createRadialGradient(256, 218, 36, 256, 256, 390);
+      gradient.addColorStop(0, '#' + center.getHexString());
+      gradient.addColorStop(0.58, '#' + color.getHexString());
+      gradient.addColorStop(1, '#' + edge.getHexString());
+      context.fillStyle = gradient;
+      context.fillRect(0, 0, 512, 512);
+      const texture = new THREE.CanvasTexture(canvas);
+      texture.colorSpace = THREE.SRGBColorSpace;
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.generateMipmaps = false;
+      return texture;
+    }
+
+    function splitTrackName(name) {
+      const dot = name.lastIndexOf('.');
+      if (dot === -1) return { nodeName: name, property: '' };
+      return { nodeName: name.slice(0, dot), property: name.slice(dot + 1) };
+    }
+
+    function isStaticTrack(track) {
+      const stride = track.getValueSize();
+      if (!stride || track.values.length <= stride) return true;
+      for (let i = stride; i < track.values.length; i++) {
+        if (Math.abs(track.values[i] - track.values[i % stride]) > 1e-6) return false;
+      }
+      return true;
+    }
+
+    const FRONTAL_BIND_POSITION_BONE = /^(CC_Base_BoneRoot|CC_Base_Hip|CC_Base_Pelvis|root|pelvis)$/i;
+    const FRONTAL_BIND_ROTATION_BONE = /^(CC_Base_Head|CC_Base_(Spine\d*|Waist|Pelvis)|head|neck_0\d|spine_0\d|pelvis)$/i;
+
+    function portraitBodyPoseSource(id) {
+      return id === 'magnus' || id === 'arjun' ? 'frontal-bind' : 'authored-frame-0';
+    }
+
+    function sanitizeIdleClip(clip, id) {
+      const removed = [];
+      const sceneRoot = /^(root|root\.001)$/i;
+      const trs = /^(position|quaternion|rotation|scale)$/;
+      const tracks = clip.tracks.filter((track) => {
+        const parsed = splitTrackName(track.name);
+        const stripStaticSceneRoot = sceneRoot.test(parsed.nodeName)
+          && trs.test(parsed.property)
+          && isStaticTrack(track);
+        const frontalBind = portraitBodyPoseSource(id) === 'frontal-bind';
+        const stripFrontalPosition = frontalBind
+          && parsed.property === 'position'
+          && FRONTAL_BIND_POSITION_BONE.test(parsed.nodeName);
+        const stripFrontalRotation = frontalBind
+          && (parsed.property === 'quaternion' || parsed.property === 'rotation')
+          && FRONTAL_BIND_ROTATION_BONE.test(parsed.nodeName);
+        const strip = stripStaticSceneRoot || stripFrontalPosition || stripFrontalRotation;
+        if (strip) removed.push(track.name);
+        return !strip;
+      });
+      return {
+        clip: new THREE.AnimationClip(clip.name, clip.duration, tracks),
+        removed,
+        bodyPoseSource: portraitBodyPoseSource(id),
+      };
+    }
+
+    function applyIdlePose(root, clips, idleTime, id) {
+      if (!clips?.length || idleTime === undefined) return { removed: [], clip: null };
+      const source = clips.find((clip) => clip.name.toLowerCase().includes('idle')) || clips[0];
+      const sanitized = sanitizeIdleClip(source, id);
+      const mixer = new THREE.AnimationMixer(root);
+      const action = mixer.clipAction(sanitized.clip);
+      action.play();
+      mixer.setTime(Math.max(0, idleTime));
+      mixer.update(0);
+      root.updateMatrixWorld(true);
+      return {
+        removed: sanitized.removed,
+        clip: source.name,
+        bodyPoseSource: sanitized.bodyPoseSource,
+      };
+    }
+
+    function applyHeadPose(root, yawDegrees, pitchDegrees) {
+      let bone = null;
+      root.traverse((object) => {
+        if (!bone && /^(head|CC_Base_Head)$/i.test(object.name)) bone = object;
+      });
+      if (!bone) fail('Could not find the portrait head bone');
+      bone.updateWorldMatrix(true, false);
+      const parentWorld = new THREE.Quaternion();
+      (bone.parent || bone).getWorldQuaternion(parentWorld);
+      const toParent = parentWorld.clone().invert();
+      const yawAxis = new THREE.Vector3(0, 1, 0).applyQuaternion(toParent).normalize();
+      const pitchAxis = new THREE.Vector3(1, 0, 0).applyQuaternion(toParent).normalize();
+      const yawQuat = new THREE.Quaternion().setFromAxisAngle(
+        yawAxis,
+        THREE.MathUtils.degToRad(yawDegrees),
+      );
+      const pitchQuat = new THREE.Quaternion().setFromAxisAngle(
+        pitchAxis,
+        THREE.MathUtils.degToRad(pitchDegrees),
+      );
+      bone.quaternion.copy(yawQuat.multiply(pitchQuat).multiply(bone.quaternion.clone()));
+      root.updateMatrixWorld(true);
+      return { bone: bone.name, yawDegrees, pitchDegrees };
+    }
+
+    function applyPoseMorphs(root, poseSpec) {
+      const applied = [];
+      if (!poseSpec) return applied;
+      const entries = poseSpec.split(',').map((part) => {
+        const separator = part.lastIndexOf(':');
+        if (separator === -1) return ['', Number.NaN];
+        return [part.slice(0, separator), Number(part.slice(separator + 1))];
+      }).filter(([name, value]) => name && Number.isFinite(value));
+      root.traverse((object) => {
+        if (!object.isMesh || !object.morphTargetDictionary || !object.morphTargetInfluences) return;
+        for (const [name, value] of entries) {
+          const index = object.morphTargetDictionary[name];
+          if (index === undefined) continue;
+          const normalized = THREE.MathUtils.clamp(value, 0, 1);
+          object.morphTargetInfluences[index] = normalized;
+          const materials = (Array.isArray(object.material) ? object.material : [object.material])
+            .filter(Boolean)
+            .map((material) => material.name || '(unnamed)');
+          applied.push({ mesh: object.name, materials, name, value: normalized });
+        }
+      });
+      return applied;
+    }
+
+    const SMILE_RECIPE = {
+      Mouth_Corner_Pull_L: 0.55,
+      Mouth_Corner_Pull_R: 0.5,
+      Mouth_Corner_Up_L: 0.2,
+      Mouth_Corner_Up_R: 0.18,
+      Mouth_Dimple_L: 0.25,
+      Mouth_Dimple_R: 0.22,
+      Eye_Cheek_Raise_L: 0.35,
+      Eye_Cheek_Raise_R: 0.32,
+      Brow_Raise_In_L: 0.15,
+      Brow_Raise_In_R: 0.13,
+      Brow_Raise_Outer_L: 0.1,
+      Brow_Raise_Outer_R: 0.08,
+    };
+
+    function normalizeMorph(name) {
+      return name.replace(/^CTRL_expressions_?/i, '').replace(/_/g, '').toLowerCase();
+    }
+
+    function applySmile(root, intensity) {
+      const applied = [];
+      if (!(intensity > 0) || !Number.isFinite(intensity)) return applied;
+      const wanted = new Map(
+        Object.entries(SMILE_RECIPE).map(([name, weight]) => [normalizeMorph(name), weight]),
+      );
+      root.traverse((object) => {
+        if (!object.isMesh || !object.morphTargetDictionary || !object.morphTargetInfluences) return;
+        for (const [name, index] of Object.entries(object.morphTargetDictionary)) {
+          const weight = wanted.get(normalizeMorph(name));
+          if (weight === undefined) continue;
+          const value = THREE.MathUtils.clamp(weight * intensity, 0, 1);
+          object.morphTargetInfluences[index] = Math.max(
+            object.morphTargetInfluences[index] || 0,
+            value,
+          );
+          applied.push({ mesh: object.name, name, value });
+        }
+      });
+      return applied;
+    }
+
+    function resetEyeMorphs(root) {
+      root.traverse((object) => {
+        if (!object.isMesh || !object.morphTargetDictionary || !object.morphTargetInfluences) return;
+        for (const name of Object.keys(object.morphTargetDictionary)) {
+          const normalized = normalizeMorph(name);
+          const isGaze = /^eyelook(?:up|down|left|right)/i.test(normalized)
+            || /^eye_(?:look_)?(?:up|down|left|right)/i.test(name);
+          if (!isGaze) continue;
+          object.morphTargetInfluences[object.morphTargetDictionary[name]] = 0;
+        }
+      });
+    }
+
+    function collectMorphDiagnostics(root) {
+      const unique = new Set();
+      const meshes = [];
+      const nonZero = new Map();
+      root.traverse((object) => {
+        if (!object.isMesh || !object.morphTargetDictionary || !object.morphTargetInfluences) return;
+        const names = Object.keys(object.morphTargetDictionary);
+        names.forEach((name) => unique.add(name));
+        for (const [name, index] of Object.entries(object.morphTargetDictionary)) {
+          const value = object.morphTargetInfluences[index] || 0;
+          if (Math.abs(value) > 1e-4 && Math.abs(value) > Math.abs(nonZero.get(name) || 0)) {
+            nonZero.set(name, value);
+          }
+        }
+        meshes.push({
+          name: object.name,
+          morphCount: object.morphTargetInfluences.length,
+          dictionaryCount: names.length,
+        });
+      });
+      return {
+        uniqueChannelCount: unique.size,
+        meshes,
+        nonZero: Array.from(nonZero, ([name, value]) => ({ name, value })),
+      };
+    }
+
+    function frameCharacter(root, config, camera, lookAt) {
+      root.position.set(0, 0, 0);
+      root.rotation.set(0, THREE.MathUtils.degToRad(config.modelYawDegrees || 0), 0);
+      root.scale.setScalar(config.modelScale);
+      root.updateMatrixWorld(true);
+      const initialBounds = new THREE.Box3().setFromObject(root);
+      const target = new THREE.Vector3().fromArray(lookAt);
+      const cameraDistance = camera.position.distanceTo(target);
+      const visibleHalfHeight = Math.tan(THREE.MathUtils.degToRad(camera.fov / 2))
+        * cameraDistance;
+      const visibleTop = target.y + visibleHalfHeight;
+      const targetTop = visibleTop - config.topInsetWorld;
+      root.position.y = targetTop - initialBounds.max.y + config.portraitCropBias;
+      root.position.x = config.horizontalOffset;
+      root.updateMatrixWorld(true);
+      const bounds = new THREE.Box3().setFromObject(root);
+      return {
+        min: bounds.min.toArray(),
+        max: bounds.max.toArray(),
+        modelScale: config.modelScale,
+        topInsetWorld: config.topInsetWorld,
+        portraitCropBias: config.portraitCropBias,
+        horizontalOffset: config.horizontalOffset,
+        modelYawDegrees: config.modelYawDegrees || 0,
+      };
+    }
+
+    function createGradedDataUrl(sourceCanvas, grade) {
+      const output = document.createElement('canvas');
+      output.width = WIDTH;
+      output.height = HEIGHT;
+      const context = output.getContext('2d', { alpha: true });
+      if (!context) throw new Error('2D color-grade canvas is unavailable');
+      context.filter = [
+        'brightness(' + grade.brightness + '%)',
+        'contrast(' + APPLIED_CSS_CONTRAST_PERCENT + '%)',
+        'saturate(' + grade.saturation + '%)',
+      ].join(' ');
+      context.drawImage(sourceCanvas, 0, 0, WIDTH, HEIGHT);
+      return output.toDataURL('image/png');
+    }
+
+    try {
+      const look = requireExactLook(await fetch(LOOK_URL).then((response) => {
+        if (!response.ok) throw new Error('Could not load ' + LOOK_URL + ': HTTP ' + response.status);
+        return response.json();
+      }));
+
+      const canvas = document.getElementById('portrait');
+      const renderer = new THREE.WebGLRenderer({
+        canvas,
+        antialias: false,
+        alpha: false,
+        preserveDrawingBuffer: true,
+        powerPreference: 'high-performance',
+      });
+      renderer.setPixelRatio(1);
+      renderer.setSize(WIDTH, HEIGHT, false);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = look.renderer.toneMappingExposure;
+      renderer.shadowMap.enabled = Boolean(look.renderer.shadows);
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+      const scene = new THREE.Scene();
+      scene.background = pageCutout
+        ? new THREE.Color(CUTOUT_CHROMA)
+        : createStudioBackdrop(config.bg, studioBackdropStrength);
+
+      const camera = new THREE.PerspectiveCamera(
+        look.camera.fov,
+        WIDTH / HEIGHT,
+        0.01,
+        20,
+      );
+      const cameraTarget = new THREE.Vector3().fromArray(look.camera.lookAt);
+      const sourceCameraPosition = new THREE.Vector3().fromArray(look.camera.position);
+      camera.position.copy(cameraTarget).add(
+        sourceCameraPosition.clone().sub(cameraTarget).multiplyScalar(1 / presentationZoom),
+      );
+      camera.lookAt(cameraTarget);
+      camera.updateMatrixWorld(true);
+
+      const lightRig = addExactLightRig(scene, look);
+
+      const dracoLoader = new DRACOLoader();
+      dracoLoader.setDecoderPath('/draco/');
+      await MeshoptDecoder.ready;
+      const loader = new GLTFLoader();
+      loader.setDRACOLoader(dracoLoader);
+      loader.setMeshoptDecoder(MeshoptDecoder);
+
+      const pmremGenerator = new THREE.PMREMGenerator(renderer);
+      pmremGenerator.compileEquirectangularShader();
+      const [environmentTexture, modelGltf, animGltf] = await Promise.all([
+        new RGBELoader().loadAsync(ENVIRONMENT_URL),
+        loader.loadAsync(config.model),
+        loader.loadAsync(config.idle),
+      ]);
+      const environmentTarget = pmremGenerator.fromEquirectangular(environmentTexture);
+      scene.environment = environmentTarget.texture;
+      scene.environmentIntensity = look.environment.intensity;
+      environmentTexture.dispose();
+      pmremGenerator.dispose();
+
+      const root = modelGltf.scene;
+      if (hidePattern) {
+        root.traverse((object) => {
+          if (object.isMesh && hidePattern.test(object.name)) object.visible = false;
+        });
+      }
+
+      const idleDiagnostics = applyIdlePose(root, animGltf.animations, config.idleTime || 0, coachId);
+      resetEyeMorphs(root);
+      const smileIntensity = params.get('smile') !== null ? Number(params.get('smile')) : 1.2;
+      const smileDiagnostics = applySmile(root, smileIntensity);
+      const poseDiagnostics = applyPoseMorphs(root, params.get('pose'));
+      const framingDiagnostics = frameCharacter(root, config, camera, look.camera.lookAt);
+      const headPoseDiagnostics = applyHeadPose(
+        root,
+        THREE.MathUtils.clamp(finiteParam('headYaw', 0), -20, 20),
+        THREE.MathUtils.clamp(finiteParam('headPitch', 0), -15, 15),
+      );
+      const materialDiagnostics = prepareV2Materials(
+        root,
+        renderer,
+        look.environment.intensity,
+        requestedIblFloor ?? look.environment.blur,
+      );
+      const skinDiagnostics = applyPennerSkin(root, look);
+      const morphDiagnostics = collectMorphDiagnostics(root);
+      scene.add(root);
+
+      const composer = new EffectComposer(renderer);
+      composer.setSize(WIDTH, HEIGHT);
+
+      const ao = look.postProcessing.ambientOcclusion;
+      const n8ao = new N8AOPass(scene, camera, WIDTH, HEIGHT);
+      n8ao.setQualityMode('Medium');
+      n8ao.configuration.aoRadius = ao.aoRadius;
+      n8ao.configuration.distanceFalloff = 1;
+      n8ao.configuration.intensity = ao.intensity;
+      n8ao.configuration.halfRes = ao.halfRes;
+      n8ao.configuration.gammaCorrection = false;
+      composer.addPass(n8ao);
+
+      const bloom = look.postProcessing.bloom;
+      const vignette = look.postProcessing.vignette;
+      if (!pageCutout) {
+        const bloomPass = new UnrealBloomPass(
+          new THREE.Vector2(WIDTH, HEIGHT),
+          bloom.intensity,
+          0.85,
+          bloom.luminanceThreshold,
+        );
+        composer.addPass(bloomPass);
+        const vignettePass = new ShaderPass(VIGNETTE_SHADER);
+        vignettePass.uniforms.offset.value = vignette.offset;
+        vignettePass.uniforms.darkness.value = vignette.darkness;
+        composer.addPass(vignettePass);
+      }
+      composer.addPass(new SMAAPass(WIDTH, HEIGHT));
+      composer.addPass(new OutputPass());
+
+      if (typeof renderer.compileAsync === 'function') {
+        await renderer.compileAsync(scene, camera);
+      } else {
+        renderer.compile(scene, camera);
+      }
+      for (let frame = 0; frame < 3; frame++) {
+        composer.render(1 / 60);
+        await new Promise((resolve) => requestAnimationFrame(resolve));
+      }
+
+      window.__PORTRAIT_DIAGNOSTICS__ = {
+        lookSource: LOOK_URL,
+        environment: {
+          source: ENVIRONMENT_URL,
+          preset: look.environment.preset,
+          intensity: look.environment.intensity,
+          blur: look.environment.blur,
+          showAsBackground: look.environment.showAsBackground,
+        },
+        coachId,
+        variant,
+        model: config.model,
+        idle: config.idle,
+        camera: {
+          fov: camera.fov,
+          position: camera.position.toArray(),
+          sourcePosition: look.camera.position,
+          lookAt: look.camera.lookAt,
+          presentationZoom,
+        },
+        studioBackdropStrength,
+        renderer: {
+          toneMapping: look.renderer.toneMapping,
+          exposure: renderer.toneMappingExposure,
+          outputColorSpace: renderer.outputColorSpace,
+          shadows: renderer.shadowMap.enabled,
+          shadowType: 'PCFSoftShadowMap',
+        },
+        lights: {
+          count: lightRig.count,
+          rigRotationDegrees: look.rigRotationDegrees,
+          whiteBalance: look.whiteBalance,
+          values: look.lights,
+        },
+        postProcessing: {
+          n8ao: {
+            aoRadius: n8ao.configuration.aoRadius,
+            intensity: n8ao.configuration.intensity,
+            distanceFalloff: n8ao.configuration.distanceFalloff,
+            halfRes: n8ao.configuration.halfRes,
+            quality: 'Medium',
+          },
+          bloom: {
+            intensity: bloom.intensity,
+            luminanceThreshold: bloom.luminanceThreshold,
+            mipmapBlur: true,
+          },
+          vignette,
+          smaa: true,
+        },
+        colorGrade: {
+          ...look.colorGrade,
+          appliedCssContrastPercent: APPLIED_CSS_CONTRAST_PERCENT,
+          transfer: COLOR_GRADE_TRANSFER,
+        },
+        skin: {
+          technique: look.skinShading.technique,
+          strength: look.skinShading.strength,
+          lutSize: SKIN_LUT_SIZE,
+          materialCount: skinDiagnostics.count,
+          materials: skinDiagnostics.materialNames,
+          ...skinDiagnostics.shaderDiagnostics,
+        },
+        materials: materialDiagnostics,
+        framing: framingDiagnostics,
+        animation: idleDiagnostics,
+        headPose: headPoseDiagnostics,
+        smile: {
+          intensity: smileIntensity,
+          appliedCount: smileDiagnostics.length,
+        },
+        pose: {
+          requested: params.get('pose') || '',
+          applied: poseDiagnostics,
+        },
+        morphTargets: morphDiagnostics,
+        render: {
+          characterTriangles: materialDiagnostics.triangleCount,
+          calls: renderer.info.render.calls,
+          triangles: renderer.info.render.triangles,
+        },
+      };
+      window.__PORTRAIT_DATA_URL__ = createGradedDataUrl(canvas, look.colorGrade);
+      window.__PORTRAIT_READY__ = true;
+    } catch (error) {
+      console.error(error);
+      window.__PORTRAIT_ERROR__ = String(error?.stack || error?.message || error);
+      window.__PORTRAIT_READY__ = true;
+    }
+  </script>
+</body>
+</html>

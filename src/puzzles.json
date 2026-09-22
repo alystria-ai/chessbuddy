@@ -1,0 +1,494 @@
+[
+  {
+    "id": "new-back-rank-rook-mate",
+    "title": "Sneak Down the Back Rank",
+    "positionSummary": "White has a king on g1, a rook on e1, and pawns on f2, g2 and h2. Black has a king on g8, a rook on b5, and pawns on f7, g7 and h7. It is White to move. Black's king is tucked behind its pawns and nothing guards Black's home rank, while the e-file is wide open for White's rook.",
+    "fen": "6k1/5ppp/8/1r6/8/8/5PPP/4R1K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "new",
+    "theme": "Back-rank mate",
+    "solution": [
+      "Re8#"
+    ],
+    "hints": [
+      "Black's king is trapped behind its own wall of pawns. Is anything guarding the row it lives on?",
+      "This is a back-rank mate: slide a major piece all the way onto Black's home rank, where nothing can block or capture it.",
+      "Play Re8 — rook to e8 is checkmate."
+    ],
+    "explanation": "Re8 is checkmate: the rook attacks the king along the eighth rank, and the black king cannot escape because its own pawns on f7, g7 and h7 block every way out. A castled king with no escape square is always in danger of a back-rank mate, so watch that last row in your own games too."
+  },
+  {
+    "id": "new-supported-queen-mate",
+    "title": "Queen and Knight Team Up",
+    "positionSummary": "White has a king on g1, a queen on c3, a knight on f5, and pawns on a2, b2, f2, g3 and h2. Black has a king on g8, a rook on e8, and pawns on a7, b7, f7 and h7. It is White to move. Black's rook guards the back rank, but the king is missing its g7 pawn shield, and White's queen on the long diagonal and knight on f5 both point at that hole.",
+    "fen": "4r1k1/pp3p1p/8/5N2/8/2Q3P1/PP3P1P/6K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "new",
+    "theme": "Supported queen mate",
+    "solution": [
+      "Qg7#"
+    ],
+    "hints": [
+      "There is a hole right in front of the enemy king. Can you land your strongest attacker in that hole — safely?",
+      "This is a supported queen mate: place your queen directly next to the king on a square that your knight protects.",
+      "Play Qg7 — queen to g7 is checkmate, protected by the knight on f5."
+    ],
+    "explanation": "Qg7 is mate because the knight on f5 protects the queen, so the king cannot capture it, and the queen covers f8 and h8 — every square the king could run to. A queen sitting right next to the enemy king, defended by a friend, is one of the most common checkmate patterns in chess."
+  },
+  {
+    "id": "new-free-queen-grab",
+    "title": "Take the Free Queen",
+    "positionSummary": "White has a king on g1, a queen on d5, a bishop on c1, and pawns on a2, b2, c2, f2, g2 and h2. Black has a king on g8, a queen on d8, and pawns on a7, b7, c7, f7, g7 and h7. It is Black to move. The two queens stare at each other down the open d-file, and White's queen on d5 has no defender at all.",
+    "fen": "3q2k1/ppp2ppp/8/3Q4/8/8/PPP2PPP/2B3K1 b - - 0 1",
+    "sideToMove": "b",
+    "difficultyId": "new",
+    "theme": "Hanging piece",
+    "solution": [
+      "Qxd5"
+    ],
+    "hints": [
+      "Before anything else, count the defenders of your opponent's most valuable piece.",
+      "It is simply hanging: White's queen is attacked and has no defender, so you can take it for free.",
+      "Play Qxd5 — take the white queen with your queen."
+    ],
+    "explanation": "White's queen on d5 had no defender, so Qxd5 wins it for nothing — White cannot take back. Before every move, check whether your opponent's last move left something undefended; grabbing free material is the fastest way to win games."
+  },
+  {
+    "id": "new-knight-snags-queen",
+    "title": "Knight Snags the Queen",
+    "positionSummary": "White has a king on g1, a knight on d5, a rook on a1, and pawns on a2, f2, g2 and h2. Black has a king on g8, a queen on e7, and pawns on a7, f7, g7 and h7. It is White to move. Black's queen outguns White's rook and knight, but it has just stepped onto a square the white knight can jump to.",
+    "fen": "6k1/p3qppp/8/3N4/8/8/P4PPP/R5K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "new",
+    "theme": "Winning the queen with check",
+    "solution": [
+      "Nxe7+"
+    ],
+    "hints": [
+      "One of your pieces can grab something huge and shout 'check!' at the very same moment.",
+      "Capture the queen with your knight: because the capture gives check, Black has no time to strike back.",
+      "Play Nxe7 — knight takes the queen on e7, with check."
+    ],
+    "explanation": "Nxe7 grabs the whole queen and gives check at the same time, so Black must deal with the check first and never gets a chance to punish the knight. Captures that come with check are the safest captures of all — your opponent cannot ignore them."
+  },
+  {
+    "id": "new-king-rook-teamwork",
+    "title": "King and Rook Finish",
+    "positionSummary": "White has a king on f6 and a rook on h5. Black has a king on f8 and a single pawn all the way down on a2, just one step from becoming a queen. It is White to move, and it is a race: if White wastes a move, Black promotes that pawn.",
+    "fen": "5k2/8/5K2/7R/8/8/p7/8 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "new",
+    "theme": "Rook mate with king support",
+    "solution": [
+      "Rh8#"
+    ],
+    "hints": [
+      "No time to chase the runaway pawn — you can end the game this very move.",
+      "Your king already guards every square in front of the enemy king, so a rook check on the last rank is mate.",
+      "Play Rh8 — rook to h8 is checkmate."
+    ],
+    "explanation": "Rh8 is checkmate because your king on f6 covers e7, f7 and g7 — all the squares the black king might run to — while the rook seals the entire back rank. This king-and-rook teamwork is the standard way to finish an endgame, and here it also arrives just in time to stop Black's pawn from queening."
+  },
+  {
+    "id": "beginner-royal-knight-fork",
+    "title": "The Royal Knight Fork",
+    "positionSummary": "White has the king on g1, the queen on d2, a rook on a1, a knight on e4, and pawns on a2, b2, c3, f2, g2 and h2. Black has the king on g8, the queen on e8, a rook on a8, a bishop on b6, and pawns on a7, b7, c6, f7, g6 and h7. White to move. Black's queen on e8 stares straight down the e-file at White's knight on e4 — the knight is attacked, but running away is not the best it can do.",
+    "fen": "r3q1k1/pp3p1p/1bp3p1/8/4N3/2P5/PP1Q1PPP/R5K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "beginner",
+    "theme": "Fork",
+    "solution": [
+      "Nf6+",
+      "Kg7",
+      "Nxe8+"
+    ],
+    "hints": [
+      "Your attacked piece doesn't have to retreat — look for a forcing move that creates two threats at once.",
+      "A knight check that also attacks the queen is a royal fork — find the square where the knight hits both.",
+      "Play Nf6+ — the knight checks the king on g8 and attacks the queen on e8 at the same time."
+    ],
+    "explanation": "Nf6+ is a royal fork: the knight attacks the king and the queen at the same time, and nothing can capture it on f6. Black has to move the king and hand over the queen. When one of your pieces is attacked, check the forcing moves first — a check that carries a second threat often wins material."
+  },
+  {
+    "id": "beginner-pinned-rook-pawn-grab",
+    "title": "The Frozen Rook",
+    "positionSummary": "White has the king on g1, a rook on e1, and pawns on a2, b2, d3, f5, g2 and h2. Black has the king on e8, a rook on e6, and pawns on a7, b7, c6, d7, g6 and h7. White to move. Black's rook on e6 sits on the open e-file directly between White's rook on e1 and its own king on e8 — it is pinned to the king, and White's f5 pawn is standing right beside it.",
+    "fen": "4k3/pp1p3p/2p1r1p1/5P2/8/3P4/PP4PP/4R1K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "beginner",
+    "theme": "Pin",
+    "solution": [
+      "fxe6"
+    ],
+    "hints": [
+      "One of the defender's pieces cannot step off the line it stands on — attack it with something cheap.",
+      "The black rook is pinned against its king by your rook — capture the pinned piece with your least valuable attacker.",
+      "Play fxe6 — the pawn captures the pinned rook, and the d7 pawn's recapture wins back only a pawn."
+    ],
+    "explanation": "Because White's rook on e1 lines up with the black king on e8, the rook on e6 is pinned — it can never step off the e-file. That lets the little f5 pawn capture it, winning a whole rook for just a pawn after dxe6. Capture a pinned piece with your cheapest attacker, and the pin does the rest."
+  },
+  {
+    "id": "beginner-long-diagonal-skewer",
+    "title": "Skewer on the Long Diagonal",
+    "positionSummary": "White has the king on d4, a rook on b2, and pawns on a4, c4, g2 and h2. Black has the king on g7, a bishop on e7, and pawns on a5, b6, f7, g6 and h7. Black to move. White's king has marched all the way to d4 — and it now stands on the same long dark diagonal as the white rook on b2, with Black's bishop one step away from exploiting it.",
+    "fen": "8/4bpkp/1p4p1/p7/P1PK4/8/1R4PP/8 b - - 0 1",
+    "sideToMove": "b",
+    "difficultyId": "beginner",
+    "theme": "Skewer",
+    "solution": [
+      "Bf6+",
+      "Kd3",
+      "Bxb2"
+    ],
+    "hints": [
+      "The enemy king has wandered far forward — check whether it lines up with something valuable behind it.",
+      "A bishop check along the long diagonal will skewer the king to the rook standing behind it.",
+      "Play Bf6+ — when the king steps off the diagonal, your bishop captures the rook on b2."
+    ],
+    "explanation": "Bf6+ is a skewer: the king and the rook stand on the same diagonal, and the check forces the king to step aside, letting the bishop scoop up the rook on b2. Whenever a king and a valuable piece share a line, look for a check that collects whatever hides behind the king."
+  },
+  {
+    "id": "beginner-double-check-queen-grab",
+    "title": "Unleash the Double Check",
+    "positionSummary": "White has the king on g1, rooks on a1 and e1, a bishop on b2, a knight on d4, and pawns on a2, b5, f2, g2 and h2. Black has the king on g7, the queen on c7, a rook on a8, and pawns on a6, b7, d6, f7, g6 and h6. White to move. White's knight on d4 stands right in the path of the b2 bishop's long diagonal toward the black king on g7 — moving the knight will unleash a discovered check.",
+    "fen": "r7/1pq2pk1/p2p2pp/1P6/3N4/8/PB3PPP/R3R1K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "beginner",
+    "theme": "Discovered check",
+    "solution": [
+      "Ne6+",
+      "Kg8",
+      "Nxc7"
+    ],
+    "hints": [
+      "One of your pieces is blocking another one's path — moving it can create two attacks in a single move.",
+      "Move the knight to give a discovered check and attack the queen at the same time — a double check cannot be blocked or captured.",
+      "Play Ne6+ — the knight and bishop check together, the king must move, and then the knight takes the queen on c7."
+    ],
+    "explanation": "Ne6+ is a double check: the knight attacks the king while unmasking the bishop on b2. Against a double check nothing can block or capture — the king must move, and the knight is then free to take the queen on c7. A discovered check lets one move deliver two attacks at once."
+  },
+  {
+    "id": "beginner-remove-the-guard",
+    "title": "Chop Down the Bodyguard",
+    "positionSummary": "White has the king on g1, a rook on e1, a bishop on b5, a knight on d2, and pawns on a2, b2, c2, f2, g2 and h2. Black has the king on g8, a rook on d8, a knight on c6, a bishop on e5, and pawns on b7, d4, f4, g7 and h7. White to move. White's rook on e1 stares down the open e-file at Black's bishop on e5 — a bishop guarded by only one piece, the knight on c6.",
+    "fen": "3r2k1/1p4pp/2n5/1B2b3/3p1p2/8/PPPN1PPP/4R1K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "beginner",
+    "theme": "Removing the defender",
+    "solution": [
+      "Bxc6",
+      "bxc6",
+      "Rxe5"
+    ],
+    "hints": [
+      "You would love to capture one enemy piece, but a bodyguard protects it — deal with the bodyguard first.",
+      "The knight on c6 is the only defender of the bishop on e5 — remove the guard, then take the target.",
+      "Play Bxc6 — after the b7 pawn recaptures, your rook takes the bishop on e5 for free."
+    ],
+    "explanation": "The bishop on e5 was protected only by the knight on c6, so Bxc6 removes the defender. After Black recaptures with the pawn, Rxe5 wins a whole piece. Count the attackers and defenders on a target — when it has just one guard, capturing that guard wins the target."
+  },
+  {
+    "id": "int-opera-deflection-mate",
+    "title": "The Opera House Finale",
+    "positionSummary": "This is the finish of the most famous game ever played. White has a king on c1, a queen on b3, rooks on d1 and h1, a bishop on g5, and pawns on a2, b2, c2, e4, f2, g2 and h2. Black has a king on e8, a queen on e6, a knight on d7, a bishop on f8, a rook on h8, and pawns on a7, e5, f7, g7 and h7. It is White to move. Black's knight on d7 is the only guard of the d8 square, and it is badly overloaded.",
+    "fen": "4kb1r/p2n1ppp/4q3/4p1B1/4P3/1Q6/PPP2PPP/2KR3R w k - 0 16",
+    "sideToMove": "w",
+    "difficultyId": "intermediate",
+    "theme": "Deflection sacrifice",
+    "solution": [
+      "Qb8+",
+      "Nxb8",
+      "Rd8#"
+    ],
+    "hints": [
+      "Black's back rank is one guard away from collapsing. Which black piece is doing too many jobs at once?",
+      "This is a deflection: sacrifice your queen to drag the knight away from the square your rook wants.",
+      "Play Qb8 with check. After the knight takes, Rd8 is mate — the bishop on g5 guards the mating square."
+    ],
+    "explanation": "Qb8 forces Nxb8 — the knight is the only piece that can deal with the check — and with the knight deflected, Rd8 is checkmate, supported by the bishop on g5. This is Morphy's Opera Game: when a defender is overloaded, a sacrifice can rip it away from its most important duty."
+  },
+  {
+    "id": "int-pawn-fork-double-attack",
+    "title": "One Pawn, Two Majors",
+    "positionSummary": "White has a king on g1, a queen on d1, a rook on f1, a knight on c3, and pawns on a2, b2, d4, f2, g2 and h2. Black has a king on g8, a queen on e6, rooks on c6 and f8, and pawns on a7, b7, f7, g7 and h7. It is White to move. Black's queen and rook both stand one diagonal step ahead of White's d4 pawn.",
+    "fen": "5rk1/pp3ppp/2r1q3/8/3P4/2N5/PP3PPP/3Q1RK1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "intermediate",
+    "theme": "Pawn fork",
+    "solution": [
+      "d5",
+      "Qf6",
+      "dxc6"
+    ],
+    "hints": [
+      "Your least valuable soldier is staring at two of Black's most valuable pieces.",
+      "This is a pawn fork: push the pawn one square and it attacks the queen and the rook at the same time.",
+      "Play d5. The queen must step away, and then the pawn simply captures the rook on c6."
+    ],
+    "explanation": "d5 forks the queen on e6 and the rook on c6, and no single move saves both. The queen has to step aside, and dxc6 wins a whole rook. When one pawn attacks two pieces at once, something valuable always falls."
+  },
+  {
+    "id": "int-rank-skewer",
+    "title": "Check First, Collect Later",
+    "positionSummary": "An endgame where White has a king on g1, a rook on a1, a bishop on f1, and pawns on b2, f2, g2 and h2. Black has a king on b6, a queen on g6, and pawns on f7 and h7. It is White to move. Black's king and queen stand on the same rank — and White's bishop on f1 quietly watches the a6 square from across the board.",
+    "fen": "8/5p1p/1k4q1/8/8/8/1P3PPP/R4BK1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "intermediate",
+    "theme": "Skewer",
+    "solution": [
+      "Ra6+",
+      "Kb7",
+      "Rxg6"
+    ],
+    "hints": [
+      "The black king and queen share the sixth rank. What happens if the king is forced to step off it?",
+      "This is a skewer: check the king along the rank so that when it moves, your rook sees straight through to the queen. Your bishop guards the checking square.",
+      "Play Ra6 with check — the king cannot capture because the f1 bishop defends the rook — and then take the queen on g6."
+    ],
+    "explanation": "Ra6 is check, and the king cannot take the rook because the bishop on f1 defends a6 all the way from the other wing. Once the king steps off the rank, Rxg6 collects the queen. A skewer is a pin in reverse: the valuable piece is forced to move first, and whatever stood behind it is lost."
+  },
+  {
+    "id": "int-black-zwischenzug-fork",
+    "title": "The Attacked Queen Strikes Back",
+    "positionSummary": "White has a king on g1, a queen on d1, a rook on a1, a knight on b1, and pawns on a2, b2, d2, f4, g2 and h2. Black has a king on g8, a queen on e5, a knight on e4, a bishop on a6, and pawns on a7, b7, f7, g7 and h7. It is Black to move - and Black's queen on e5 is attacked by White's f4 pawn. Running away is not the only option.",
+    "fen": "6k1/pp3ppp/b7/4q3/4nP2/8/PP1P2PP/RN1Q2K1 b - - 0 1",
+    "sideToMove": "b",
+    "difficultyId": "intermediate",
+    "theme": "Zwischenzug fork",
+    "solution": [
+      "Qd4+",
+      "Kh1",
+      "Nf2+"
+    ],
+    "hints": [
+      "Your queen is attacked — but a move that gives check does not have to ask permission.",
+      "This is a zwischenzug into a knight fork: step the queen away WITH check, and the king will be forced onto the forking square's diagonal.",
+      "Play Qd4 with check. The bishop on a6 covers f1 and White's own d2 pawn blocks the queen's defense, so the king must go to h1 - then Nf2 forks king and queen."
+    ],
+    "explanation": "Qd4 saves the attacked queen with check, and the king cannot go to f1 because your bishop on a6 covers it. Once the king is shoved to h1, Nf2 forks king and queen and wins her. When one of your pieces is attacked, always look for an answer that comes with check — a threat that outranks theirs."
+  },
+  {
+    "id": "int-check-and-collect",
+    "title": "The Check That Robs",
+    "positionSummary": "White has a king on g1, a queen on d1, rooks on a1 and f1, a bishop on c1, knights on c3 and f3, and pawns on a2, b2, d4, e4, g2 and h2. Black has a king on e8, a queen on d8, rooks on a8 and h8, bishops on b4 and c8, a knight on f6, and pawns on a7, b7, c7, e6, f7 and g7. It is White to move. Black's dark-squared bishop ventured out to b4 - and nothing defends it, while Black's king still sits in the center.",
+    "fen": "r1bqk2r/ppp2pp1/4pn2/8/1b1PP3/2N2N2/PP4PP/R1BQ1RK1 w kq - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "intermediate",
+    "theme": "Double attack",
+    "solution": [
+      "Qa4+",
+      "Nd7",
+      "Qxb4"
+    ],
+    "hints": [
+      "Black's bishop on b4 is all alone. Is there a way to attack it and something even more important at the same time?",
+      "This is a double attack by check: one queen move gives check on the open diagonal and attacks the loose bishop.",
+      "Play Qa4 with check. Black must answer the check first, and then the queen takes the bishop on b4."
+    ],
+    "explanation": "Qa4 gives check along the wide-open diagonal and attacks the undefended bishop on b4 at the same time. Black has to deal with the check - blocking is best - and then Qxb4 pockets a whole bishop. A check is the strongest kind of double attack: your opponent never gets a turn to save the second target."
+  },
+  {
+    "id": "adv-philidor-smothered",
+    "title": "The Queen Gives, the Knight Takes",
+    "positionSummary": "White has a king on g1, a queen on c4, a knight on h6, and pawns on a2, b2, f2, g2 and h2. Black has a king on h8, a rook on f8, a queen on a5, and pawns on a7, g7 and h7. It is White to move. Black's king is jammed in the corner behind its own pawns, and White's knight already sits in the heart of the position.",
+    "fen": "5r1k/p5pp/7N/q7/2Q5/8/PP3PPP/6K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "advanced",
+    "theme": "Smothered mate",
+    "solution": [
+      "Qg8+",
+      "Rxg8",
+      "Nf7#"
+    ],
+    "hints": [
+      "The king is boxed in by its own pieces. What would happen if EVERY square around it were blocked?",
+      "This is Philidor's smothered mate: sacrifice the queen to force the rook to seal the king's last breathing square, then the knight delivers mate alone.",
+      "Play Qg8 with check - the rook must take, and then Nf7 is checkmate."
+    ],
+    "explanation": "Qg8 cannot be taken by the king because the knight on h6 guards g8, so Rxg8 is forced - and now the king is completely smothered by its own rook and pawns. Nf7 is checkmate: a knight check can never be blocked, and there is nowhere to run. The full sequence is called Philidor's Legacy, and it is the most famous knight mate in chess."
+  },
+  {
+    "id": "adv-damiano-ladder",
+    "title": "The Rook Clears the Road",
+    "positionSummary": "White has a king on g1, a queen on d1, a rook on h1, and pawns on a2, b2, c2, f2 and g6. Black has a king on g8, a rook on f8, a queen on a3, and pawns on a7, b7, f7 and g7. It is White to move. The h-file is wide open, White's pawn wedge on g6 clamps the king's shelter, and Black's queen is a whole board away from the defense.",
+    "fen": "5rk1/pp3pp1/6P1/8/8/q7/PPP2P2/3Q2KR w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "advanced",
+    "theme": "Damiano's mate",
+    "solution": [
+      "Rh8+",
+      "Kxh8",
+      "Qh5+",
+      "Kg8",
+      "Qh7#"
+    ],
+    "hints": [
+      "The h-file is open and your pawn on g6 already fixes the king in place. Who gets to use that file first?",
+      "This is Damiano's mate: sacrifice the rook on h8 to drag the king onto the file, then the queen arrives with check and walks down to h7.",
+      "Play Rh8 with check. After the king takes, Qh5 check, the king returns, and Qh7 is mate - guarded by the g6 pawn."
+    ],
+    "explanation": "Rh8 is a pure decoy: the king must take, and Qh5 drags it back with check. Then Qh7 is mate - the queen is protected by the pawn on g6, and the king's own rook and pawns seal every other square. Damiano published this rook-sacrifice ladder in 1512, and it still wins games today: an open rook file plus a pawn on g6 is usually worth more than a rook."
+  },
+  {
+    "id": "adv-boden-crisscross",
+    "title": "Two Bishops, One Cross",
+    "positionSummary": "White has a king on g1, a queen on a4, bishops on d3 and f4, and pawns on a2, b2, f2, g2 and h2. Black has a king on c8, rooks on d8 and h8, a knight on d7, and pawns on a7, b7, c6, f7, g7 and h7. It is White to move. Black castled long, and the two white bishops slice across the board toward that corner from opposite directions.",
+    "fen": "2kr3r/pp1n1ppp/2p5/8/Q4B2/3B4/PP3PPP/6K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "advanced",
+    "theme": "Boden's mate",
+    "solution": [
+      "Qxc6+",
+      "bxc6",
+      "Ba6#"
+    ],
+    "hints": [
+      "The queenside castle looks solid - but count what actually guards the squares around the king once the pawns are disturbed.",
+      "This is Boden's mate: sacrifice the queen to drag the b-pawn open, and the two bishops mate on criss-crossing diagonals.",
+      "Play Qxc6 with check. The pawn must recapture, and then Ba6 is checkmate."
+    ],
+    "explanation": "Qxc6 is a full queen sacrifice: bxc6 is forced because the king has no square - b8 is covered by the bishop on f4. And once the b7 pawn leaves, Ba6 is mate: the light bishop attacks along the freshly opened diagonal while the dark bishop covers b8 and c7, and the king's own rook and knight seal d8 and d7. Two bishops crossing at the corner: Boden's mate."
+  },
+  {
+    "id": "adv-pawn-breakthrough",
+    "title": "Three Pawns Crack the Wall",
+    "positionSummary": "A pure pawn endgame. White has a king on g1 and pawns on a5, b5 and c5. Black has a king on h7 and pawns on a7, b7 and c7. It is White to move. The two pawn chains face each other on the queenside, and both kings are far away on the other wing - whoever queens first wins.",
+    "fen": "8/ppp4k/8/PPP5/8/8/8/6K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "advanced",
+    "theme": "Pawn breakthrough",
+    "solution": [
+      "b6"
+    ],
+    "hints": [
+      "Neither king can reach the queenside in time. Can your pawns force a path through by themselves?",
+      "This is the classic three-versus-three breakthrough: offer the middle pawn so that whichever way Black captures, an outside pawn runs through.",
+      "Play b6. Whichever way Black answers, one of your outside pawns runs through to promote."
+    ],
+    "explanation": "b6 is the textbook breakthrough. If cxb6, then a6! bxa6 c6 and the c-pawn queens; if axb6, then c6! bxc6 a6 mirrors it with the a-pawn; and if Black declines, the pawn simply eats into the chain. The defending king on h7 is outside the square of every runner - three pawns against three can force a queen all by themselves, but only if you offer the middle one first."
+  },
+  {
+    "id": "adv-desperado-rook-fork",
+    "title": "The Rook That Would Not Die Quietly",
+    "positionSummary": "A sharp endgame. White has a king on e4, a rook on d1, a bishop on c2, and pawns on a5, f2 and g3. Black has a king on h5, a queen on b5, and pawns on a7 and h6. It is White to move. Black's queen normally beats a rook and bishop - but right now both black royals stand on the same rank, and White's king guards the square between them.",
+    "fen": "8/p7/7p/Pq5k/4K3/6P1/2B2P2/3R4 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "advanced",
+    "theme": "Rook fork",
+    "solution": [
+      "Rd5+",
+      "Qxd5+",
+      "Kxd5"
+    ],
+    "hints": [
+      "The black king and queen share the fifth rank. Is there a protected square between them?",
+      "This is a rook fork backed by your king: land the rook where it checks the king and attacks the queen at once - she can take it, but only at a terrible price.",
+      "Play Rd5 with check. The queen's best try is to capture, and your king simply takes her back."
+    ],
+    "explanation": "Rd5 attacks king and queen along the same rank, and the rook is guarded by your own king - so Qxd5+ Kxd5 just trades the queen for the rook, leaving you a whole bishop ahead in the pawn endgame that follows. When your king stands close enough to protect the forking square, even a queen has no good answer."
+  },
+  {
+    "id": "expert-knight-promotion-fork",
+    "title": "The Knight Says No",
+    "positionSummary": "White has only a king on g1 and pawns on e7, b5, f2, g2 and h2 — but that e7 pawn is one step from queening. Black has a king on g7, a queen on d6, and pawns on a7 and h5. Black threatens checkmate on d1, so a routine promotion loses on the spot. White to move must find the one promotion that saves everything.",
+    "fen": "8/p3P1k1/3q4/1P5p/8/8/5PPP/6K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "expert",
+    "theme": "Underpromotion",
+    "solution": [
+      "e8=N+",
+      "Kf8",
+      "Nxd6"
+    ],
+    "hints": [
+      "A new queen walks straight into disaster — think smaller.",
+      "An underpromotion with check forks two targets at once.",
+      "Promote to a knight: e8=N+ forks the king and queen."
+    ],
+    "explanation": "Promoting to a queen fails because the new queen gives no check, and Black crashes through with Qd1+ and mates on the bottom rank. The knight promotion checks the king on g7 and simultaneously forks the queen on d6, so after the king steps away White captures the queen and wins easily with the extra piece and pawns."
+  },
+  {
+    "id": "expert-double-check-demolition",
+    "title": "Two Checks, No Answers",
+    "positionSummary": "From a famous miniature: White has the king on c1, queen on d3, rooks on d1 and h1, bishops on d2 and f1, a knight on g1, and pawns on a2, b2, c2, f2, g2 and h2. Black has the king on e8, queen on e5, rooks on a8 and h8, bishops on c8 and f8, knights on b8 and e4, and pawns on a7, b7, c6, f7, g7 and h7. Black just grabbed a knight on e4 and attacks d2 — but Black's king is still in the center, and White has a stunning queen sacrifice.",
+    "fen": "rnb1kb1r/pp3ppp/2p5/4q3/4n3/3Q4/PPPB1PPP/2KR1BNR w kq - 0 9",
+    "sideToMove": "w",
+    "difficultyId": "expert",
+    "theme": "Double check",
+    "solution": [
+      "Qd8+",
+      "Kxd8",
+      "Bg5+",
+      "Kc7",
+      "Bd8#"
+    ],
+    "hints": [
+      "The most forcing move in chess is a check the king must swallow.",
+      "Sacrifice the queen to drag the king onto a double-check square.",
+      "Play Qd8+: after Kxd8, Bg5+ is double check and Bd8 is mate."
+    ],
+    "explanation": "The queen sacrifice on d8 drags the king onto the d-file, where Bg5 delivers double check from bishop and rook at once. Against double check the king must move, so Black cannot block or capture, and after Kc7 the bishop returns with Bd8, a picturesque mate supported by the rook."
+  },
+  {
+    "id": "expert-quiet-pawn-noose",
+    "title": "The Quiet Pawn Tightens",
+    "positionSummary": "White has the king on g1, queen on f6, rook on f1, and pawns on a2, d4, f2, g2 and h5. Black has the king on g8, queen on a3, rook on f8, and pawns on a7, b7, f7, g6 and h7. White's queen is already camped on f6, but g7 is not yet a mating square — no capture or check wins here. One silent pawn move builds an unstoppable mating net.",
+    "fen": "5rk1/pp3p1p/5Qp1/7P/3P4/q7/P4PP1/5RK1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "expert",
+    "theme": "Quiet move",
+    "solution": [
+      "h6",
+      "Qd6",
+      "Qg7#"
+    ],
+    "hints": [
+      "The winning move makes no capture and gives no check.",
+      "A quiet pawn advance supports an unstoppable mate on g7.",
+      "Push h6: nothing can prevent Qg7 mate next move."
+    ],
+    "explanation": "The modest pawn push to h6 gives the queen a protected home on g7, and Black has no checks and no way to defend that square. Whatever Black tries, Qg7 next move is mate — a reminder that the deadliest moves are sometimes the quietest."
+  },
+  {
+    "id": "expert-windmill-harvest",
+    "title": "Windmill in Motion",
+    "positionSummary": "White has the king on g1, a rook on g7, a bishop on f6, and pawns on a2, e5, f2, g2 and h2. Black has the king on h8, queen on h5, rook on f8, bishop on f7, and pawns on a6 and b5. Black's queen eyes d1 with mating threats, so White has no time for quiet play — but the rook and bishop battery on the g-file and long diagonal can start a devastating windmill of discovered checks.",
+    "fen": "5r1k/5bR1/p4B2/1p2P2q/8/8/P4PPP/6K1 w - - 0 1",
+    "sideToMove": "w",
+    "difficultyId": "expert",
+    "theme": "Windmill",
+    "solution": [
+      "Rxf7+",
+      "Kg8",
+      "Rg7+"
+    ],
+    "hints": [
+      "Keep checking — the rook can feast while the king shuffles.",
+      "A windmill: a discovered check lets the rook grab material for free.",
+      "Take the bishop on f7 with the rook, then return to g7 with check."
+    ],
+    "explanation": "When the rook leaves g7 it unleashes a discovered check from the bishop on f6, so capturing the bishop on f7 costs Black a whole piece for free — and only that capture keeps h7 covered so the king cannot slip out. With the rook back on g7 the windmill battery is rebuilt, and Black is helpless against the follow-up swing to g5, which wins the queen on h5 with another discovered check."
+  },
+  {
+    "id": "expert-smothered-counterblow",
+    "title": "Mated Out of Nowhere",
+    "positionSummary": "White has the king on g1, queen on h6, rook on f1, bishop on b2, and pawns on a2, d6, g2 and h2. Black has the king on g8, queen on b6, rook on a8, a knight on f2, and pawns on a7, f7, g7 and h7. White threatens Qxg7 checkmate, supported by the bishop, and Black's knight looks lost — but it is Black to move, and a queen-and-knight battery aimed at g1 turns the tables completely.",
+    "fen": "r5k1/p4ppp/1q1P3Q/8/8/8/PB3nPP/5RK1 b - - 0 1",
+    "sideToMove": "b",
+    "difficultyId": "expert",
+    "theme": "Counterattack",
+    "solution": [
+      "Nh3+",
+      "Kh1",
+      "Qg1+",
+      "Rxg1",
+      "Nf2#"
+    ],
+    "hints": [
+      "White mates next move — so Black must never stop checking.",
+      "A double check opens the door to a classic smothered mate.",
+      "Play Nh3+, then sacrifice the queen on g1 and mate with Nf2."
+    ],
+    "explanation": "The knight leap to h3 is double check — the knight hits g1 while the queen's diagonal to g1 opens — so White cannot capture with the pawn and must play Kh1. Then the queen sacrifice on g1 forces Rxg1, sealing the king in its own box, and Nf2 delivers smothered mate. When your opponent threatens mate, a forcing counterattack can land first."
+  }
+]

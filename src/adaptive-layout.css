@@ -1,0 +1,1111 @@
+/*
+ * Chessbuddy adaptive layout framework
+ *
+ * One final responsive system for the live Japanese product. It deliberately
+ * sits after the historical theme files so page structure, spacing, overflow,
+ * and component sizing have one owner. Visual tokens remain in the Japanese
+ * theme; this file owns only adaptive geometry and interaction ergonomics.
+ *
+ * Tiers:
+ *   compact  < 768px  — one readable column, phone-safe controls
+ *   medium   768–1199 — content-led stacking and two-column workspaces
+ *   expanded >=1200  — fluid multi-panel workspaces
+ *   rail     >=1340  — persistent game shortcut rail
+ */
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] {
+  --adaptive-gutter: clamp(0.75rem, 2.1vw, 2.25rem);
+  --adaptive-gap: clamp(0.75rem, 1.25vw, 1.35rem);
+  --adaptive-control: 46px;
+  --adaptive-topbar: 58px;
+  --adaptive-menu-max: 1840px;
+  --adaptive-page-max: 1880px;
+  --adaptive-reading: 68ch;
+  --adaptive-rail: 92px;
+  --adaptive-guidance: 112px;
+  --adaptive-scroll-track: rgba(255, 255, 255, 0.26);
+  --adaptive-scroll-thumb: rgba(71, 86, 80, 0.38);
+  --adaptive-scroll-thumb-hover: rgba(51, 65, 60, 0.58);
+  scrollbar-color: var(--adaptive-scroll-thumb) var(--adaptive-scroll-track);
+  scrollbar-width: thin;
+}
+
+html[data-theme="japanese-minimal"] :where(
+  .game-screen,
+  .app-menu,
+  .games-list,
+  .replay-panel,
+  .replay-moves,
+  .analysis-card,
+  .coach-line-wrap,
+  .turn-card-body,
+  .creator-form,
+  textarea,
+  select
+) {
+  scrollbar-color: var(--adaptive-scroll-thumb) var(--adaptive-scroll-track);
+  scrollbar-width: thin;
+}
+
+html[data-theme="japanese-minimal"] :where(
+  .game-screen,
+  .app-menu,
+  .games-list,
+  .replay-panel,
+  .replay-moves,
+  .analysis-card,
+  .coach-line-wrap,
+  .turn-card-body,
+  .creator-form,
+  textarea,
+  select
+)::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+
+html[data-theme="japanese-minimal"] :where(
+  .game-screen,
+  .app-menu,
+  .games-list,
+  .replay-panel,
+  .replay-moves,
+  .analysis-card,
+  .coach-line-wrap,
+  .turn-card-body,
+  .creator-form,
+  textarea,
+  select
+)::-webkit-scrollbar-track {
+  background: var(--adaptive-scroll-track);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+html[data-theme="japanese-minimal"] :where(
+  .game-screen,
+  .app-menu,
+  .games-list,
+  .replay-panel,
+  .replay-moves,
+  .analysis-card,
+  .coach-line-wrap,
+  .turn-card-body,
+  .creator-form,
+  textarea,
+  select
+)::-webkit-scrollbar-thumb {
+  min-height: 34px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--adaptive-scroll-thumb);
+  background-clip: padding-box;
+}
+
+html[data-theme="japanese-minimal"] :where(
+  .game-screen,
+  .app-menu,
+  .games-list,
+  .replay-panel,
+  .replay-moves,
+  .analysis-card,
+  .coach-line-wrap,
+  .turn-card-body,
+  .creator-form,
+  textarea,
+  select
+)::-webkit-scrollbar-thumb:hover {
+  background: var(--adaptive-scroll-thumb-hover);
+  background-clip: padding-box;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] :where(
+  .menu-workspace,
+  .app-shell,
+  .training-layout,
+  .games-layout,
+  .replay-layout,
+  .creator-layout,
+  .creator-form,
+  .coach-card,
+  .side-panel,
+  .game-stage,
+  .panel-card
+) {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen:not([data-screen="game"]) > .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 70;
+  height: var(--adaptive-topbar);
+  min-height: var(--adaptive-topbar);
+  padding-inline: var(--adaptive-gutter);
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .topbar :where(button, .topbar-actions > span) {
+  min-height: 42px;
+}
+
+/* Landing: use the canvas, but keep prose and controls readable. */
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-menu {
+  padding: var(--adaptive-gutter) !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace {
+  width: min(var(--adaptive-menu-max), calc(100vw - (var(--adaptive-gutter) * 2))) !important;
+  max-width: var(--adaptive-menu-max) !important;
+  grid-template-columns: repeat(16, minmax(0, 1fr)) !important;
+  grid-template-rows: minmax(230px, auto) auto auto !important;
+  gap: var(--adaptive-gap) !important;
+  margin-inline: auto !important;
+  container: menu-workspace / inline-size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading {
+  grid-column: 6 / 17 !important;
+  grid-row: 1 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.75rem, 3vw, 4rem) !important;
+  align-items: flex-start !important;
+  text-align: left !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading h1 {
+  font-size: clamp(3.4rem, 6.1cqw, 7.25rem) !important;
+  line-height: .9 !important;
+  align-self: flex-start !important;
+  justify-self: start !important;
+  width: auto !important;
+  margin: 0 0 clamp(.65rem, 1vw, 1rem) !important;
+  text-align: left !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading :where(.eyebrow, p) {
+  align-self: flex-start !important;
+  justify-self: start !important;
+  text-align: left !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading-row {
+  align-self: stretch !important;
+  width: 100% !important;
+  margin-bottom: clamp(.65rem, 1vw, 1rem) !important;
+}
+
+@media (min-width: 768px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading .menu-auth-slot {
+    position: absolute !important;
+    top: clamp(1.25rem, 2vw, 2rem) !important;
+    right: clamp(1.25rem, 2vw, 2rem) !important;
+    left: auto !important;
+    z-index: 2;
+  }
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading > p:not(.eyebrow) {
+  max-width: var(--adaptive-reading);
+  font-size: clamp(0.86rem, 1.05vw, 1.08rem) !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-grid {
+  grid-column: 1 / 6 !important;
+  grid-row: 1 !important;
+  grid-template-rows: repeat(4, minmax(0, 1fr)) !important;
+  min-height: 230px;
+  padding-left: 1.5rem !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-grid::before {
+  left: 1.5rem !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel {
+  display: grid !important;
+  grid-column: 1 / 17 !important;
+  grid-row: 2 !important;
+  grid-template-columns: minmax(520px, 1.55fr) minmax(270px, .7fr) minmax(300px, .75fr) !important;
+  gap: var(--adaptive-gap) !important;
+  width: 100%;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  align-items: stretch !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > .setup-panel-coach,
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > :nth-child(2),
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > .coach-summary-stack {
+  grid-area: auto !important;
+  grid-column: auto !important;
+  grid-row: auto !important;
+  inset: auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 250px;
+  padding: 2.7rem 1rem 1rem !important;
+  overflow: visible !important;
+  transform: none !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > :where(.setup-panel-coach, :nth-child(2), .coach-summary-stack)::before {
+  left: 1.5rem !important;
+}
+
+@media (min-width: 1200px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > .setup-panel-coach,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > :nth-child(2),
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > .coach-summary-stack {
+    align-self: stretch !important;
+    height: 100% !important;
+    box-sizing: border-box;
+  }
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel .coach-picker-avatar-wrap {
+  height: clamp(132px, 9.2vw, 178px) !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel .difficulty-picker button {
+  grid-template-columns: minmax(8rem, 1fr) minmax(max-content, auto) !important;
+  gap: .65rem;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .coaching-control-toggle {
+  grid-template-columns: repeat(2, minmax(88px, 1fr));
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .coaching-control-option {
+  min-width: 88px;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-launch {
+  grid-column: 1 / 17 !important;
+  grid-row: 3 !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-launch .menu-play {
+  width: min(520px, 100%);
+  min-height: 54px;
+}
+
+/* Live game: stable three-panel geometry and a coach that never breathes with copy. */
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] {
+  --topbar-h: var(--adaptive-topbar);
+  min-height: var(--viewport-h);
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+  width: min(var(--adaptive-page-max), calc(100vw - (var(--adaptive-gutter) * 2))) !important;
+  max-width: var(--adaptive-page-max) !important;
+  min-height: calc(var(--viewport-h) - var(--adaptive-topbar)) !important;
+  margin-inline: auto !important;
+  padding: var(--adaptive-gap) 0 !important;
+  grid-template-columns: minmax(320px, .92fr) minmax(500px, 1.48fr) minmax(285px, .72fr) !important;
+  grid-template-rows: minmax(0, calc(var(--viewport-h) - var(--adaptive-topbar) - (var(--adaptive-gap) * 2))) !important;
+  grid-template-areas: "coach board side" !important;
+  gap: var(--adaptive-gap) !important;
+  align-items: stretch !important;
+  container: live-game / inline-size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .coach-card {
+  grid-area: coach !important;
+  position: relative !important;
+  top: auto !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  grid-template-rows: minmax(300px, 1fr) 88px var(--adaptive-guidance);
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .coach-card.has-chat {
+  grid-template-rows: minmax(270px, 1fr) 88px var(--adaptive-guidance) 74px;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-window {
+  grid-row: 1;
+  grid-column: 1 !important;
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  flex: none !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .character-caption {
+  grid-row: 2;
+  grid-column: 1 !important;
+  width: 100%;
+  height: 88px !important;
+  min-height: 88px !important;
+  padding: .95rem 1.1rem !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line-wrap {
+  grid-row: 3;
+  grid-column: 1 !important;
+  width: 100%;
+  height: var(--adaptive-guidance) !important;
+  min-height: var(--adaptive-guidance) !important;
+  max-height: var(--adaptive-guidance) !important;
+  overflow-y: auto !important;
+  transition: none !important;
+  scrollbar-gutter: stable;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-line-wrap:empty::before {
+  height: 100%;
+  min-height: 100% !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) .coach-chat-row {
+  grid-row: 4;
+  grid-column: 1 !important;
+  height: 74px;
+  min-height: 74px;
+  padding: .7rem .85rem !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .game-stage {
+  grid-area: board !important;
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  padding: clamp(.55rem, 1vw, 1rem) !important;
+  overflow: hidden;
+  container: game-board / size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .game-stage .board-wrap {
+  --board-size: min(calc(100cqw - 3.9rem), calc(100cqh - 3.9rem), 820px);
+  max-width: 100%;
+  max-height: 100%;
+  box-sizing: border-box;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .side-panel {
+  grid-area: side !important;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: hidden;
+}
+
+/* Game Library: sessions and replay own independent tracks; the replay then
+   responds to its own measured width instead of a viewport subtraction. */
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="games"] {
+  min-height: var(--viewport-h);
+  overflow-y: auto;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .games-layout {
+  width: min(var(--adaptive-page-max), calc(100vw - (var(--adaptive-gutter) * 2))) !important;
+  height: auto !important;
+  min-height: calc(var(--viewport-h) - var(--adaptive-topbar)) !important;
+  margin: 0 auto !important;
+  padding: var(--adaptive-gap) 0 calc(var(--adaptive-gap) * 1.5) !important;
+  grid-template-columns: clamp(260px, 19vw, 350px) minmax(0, 1fr) !important;
+  grid-template-rows: minmax(0, 1fr) !important;
+  gap: var(--adaptive-gap) !important;
+  align-items: start !important;
+  overflow: visible !important;
+  container: game-library / inline-size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .games-list {
+  position: sticky;
+  top: calc(var(--adaptive-topbar) + var(--adaptive-gap));
+  width: 100%;
+  max-height: calc(var(--viewport-h) - var(--adaptive-topbar) - (var(--adaptive-gap) * 2));
+  padding: clamp(1rem, 1.25vw, 1.35rem);
+  overflow: auto;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout {
+  --replay-panel-width: clamp(290px, 22vw, 390px);
+  display: grid !important;
+  grid-template-columns: minmax(420px, 1fr) var(--replay-panel-width) !important;
+  gap: var(--adaptive-gap) !important;
+  width: 100%;
+  min-width: 0;
+  align-items: start;
+  justify-content: stretch !important;
+  container: replay-workspace / inline-size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout > .board-wrap {
+  /* `cqw` on the replay grid itself and on its child previously resolved
+     against different nearest containers. At Windows/QHD scaling that made
+     the board larger than its own grid track and it painted under review. */
+  --board-size: min(calc(100cqw - var(--replay-panel-width) - var(--adaptive-gap) - 4.5rem), calc(var(--viewport-h) - var(--adaptive-topbar) - 5rem), 820px) !important;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  align-self: start;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-panel {
+  width: 100%;
+  max-height: calc(var(--viewport-h) - var(--adaptive-topbar) - (var(--adaptive-gap) * 2));
+  padding: clamp(1rem, 1.25vw, 1.35rem);
+  overflow-y: auto;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-controls {
+  gap: .35rem;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-controls button {
+  width: 100%;
+  min-width: 0;
+  min-height: var(--adaptive-control);
+}
+
+@container game-library (max-width: 1160px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout > .board-wrap {
+    --board-size: min(calc(100cqw - 4.2rem), 700px) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-panel {
+    max-height: none;
+  }
+}
+
+/* Puzzles: coach and board keep useful proportions at every state. */
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="puzzles"] {
+  min-height: var(--viewport-h);
+  overflow-y: auto;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .training-layout {
+  width: min(1540px, calc(100vw - (var(--adaptive-gutter) * 2))) !important;
+  height: auto !important;
+  min-height: calc(var(--viewport-h) - var(--adaptive-topbar)) !important;
+  margin: 0 auto !important;
+  padding: var(--adaptive-gap) 0 calc(var(--adaptive-gap) * 1.5) !important;
+  grid-template-columns: clamp(320px, 27vw, 430px) minmax(0, 1fr) !important;
+  gap: clamp(1rem, 2vw, 2rem) !important;
+  align-items: center !important;
+  overflow: visible !important;
+  container: puzzle-workspace / inline-size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col {
+  min-width: 0;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col > .coach-card {
+  position: static;
+  display: grid;
+  grid-template-rows: clamp(310px, 43vh, 500px) 78px 96px;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col > .coach-card.has-chat {
+  grid-template-rows: clamp(280px, 38vh, 450px) 78px 96px 70px;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col .character-window,
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col .character-caption,
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col .coach-line-wrap,
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col .coach-chat-row {
+  width: 100%;
+  height: 100% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  transition: none !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col .coach-line-wrap {
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-board-stage {
+  width: 100%;
+  min-height: min(760px, calc(var(--viewport-h) - var(--adaptive-topbar) - (var(--adaptive-gap) * 2))) !important;
+  padding: clamp(.55rem, 1.2vw, 1rem);
+  overflow: hidden;
+  container: puzzle-board / inline-size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .training-layout .board-wrap {
+  --board-size: min(calc(100cqw - 4.2rem), calc(var(--viewport-h) - var(--adaptive-topbar) - 5rem), 760px) !important;
+  max-width: 100%;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] :where(.puzzle-cover, .puzzle-intro-overlay) {
+  position: fixed;
+  inset: var(--adaptive-topbar) 0 0;
+  height: auto !important;
+  min-height: 0;
+  padding: var(--adaptive-gutter);
+  overflow-y: auto;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-intro-card {
+  width: min(620px, 100%);
+  max-height: calc(var(--viewport-h) - var(--adaptive-topbar) - (var(--adaptive-gutter) * 2));
+  padding: clamp(1.25rem, 3vw, 2.35rem);
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-result-chip {
+  border-radius: 2px;
+  padding: .72rem 1.15rem;
+  box-shadow: 0 12px 28px rgba(44, 56, 52, .18);
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-result-chip.is-solved {
+  border-color: #31584b;
+  background: #3f6757;
+  color: #fff;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-result-chip.is-wrong {
+  border-color: #8f2d28;
+  background: #a43b34;
+  color: #fff;
+}
+
+/* Create a Coach: a spacious workbench, not a tiny scrolling card. */
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="creator"] {
+  height: auto !important;
+  min-height: var(--viewport-h);
+  overflow-y: auto !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-layout {
+  display: block !important;
+  width: min(1660px, calc(100vw - (var(--adaptive-gutter) * 2))) !important;
+  height: auto !important;
+  min-height: calc(var(--viewport-h) - var(--adaptive-topbar)) !important;
+  margin: 0 auto !important;
+  padding: var(--adaptive-gap) 0 calc(var(--adaptive-gap) * 1.5) !important;
+  overflow: visible !important;
+  container: coach-creator / inline-size;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form {
+  display: grid !important;
+  grid-template-columns: minmax(300px, .88fr) minmax(300px, 1fr) minmax(300px, 1fr) !important;
+  grid-template-areas:
+    "title title warning"
+    "name backstory backstory"
+    "appearance speaking dialogue"
+    "appearance voice model"
+    "actions actions status"
+    "created created created" !important;
+  gap: clamp(1rem, 1.5vw, 1.65rem) !important;
+  width: 100%;
+  height: auto !important;
+  max-height: none !important;
+  padding: clamp(1.25rem, 2vw, 2.1rem) !important;
+  overflow: visible !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form > h2 { grid-area: title !important; text-align: left; font-size: clamp(1.8rem, 2.4vw, 2.7rem); }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form > .warning-text { grid-area: warning !important; margin: 0; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-field--name { grid-area: name !important; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-section--appearance { grid-area: appearance !important; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-field--backstory { grid-area: backstory !important; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-field--speaking-style { grid-area: speaking !important; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-field--sample-dialogue { grid-area: dialogue !important; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-row--voice { grid-area: voice !important; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-row--model { grid-area: model !important; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-actions { grid-area: actions !important; justify-content: flex-start; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-actions ~ .hint-text { grid-area: status !important; margin: 0; }
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form > .created-id { grid-area: created !important; }
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form :where(input, select, textarea) {
+  min-height: var(--adaptive-control);
+  padding: .8rem .9rem !important;
+  font-size: .92rem;
+  line-height: 1.5;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form .creator-tall-field {
+  height: clamp(260px, 35vh, 390px);
+  min-height: 260px;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-model-picker {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: .7rem !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-model-picker button {
+  min-height: 120px !important;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-model-picker .coach-picker-avatar-wrap {
+  width: 76px;
+  height: 76px;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-row {
+  gap: .8rem;
+}
+
+html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-actions .primary-action {
+  height: 52px !important;
+  min-height: 52px !important;
+}
+
+@media (min-width: 1200px) and (min-height: 700px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] {
+    --topbar-h: 0px;
+    padding-left: var(--adaptive-rail) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .game-navigation-rail {
+    width: var(--adaptive-rail) !important;
+    grid-template-rows: auto minmax(0, 1fr) auto !important;
+    padding: .8rem .55rem !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-navigation-rail > .rail-menu-button {
+    width: 72px !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+    width: min(var(--adaptive-page-max), calc(100vw - var(--adaptive-rail) - (var(--adaptive-gutter) * 2))) !important;
+    min-height: var(--viewport-h) !important;
+    grid-template-rows: minmax(0, calc(var(--viewport-h) - (var(--adaptive-gap) * 2))) !important;
+    grid-template-columns: clamp(360px, 28vw, 480px) minmax(640px, 1fr) !important;
+    grid-template-areas: "coach board" !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .side-panel {
+    display: none !important;
+  }
+}
+
+@media (max-width: 1199px), (max-height: 699px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .game-navigation-rail {
+    position: sticky !important;
+    inset: 0 auto auto 0 !important;
+    display: flex !important;
+    width: 100% !important;
+    height: var(--adaptive-topbar) !important;
+    min-height: var(--adaptive-topbar) !important;
+    padding: .45rem var(--adaptive-gutter) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-navigation-rail .rail-tools {
+    display: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-navigation-rail > .topbar-actions {
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1339px) and (min-height: 700px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+    grid-template-columns: clamp(340px, 28vw, 390px) minmax(580px, 1fr) !important;
+    grid-template-areas: "coach board" !important;
+  }
+}
+
+@media (max-width: 1199px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] {
+    --adaptive-guidance: 96px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace {
+    grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+    grid-template-rows: auto auto minmax(54px, auto) !important;
+    height: auto !important;
+    min-height: max-content !important;
+    margin-block: 0 !important;
+    align-self: start !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading {
+    grid-column: 5 / 13 !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-grid {
+    grid-column: 1 / 5 !important;
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: repeat(4, minmax(70px, auto)) !important;
+    grid-auto-flow: row !important;
+    grid-auto-rows: minmax(70px, auto) !important;
+    height: auto !important;
+    min-height: 390px !important;
+    max-height: none !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-grid > .mode-tile,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-grid:has(> .mode-tile:nth-child(5)) > .mode-tile:first-child {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel {
+    grid-column: 1 / 13 !important;
+    grid-template-columns: minmax(0, 1.35fr) minmax(260px, .65fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel > .coach-summary-stack {
+    grid-column: 1 / -1 !important;
+    min-height: auto;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-launch {
+    grid-column: 1 / 13 !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+    grid-template-columns: minmax(280px, .85fr) minmax(420px, 1.35fr) !important;
+    grid-template-rows: minmax(580px, auto) auto !important;
+    grid-template-areas: "coach board" "side side" !important;
+    height: auto !important;
+    min-height: calc(var(--viewport-h) - var(--adaptive-topbar)) !important;
+    overflow: visible;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .coach-card,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .game-stage {
+    height: min(720px, calc(var(--viewport-h) - var(--adaptive-topbar) - (var(--adaptive-gap) * 2))) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .side-panel {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(240px, auto);
+    height: auto !important;
+    overflow: visible;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .side-panel > .panel-card {
+    height: 100%;
+    max-height: 520px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .games-layout {
+    grid-template-columns: minmax(230px, 290px) minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout > .board-wrap {
+    --board-size: min(calc(100cqw - 4.2rem), 680px) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-panel {
+    max-height: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .training-layout {
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form {
+    grid-template-columns: minmax(280px, .8fr) minmax(0, 1fr) !important;
+    grid-template-areas:
+      "title warning"
+      "name backstory"
+      "appearance speaking"
+      "appearance dialogue"
+      "voice model"
+      "actions status"
+      "created created" !important;
+  }
+}
+
+@media (max-width: 767px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] {
+    --adaptive-gutter: clamp(.65rem, 3.4vw, 1rem);
+    --adaptive-gap: .8rem;
+    --adaptive-control: 48px;
+    --adaptive-topbar: 58px;
+    --adaptive-guidance: 92px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .topbar h1 {
+    max-width: 42vw;
+    font-size: .95rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .topbar-actions {
+    max-width: 46vw;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-menu {
+    position: relative;
+    height: auto;
+    min-height: var(--viewport-h);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    margin: 0 !important;
+    gap: var(--adaptive-gap) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading {
+    order: -2;
+    min-height: 230px;
+    padding: 2.15rem 1.25rem 1.4rem !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-heading h1 {
+    font-size: clamp(3rem, 15vw, 4.75rem) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-grid {
+    order: -1;
+    min-height: 0 !important;
+    padding: 2.55rem 1.25rem .4rem !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .mode-grid::before {
+    left: 1.25rem !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > .setup-panel-coach,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > :nth-child(2),
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .menu-workspace > .setup-panel > .coach-summary-stack {
+    grid-column: auto !important;
+    min-height: 0;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel .coach-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel .coach-picker-avatar-wrap {
+    height: clamp(110px, 36vw, 150px) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="game"] > .app-shell:not(.analysis-shell) {
+    display: flex !important;
+    flex-direction: column;
+    width: 100% !important;
+    padding: var(--adaptive-gap) var(--adaptive-gutter) calc(var(--adaptive-gap) * 1.5) !important;
+    overflow: visible;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .coach-card {
+    order: 1;
+    display: grid !important;
+    grid-template-rows: clamp(340px, 62vh, 520px) 82px var(--adaptive-guidance) !important;
+    height: auto !important;
+    min-height: 514px !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .coach-card.has-chat {
+    grid-template-rows: clamp(320px, 56vh, 480px) 82px var(--adaptive-guidance) 70px !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .game-stage {
+    order: 2;
+    width: 100% !important;
+    /* Give the board a real containing block. An auto-height flex item combined
+       with the legacy board's max-height:100% formed a circular percentage and
+       collapsed the card to its padding while the board painted outside it. */
+    height: min(680px, calc(100vw - (var(--adaptive-gutter) * 2))) !important;
+    min-height: min(680px, calc(100vw - (var(--adaptive-gutter) * 2))) !important;
+    padding: .4rem !important;
+    overflow: hidden;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .game-stage .board-wrap {
+    --board-size: min(640px, calc(100vw - (var(--adaptive-gutter) * 2) - 3rem)) !important;
+    grid-template-columns: .8rem var(--board-size);
+    grid-template-rows: var(--board-size) 1.05rem;
+    column-gap: .28rem;
+    row-gap: 1rem;
+    max-width: 100%;
+    padding: .35rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .side-panel {
+    order: 3;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(280px, auto);
+    width: 100%;
+    height: auto !important;
+    overflow: visible;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .side-panel > .panel-card {
+    max-height: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .games-layout,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .training-layout {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    width: 100% !important;
+    padding: var(--adaptive-gap) var(--adaptive-gutter) calc(var(--adaptive-gap) * 1.5) !important;
+    overflow: visible !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .games-list {
+    position: static;
+    max-height: min(42vh, 380px);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-layout > .board-wrap,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .training-layout .board-wrap {
+    --board-size: min(640px, calc(100vw - (var(--adaptive-gutter) * 2) - 3rem)) !important;
+    grid-template-columns: .8rem var(--board-size);
+    grid-template-rows: var(--board-size) .7rem;
+    gap: .28rem;
+    max-width: 100%;
+    padding: .35rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .replay-panel {
+    max-height: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col {
+    order: 2;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-board-stage {
+    order: 1;
+    min-height: 0 !important;
+    padding: .4rem;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col > .coach-card,
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col > .coach-card.has-chat {
+    grid-template-rows: clamp(320px, 55vh, 460px) 76px 90px auto;
+    max-height: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .puzzle-left-col .coach-chat-row:empty {
+    display: none;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="creator"] .creator-layout {
+    width: 100% !important;
+    padding: var(--adaptive-gap) var(--adaptive-gutter) calc(var(--adaptive-gap) * 1.5) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="creator"] .creator-layout .creator-form {
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-areas: none !important;
+    grid-auto-flow: row !important;
+    grid-auto-columns: minmax(0, 1fr) !important;
+    gap: 1rem !important;
+    padding: 1rem !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="creator"] .creator-layout .creator-form > * {
+    grid-area: auto !important;
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    min-width: 0 !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="creator"] .creator-model-picker {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .game-screen[data-screen="creator"] .creator-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-form .creator-tall-field {
+    height: 240px;
+    min-height: 180px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .creator-actions .primary-action {
+    width: 100%;
+  }
+}
+
+@media (max-width: 390px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .setup-panel .coach-picker {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .topbar-actions > span:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+@media (max-height: 720px) and (min-width: 768px) {
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] {
+    --adaptive-guidance: 84px;
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .coach-card {
+    grid-template-rows: minmax(240px, 1fr) 76px var(--adaptive-guidance);
+  }
+
+  html[data-premium-layout="true"][data-theme="japanese-minimal"] .app-shell:not(.analysis-shell) > .coach-card.has-chat {
+    grid-template-rows: minmax(220px, 1fr) 76px var(--adaptive-guidance) 66px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="japanese-minimal"] .coach-line-wrap {
+    scroll-behavior: auto;
+  }
+}
+/* The temporarily disabled creator is a single message, not the themed form grid. */
+html[data-premium-layout="true"] .game-screen[data-screen="creator"][data-screen-state="disabled"] .creator-layout {
+  display: grid !important;
+  place-items: start center;
+  width: min(760px, calc(100vw - 2rem));
+  min-height: 0;
+  padding: clamp(1rem, 6vh, 4rem) 0 1rem;
+}
+
+html[data-premium-layout="true"] .game-screen[data-screen="creator"][data-screen-state="disabled"] .creator-form {
+  display: block !important;
+  width: 100%;
+  min-height: 0;
+  padding: clamp(0.75rem, 2vw, 1.1rem);
+}
+
+html[data-premium-layout="true"] .game-screen[data-screen="creator"][data-screen-state="disabled"] .creator-disabled-notice {
+  grid-area: auto !important;
+}
