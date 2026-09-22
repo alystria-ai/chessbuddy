@@ -8,7 +8,9 @@ An Alystria project powered by Convai. Play a position, ask why, and learn from 
 
 [Play at chessbuddy.live](https://chessbuddy.live) · [Run locally](#run-locally) · [Contribute](CONTRIBUTING.md)
 
-<img src="docs/media/chessbuddy-preview.webp" width="960" alt="Chessbuddy gameplay with Leila and a highlighted chess position" />
+<img src="docs/media/chessbuddy-full-demo.webp" width="960" alt="The complete Chessbuddy gameplay demo featuring the AI chess coaches" />
+
+[▶ Watch the complete demo with sound (1440p)](https://github.com/alystria-ai/chessbuddy/releases/download/demo-v1/Chessbuddy-Demo-v15-1440p.mp4)
 
 </div>
 
