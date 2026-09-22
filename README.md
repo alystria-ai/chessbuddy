@@ -10,8 +10,6 @@ An Alystria project powered by Convai. Play a position, ask why, and learn from 
 
 <img src="docs/media/chessbuddy-full-demo.webp" width="960" alt="The complete Chessbuddy gameplay demo featuring the AI chess coaches" />
 
-[▶ Watch the complete demo with sound (1440p)](https://github.com/alystria-ai/chessbuddy/releases/download/demo-v1/Chessbuddy-Demo-v15-1440p.mp4)
-
 </div>
 
 ## Build with us
